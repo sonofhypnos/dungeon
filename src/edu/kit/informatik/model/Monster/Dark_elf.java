@@ -1,0 +1,13 @@
+package edu.kit.informatik.model.Monster;
+
+import edu.kit.informatik.model.Cards.Monster;
+
+/**
+ * @author upkim
+ * @version 1.0.0 2022-03-11
+ */
+public class Dark_elf extends Monster {
+    // TODO: 11.03.22 do null checking instead of ... for the States
+
+
+}
