@@ -28,8 +28,8 @@ public class SelectPrompt<T> implements Prompt<T> {
      * The Max ordinal.
      */
     int maxOrdinal;
-    private final String text;
-    private final String entryPrompt;
+    protected final String text;
+    protected final String entryPrompt;
 
     /**
      * Instantiates a new Select prompt.

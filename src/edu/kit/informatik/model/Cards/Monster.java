@@ -42,4 +42,23 @@ public class Monster extends Agent {
         return level;
     }
 
+    @Override
+    public String getFocusPointStatus() {
+        return String.format("%d", focusPoints);
+
+    }
+
+
+    public String getHealthStatus(){
+        return String.format("%d", healthPoints);
+    }
+
+    @Override
+    public void damage(final Damage damage) {
+        checkDamage(damage);
+    }
+
+    // TODO: 14.03.22 tradeoff between UI vs Model and tradeoff abstraction?
+
+
 }

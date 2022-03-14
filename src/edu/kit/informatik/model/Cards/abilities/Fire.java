@@ -6,22 +6,11 @@ package edu.kit.informatik.model.Cards.abilities;
  */
 public class Fire extends MonsterAbility {
 
+    private static final String FIRE = "Fire";
+
     public Fire(final int level) {
         super(level);
-    }
-
-
-
-
-    @Override
-    public String toString() {
-        return String.format("Fire", level);
-    }
-
-
-    @Override
-    public String toString() {
-        return String.format("Fire", level);
+        this.name = FIRE;
     }
 
 }

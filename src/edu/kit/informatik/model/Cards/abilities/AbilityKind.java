@@ -6,4 +6,5 @@ package edu.kit.informatik.model.Cards.abilities;
  */
 public interface AbilityKind {
 
+
 }

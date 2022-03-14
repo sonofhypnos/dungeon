@@ -1,6 +1,8 @@
 package edu.kit.informatik.model.Cards.abilities;
 
+import edu.kit.informatik.model.Agent;
 import edu.kit.informatik.model.Cards.Player;
+import java.util.List;
 
 /**
  * The enum Player cards.
@@ -12,47 +14,43 @@ public enum PlayerAbilityCards implements Effect {
     /**
      * Slash player cards.
      */
-SLASH(new Slash()),
+    SLASH(new Slash(0)),
     /**
      * Swing player cards.
      */
-SWING(new Swing()),
+    SWING(new Swing(0)),
     /**
      * Thrust player cards.
      */
-THRUST(new Thrust()),
+    THRUST(new Thrust(0)),
     /**
      * Pierce player cards.
      */
-PIERCE(new Pierce()),
+    PIERCE(new Pierce(0)),
     /**
      * Parry player cards.
      */
-PARRY(new Parry()),
-    /**
-     * Focus player cards.
-     */
-FOCUS(new FocusPlayer()),
+    PARRY(new Parry(0)), FOCUS(new Focus(0)),
     /**
      * Reflect player cards.
      */
-REFLECT(new Reflect()),
+    REFLECT(new Reflect(0)),
     /**
      * Water player cards.
      */
-WATER(new WaterPlayer()),
+    WATER(new WaterPlayer(0)),
     /**
      * Ice player cards.
      */
-ICE(new IcePlayer()),
+    ICE(new IcePlayer(0)),
     /**
      * Fire player cards.
      */
-FIRE(new FirePlayer()),
+    FIRE(new FirePlayer(0)),
     /**
      * Lightning player cards.
      */
-LIGHTNING(new LightningPlayer()),
+    LIGHTNING(new LightningPlayer(0)),
     ;
 
     private final Ability ability;
@@ -61,9 +59,10 @@ LIGHTNING(new LightningPlayer()),
         this.ability = ability;
     }
 
+
     @Override
-    public <A extends Player, B extends Player> void applyEffect(final A aggressor, final B target) {
-        this.ability.applyEffect(aggressor, target);
+    public <A extends Agent, B extends Agent> void applyEffect(final A aggressor, final List<B> targets) {
+
     }
 }
 

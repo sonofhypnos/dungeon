@@ -8,11 +8,14 @@ import edu.kit.informatik.model.Cards.Player;
  */
 public class Lightning extends MonsterAbility {
 
+
+    private static final String LIGHTNING = "Lightning";
+
     public Lightning(final int level) {
         super(level);
+        name = LIGHTNING;
     }
 
-    @Override
     public <A extends Player, B extends Player> void applyEffect(final A aggressor, final B target) {
 
     }
@@ -20,7 +23,7 @@ public class Lightning extends MonsterAbility {
 
     @Override
     public String toString() {
-        return String.format("Lightning", level);
+        return String.format(LIGHTNING, level);
     }
 
 }
