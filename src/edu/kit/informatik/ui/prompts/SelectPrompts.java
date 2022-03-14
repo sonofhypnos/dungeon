@@ -1,8 +1,5 @@
 package edu.kit.informatik.ui.prompts;
 
-import edu.kit.informatik.model.exception.ParseException;
-import edu.kit.informatik.ui.resources.ErrorMessage;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +11,8 @@ import java.util.stream.Collectors;
 public class SelectPrompts<T> extends SelectPrompt<T> {
 
     private static final String ENTER_NUMBERS = "Enter numbers [1--<n>] separated by comma:";
-    private static final String REGEX = ",";
+    private static final String SEPARATOR_REGEX = ",";
+    private final String separator;
 
     /**
      * Instantiates a new Select prompt.
@@ -24,13 +22,19 @@ public class SelectPrompts<T> extends SelectPrompt<T> {
      */
     public SelectPrompts(final String text, final List<T> options) {
         super(text, options, ENTER_NUMBERS);
+        this.separator = SEPARATOR_REGEX;
+    }
+
+    public SelectPrompts(final String text, final String entryPrompt, final List<T> options, String separator) {
+        super(text, options, entryPrompt);
+        this.separator = separator;
     }
 
     @Override
     public List<T> parse(final String input) {
         List<Integer> args;
         try {
-            args = Arrays.stream(input.split(REGEX)).map(Integer::parseUnsignedInt).collect(Collectors.toList());
+            args = Arrays.stream(input.split(separator)).map(Integer::parseUnsignedInt).collect(Collectors.toList());
         } catch (NumberFormatException e) {
             return null;
         }

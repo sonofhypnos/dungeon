@@ -12,23 +12,29 @@ import java.util.List;
  * @author Moritz Hertler
  * @version 1.0
  */
-public class Runa {
+public class GameInitializer {
 
     /**
      * The constant PLAYER.
      */
-    public static final String PLAYER_NAME = "Runa";
     private final PlayerDeck playerDeck = new PlayerDeck();
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    private final Player player;
     private List<Integer> seeds;
     private GameState gameState;
     private MonsterDeck monsterDeck;
     // TODO: 11.03.22 guarantee states are immutable?
 
+
     /**
      * Instantiates a new Runa.
      */
-    public Runa() {
-        Player player = new Player("Runa");
+    public GameInitializer() {
+        player = new Player("Runa");
         this.gameState = new SelectClass(player);
     }
 
@@ -71,6 +77,7 @@ public class Runa {
         playerDeck.shuffle(seeds.get(0));
         monsterDeck.shuffle(seeds.get(1));
     }
+
     public List<Monster> drawMonster(int n) {
         return monsterDeck.draw(n);
     }

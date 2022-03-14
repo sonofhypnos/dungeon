@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import edu.kit.informatik.model.Runa;
+import edu.kit.informatik.model.GameInitializer;
 import edu.kit.informatik.ui.prompts.Command;
 
 /**
@@ -34,14 +34,14 @@ public class Session {
 
     private final Scanner scanner;
     private final List<Command> commands;
-    private final Runa game;
+    private final GameInitializer game;
     private boolean running;
 
     /**
      * Constructs a new session.
      * @param game
      */
-    public Session(final Runa game) {
+    public Session(final GameInitializer game) {
         this.scanner = new Scanner(System.in);
         this.commands = new ArrayList<>();
         this.game = game;

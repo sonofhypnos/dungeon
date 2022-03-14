@@ -1,6 +1,6 @@
 package edu.kit.informatik.model.states;
 
-import edu.kit.informatik.model.Runa;
+import edu.kit.informatik.model.GameInitializer;
 
 /**
  * @author upkim
@@ -19,7 +19,7 @@ public class Level implements GameState {
     }
 
     @Override
-    public void run(final String input, final Runa runa) {
+    public void run(final String input, final GameInitializer gameInitializer) {
 
     }
 }

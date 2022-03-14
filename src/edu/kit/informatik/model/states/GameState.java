@@ -4,7 +4,7 @@
 
 package edu.kit.informatik.model.states;
 
-import edu.kit.informatik.model.Runa;
+import edu.kit.informatik.model.GameInitializer;
 import edu.kit.informatik.model.exception.GameStateException;
 
 /**
@@ -29,7 +29,7 @@ public interface GameState {
      * @param input the input
      * @param runa
      */
-    void run(String input, final Runa runa);
+    void run(String input, final GameInitializer runa);
 
 }
 

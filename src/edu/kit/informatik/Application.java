@@ -4,7 +4,7 @@
 
 package edu.kit.informatik;
 
-import edu.kit.informatik.model.Runa;
+import edu.kit.informatik.model.GameInitializer;
 import edu.kit.informatik.ui.Session;
 import edu.kit.informatik.ui.prompts.Quit;
 
@@ -31,7 +31,7 @@ public final class Application {
      */
     public static void main(String[] args) {
 
-        Runa game = new Runa();
+        GameInitializer game = new GameInitializer();
         // TODO: 10.03.22 Add check for 0 arguments
         // TODO: 10.03.22 check what kinds of input/output is allowed.
         // TODO: 10.03.22 make sure there is no final \n when exiting?

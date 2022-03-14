@@ -1,7 +1,6 @@
 package edu.kit.informatik.model.states;
 
-import edu.kit.informatik.model.Runa;
-import edu.kit.informatik.model.exception.ParseException;
+import edu.kit.informatik.model.GameInitializer;
 import edu.kit.informatik.ui.prompts.Prompt;
 import edu.kit.informatik.ui.prompts.SeedPrompt;
 
@@ -32,7 +31,7 @@ public class GetSeed implements GameState {
     }
 
     @Override
-    public void run(final String input, final Runa runa) {
+    public void run(final String input, final GameInitializer runa) {
         List<Integer> seeds = prompt.parse(input);
         if (seeds == null || seeds.size() != SEED_NUMBER) {
             prompt.entryPrompt();

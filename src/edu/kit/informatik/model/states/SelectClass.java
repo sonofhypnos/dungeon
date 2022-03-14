@@ -1,9 +1,8 @@
 package edu.kit.informatik.model.states;
 
-import edu.kit.informatik.model.Class;
+import edu.kit.informatik.model.Archetype;
 import edu.kit.informatik.model.Cards.Player;
-import edu.kit.informatik.model.Runa;
-import edu.kit.informatik.model.exception.ParseException;
+import edu.kit.informatik.model.GameInitializer;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
 public class SelectClass implements GameState {
 
     private static final String SELECT_PLAYER_S_CHARACTER_CLASS = "Select %s's character class";
-    private final SelectPrompt<Class> selection;
+    private final SelectPrompt<Archetype> selection;
     private final Player player;
 
 
@@ -28,7 +27,7 @@ public class SelectClass implements GameState {
      */
     public SelectClass(Player player) {
         this.selection = new SelectPrompt<>(String.format(SELECT_PLAYER_S_CHARACTER_CLASS, player.getName()),
-                List.of(Class.values()));
+                List.of(Archetype.values()));
         this.player = player;
     }
 
@@ -38,8 +37,8 @@ public class SelectClass implements GameState {
     }
 
     @Override
-    public void run(final String input, final Runa runa) {
-        Class c = selection.parse(input).get(0);
+    public void run(final String input, final GameInitializer runa) {
+        Archetype c = selection.parse(input).get(0);
             if (c == null){
 
             selection.entryPrompt();

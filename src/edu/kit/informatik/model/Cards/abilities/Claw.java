@@ -12,7 +12,6 @@ public class Claw extends MonsterAbility{
         super(level);
     }
 
-    @Override
     public <A extends Player, B extends Player> void applyEffect(final A aggressor, final B target) {
 
 

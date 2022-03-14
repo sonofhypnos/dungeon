@@ -11,6 +11,7 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-10
  */
+// TODO: 12.03.22 potentially add name field for Monsters
 public enum Monsters {
     SPIDER_KING(1, 50, List.of(MonsterType.LIGHTNING, MonsterType.BOSS),
             List.of(new Bite(1), new Block(1), new Focus(1), new Lightning(1))),
@@ -51,8 +52,7 @@ public enum Monsters {
      */
     MEGA_SAURUS(1, 100, List.of(MonsterType.BOSS),
             List.of(new Bite(2), new Block(2), new Focus(2), new Fire(1), new Lightning(1))),
-    SNAKE(2, 1, List.of(MonsterType.ICE),
-            List.of(new Bite(2), new Focus(2), new Ice(2))),
+    SNAKE(2, 1, List.of(MonsterType.ICE), List.of(new Bite(2), new Focus(2), new Ice(2))),
     /**
      * The Dark elf.
      */
@@ -60,13 +60,11 @@ public enum Monsters {
     /**
      * The Shadow blade.
      */
-    SHADOW_BLADE(2, 1, List.of(MonsterType.LIGHTNING),
-            List.of(new Scratch(2), new Focus(2), new Lightning(2))),
+    SHADOW_BLADE(2, 1, List.of(MonsterType.LIGHTNING), List.of(new Scratch(2), new Focus(2), new Lightning(2))),
     /**
      * The Hornet.
      */
-    HORNET(2, 1, List.of(MonsterType.FIRE),
-            List.of(new Scratch(2), new Focus(2), new Fire(1), new Fire(2))),
+    HORNET(2, 1, List.of(MonsterType.FIRE), List.of(new Scratch(2), new Focus(2), new Fire(1), new Fire(2))),
     /**
      * The Tarantula.
      */
@@ -87,8 +85,7 @@ public enum Monsters {
 
     private final Monster monster;
 
-    Monsters(final int level, final int lifePoints, List<MonsterType> monsterTypes,
-             List<Ability> monsterAbilites) {
+    Monsters(final int level, final int lifePoints, List<MonsterType> monsterTypes, List<Ability> monsterAbilites) {
         this.monster = new Monster(this.toString(), lifePoints, monsterTypes, monsterAbilites, level);
     }
 

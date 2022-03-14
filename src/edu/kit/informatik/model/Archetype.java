@@ -1,14 +1,12 @@
 package edu.kit.informatik.model;
 
-import java.util.List;
-
 /**
  * The enum Class.
  *
  * @author upkim
  * @version 1.0.0 10.03.22
  */
-public enum Class {
+public enum Archetype {
     /**
      * Warrior class.
      */
@@ -24,7 +22,7 @@ public enum Class {
 
     private final String name;
 
-    private Class(final String name) {
+    private Archetype(final String name) {
         this.name = name;
     }
 
