@@ -1,7 +1,5 @@
 package edu.kit.informatik.model.Cards;
 
-import java.util.Arrays;
-
 /**
  * @author upkim
  * @version 1.0.0 2022-03-14
@@ -14,6 +12,7 @@ public enum Dice {
     D12(12);
 
     private final int value;
+
     Dice(final int value) {
         this.value = value;
     }
@@ -22,9 +21,9 @@ public enum Dice {
         return value;
     }
 
-    public int maxValue(){
+    public boolean isLast(){
         // TODO: 14.03.22 figure out functional
         //return Arrays.stream(Dice.values()).mapToInt(Dice::getValue).max().getAsInt();
-        return 12;
+        return Dice.values().length == this.ordinal() - 1; //-1 because 0-indexed
     }
 }

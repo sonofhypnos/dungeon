@@ -8,11 +8,12 @@ import java.util.Random;
 /**
  * The type Card deck.
  *
- * @param <T> the type parameter
+ * @param <T> the type of the cards.
  * @author upkim
  * @version 1.0.0 10.03.22
  */
 public class CardDeck<T> {
+    private static final int DRAW_INDEX = 0;
     /**
      * The Cards.
      */
@@ -38,17 +39,27 @@ public class CardDeck<T> {
     }
 
     /**
-     * Draw t.
+     * Draw item t. Removes t from the deck.
      *
      * @return the t
      */
     public T draw() {
-        return this.cards.remove(0);
+        return this.cards.remove(DRAW_INDEX);
     }
 
+    /**
+     * Draw up to n cards from the deck. If the deck has less than n cards the remaining cards are returned and
+     * the deck is emptied.
+     *
+     * @param n the n
+     * @return the list
+     */
     public List<T> draw(int n){
         List<T> values = new ArrayList<>();
         for (int i = 0; i < n; i++) {
+            if (this.cards.isEmpty()) {
+                break;
+            }
             values.add(draw());
         }
         return values;
