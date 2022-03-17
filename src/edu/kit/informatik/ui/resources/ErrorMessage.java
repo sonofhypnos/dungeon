@@ -70,7 +70,7 @@ public enum ErrorMessage {
      * Expects one format argument:
      * The illegal string.
      */
-    ILLEGAL_INTEGER("cannot parse %s into an integer."),
+    ILLEGAL_INTEGER("cannot parseList %s into an integer."),
 
     /**
      * The error message printed if a string could not be parsed to a die.
@@ -78,7 +78,7 @@ public enum ErrorMessage {
      * Expects one format argument:
      * The illegal string.
      */
-    ILLEGAL_DIE("cannot parse %s into a die."),
+    ILLEGAL_DIE("cannot parseList %s into a die."),
 
     /**
      * The error message printed if rolled dice yield to much tokens.
@@ -95,7 +95,7 @@ public enum ErrorMessage {
      * Expects one format argument:
      * The illegal string.
      */
-    ILLEGAL_GOD_FAVOR("cannot parse %s into a god favor."),
+    ILLEGAL_GOD_FAVOR("cannot parseList %s into a god favor."),
 
     /**
      * The error message printed if a integer is not a legal god favor level.
@@ -105,7 +105,7 @@ public enum ErrorMessage {
      * the lowest possible level (integer) and
      * the highest possible level (integer).
      */
-    ILLEGAL_GOD_FAVOR_LEVEL("cannot parse %d into a god favor level. Expected an integer between %d and %d."),
+    ILLEGAL_GOD_FAVOR_LEVEL("cannot parseList %d into a god favor level. Expected an integer between %d and %d."),
 
     /**
      * The error message printed if the executed command cannot be executed in the current game state.

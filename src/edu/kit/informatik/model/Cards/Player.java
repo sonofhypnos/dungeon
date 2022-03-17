@@ -1,31 +1,32 @@
 package edu.kit.informatik.model.Cards;
 
 import edu.kit.informatik.model.Agent;
-import edu.kit.informatik.model.Cards.abilities.Ability;
-import edu.kit.informatik.model.Cards.abilities.Effect;
+import edu.kit.informatik.model.Damage;
+import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.Archetype;
-import edu.kit.informatik.model.Cards.abilities.Focus;
-import edu.kit.informatik.model.Cards.abilities.Parry;
-import edu.kit.informatik.model.Cards.abilities.Reflect;
-import edu.kit.informatik.model.Cards.abilities.Slash;
-import edu.kit.informatik.model.Cards.abilities.Thrust;
-import edu.kit.informatik.model.Cards.abilities.Water;
+import edu.kit.informatik.model.abilities.player.PlayerAbilities;
+import edu.kit.informatik.ui.prompts.DiceRoll;
+import edu.kit.informatik.ui.prompts.Prompt;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author upkim
  * @version 1.0.0 2022-03-10
  */
-public class Player extends Agent {
+public class Player extends Agent<Player, List<Monster>> {
 
     private static final int MAX_FOCUS_POINTS = 5;
     private static final int INITIAL_HEALTH = 50;
     private static final Dice INITIAL_DICE = Dice.D4;
+    private static final int REFLECT_DAMAGE = 10;
     private Archetype archetype;
-    private List<Ability> cards;
-    private List<Ability> startingCards;
+    private List<Ability<Player, List<Monster>>> cards;
+    private List<Ability<Player, List<Monster>>> startingCards;
     private Dice dice;
+    private int roll;
+    private boolean reflect;
 
     // TODO: 13.03.22 implement stuff for Fähigkeiten
 
@@ -58,13 +59,13 @@ public class Player extends Agent {
         // TODO: 14.03.22 make enum for this?
         switch (archetype) {
             case MAGE:
-                cards = List.of(new Focus(1), new Water(1));
+//                cards = List.of(PlayerAbilities.FOCUS.getAbility(), PlayerAbilities.WATER.getAbility());
                 break;
             case WARRIOR:
-                cards = List.of(new Thrust(1), new Parry(1));
+                cards = List.of(PlayerAbilities.THRUST.getAbility(), PlayerAbilities.PARRY.getAbility());
                 break;
             case PALADIN:
-                cards = List.of(new Slash(1), new Reflect(1));
+//                cards = List.of(PlayerAbilities.SLASH.getAbility(), PlayerAbilities.REFLECT.getAbility());
         }
         startingCards = cards;
     }
@@ -83,13 +84,57 @@ public class Player extends Agent {
         return String.format("%d/%d", healthPoints, INITIAL_HEALTH);
     }
 
-    @Override
-    public void damage(final Damage damage) {
-        checkDamage(damage);
+    public void damage(final Damage damage, Monster aggressor) {
+        if (isReflect()) {
+            if (damage.getAmount() > REFLECT_DAMAGE) {
+                damage.setAmount(damage.getAmount() - REFLECT_DAMAGE);
+                aggressor.damage(new Damage(damage.getType(), REFLECT_DAMAGE));
+            } else {
+                aggressor.damage(damage);
+                return;
+            }
+        }
+        checkDamage(damage); // this is to be applied after other effects
     }
 
-    public List<Ability> getCards() {
+    public List<Ability<Player, List<Monster>>> getCards() {
         return new ArrayList<>(cards);
     }
 
+    public Dice getDice() {
+        return this.dice;
+    }
+
+    public void getNextDice() {
+        assert !dice.isLast();
+        this.dice = Dice.values()[dice.ordinal() + 1];
+    }
+
+    public void roll() {
+        Prompt<Integer> dicePrompt = new DiceRoll(dice);
+        this.roll = dicePrompt.parseItem();
+    }
+
+    public int getRoll() {
+        return roll;
+    }
+
+    public List<Ability<Player, List<Monster>>> getStartingCards() {
+        return this.getCards().stream().filter((Ability<Player, List<Monster>> card) -> this.startingCards.contains(card))
+                .collect(Collectors.toList());
+    }
+
+    public boolean isReflect() {
+        return reflect;
+    }
+
+    public void setReflect(final boolean reflect) {
+        this.reflect = reflect;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.setReflect(false);
+    }
 }

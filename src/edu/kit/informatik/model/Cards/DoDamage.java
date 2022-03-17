@@ -1,18 +1,18 @@
 package edu.kit.informatik.model.Cards;
 
 import edu.kit.informatik.model.Agent;
-import edu.kit.informatik.model.Cards.abilities.Effect;
-import java.util.List;
+import edu.kit.informatik.model.abilities.effects.Effect;
 
 /**
  * @author upkim
  * @version 1.0.0 2022-03-14
  */
-public class DoDamage implements Effect {
+public class DoDamage <A extends Agent<?, ?>, T extends Agent<?,?>> extends Effect<A, T> {
 
 
     @Override
-    public <A extends Agent, B extends Agent> void applyEffect(final A aggressor, final List<B> target) {
+    public void applyEffect(final A aggressor, final T target) {
+
 
 
     }
