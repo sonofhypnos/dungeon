@@ -19,7 +19,7 @@ public class DamageMonster extends Effect<Player, Monster> {
     public void applyEffect(final Player aggressor, final Monster target) {
         target.damage(damage);
         if (target.isDead()) {
-            interFace.printDead(target);
+            interFace.dies(target);
         }
     }
 }

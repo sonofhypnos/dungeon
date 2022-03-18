@@ -12,15 +12,21 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class IcePlayer extends Ability<Player, List<Monster>> {
+public class Ice extends Ability<Player, List<Monster>> {
 
-    public IcePlayer(final String name, final int level) {
+    private static final int DAMAGE_FACTOR = 2;
+    private static final int DAMAGE_CONSTANT = 4;
+    private static final int SECOND_DAMAGE_CONSTANT = 2;
+    private static final int BONUS_DAMAGE_FACTOR = 2;
+
+    public Ice(final String name, final int level) {
         super(name, level, AbilityType.OFFENSIV);
     }
 
     @Override
     public void applyEffect(final Player aggressor, final List<Monster> targets) {
-        var effect = new ElementPlayerEffect(MonsterType.WATER, 2, 4, 2, 2, level);
+        var effect = new ElementPlayerEffect(MonsterType.WATER, DAMAGE_FACTOR, DAMAGE_CONSTANT, SECOND_DAMAGE_CONSTANT,
+                BONUS_DAMAGE_FACTOR, level);
         effect.applyEffect(aggressor, targets);
     }
 }

@@ -2,7 +2,7 @@ package edu.kit.informatik.model.abilities.effects;
 
 import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
-import edu.kit.informatik.ui.prompts.OutputInterFace;
+import edu.kit.informatik.ui.OutputInterFace;
 import edu.kit.informatik.ui.prompts.Prompt;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 import java.util.List;

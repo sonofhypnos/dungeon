@@ -14,13 +14,19 @@ import java.util.List;
  */
 public class Fire extends Ability<Player, List<Monster>> {
 
+    private static final int DAMAGE_FACTOR = 2;
+    private static final int DAMAGE_CONSTANT = 5;
+    private static final int SECOND_DAMAGE_CONSTANT = 0;
+    private static final int BONUS_DAMAGE_FACTOR = 2;
+
     public Fire(final String name, final int level) {
         super(name, level, AbilityType.OFFENSIV);
     }
 
     @Override
     public void applyEffect(final Player aggressor, final List<Monster> target) {
-        var effect = new ElementPlayerEffect(MonsterType.ICE, 2, 5, 0,  2, level);
+        var effect = new ElementPlayerEffect(MonsterType.ICE, DAMAGE_FACTOR, DAMAGE_CONSTANT, SECOND_DAMAGE_CONSTANT,
+                BONUS_DAMAGE_FACTOR, level);
     }
 }
 

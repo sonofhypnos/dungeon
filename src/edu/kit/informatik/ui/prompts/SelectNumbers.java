@@ -38,25 +38,6 @@ public class SelectNumbers extends NumberPrompt {
 
     @Override
     public List<Integer> parseList() {
-
-        List<Integer> args;
-        Scanner scanner = ScannerSingleton.getInstance();
-        while (true) {
-            entryPrompt();
-            String input = scanner.nextLine();
-            if (input == null) {
-                System.out.println("should not happen?");
-            }
-            try {
-                args = Arrays.stream(Objects.requireNonNull(input).split(separator, -1)).map(Integer::parseUnsignedInt)
-                        .collect(Collectors.toList());
-            } catch (NumberFormatException e) {
-                continue;
-            }
-            if (args.size() != optionNumber || args.stream().anyMatch(i -> i < FIRST_ORDINAL || i > this.maxOrdinal))
-                continue;
-            break;
-        }
-        return args;
+        return getIntegers(separator, maxOrdinal, optionNumber, optionNumber);
     }
 }

@@ -24,6 +24,7 @@ public class newAbilityCards extends Effect<Player, Monster> {
     public void applyEffect(final Player aggressor, final Monster target) {
         var newCards = this.cards.draw(cardNumber);
         var abilityPrompt = new SelectPrompt<>("%s", newCards);
+        abilityPrompt.parseList();
 
     }
 
