@@ -43,6 +43,7 @@ public class Runa {
     public Runa() {
         player = new Player("Runa");
         this.lost = false;
+        interFace = new OutputInterFace();
     }
 
     public Player getPlayer() {

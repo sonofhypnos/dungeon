@@ -84,10 +84,7 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     @Override
     public void prompt() {
-        if (this.options.size() == 0) {
-            return;
-        }
-        System.out.println(listOptions(text, this.options));
+        listOptions(text, this.options);
     }
 
     @Override
@@ -117,6 +114,7 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     protected List<Integer> getIntegers(final String separator, final int maxOrdinal, final int minOptionNumber,
                                         final int maxOptionNumber) {
+
         List<Integer> args;
         Scanner scanner = ScannerSingleton.getInstance();
         while (true) {
@@ -149,7 +147,7 @@ public class SelectPrompt<T> implements Prompt<T> {
 
 
     protected int getInt(int maxOrdinal) {
-        prompt();
+        this.prompt();
         Scanner scanner = ScannerSingleton.getInstance();
         int arg;
         while (true) {
@@ -170,13 +168,14 @@ public class SelectPrompt<T> implements Prompt<T> {
         }
         return arg;
     }
+    // TODO: 18.03.22 throw exception if arguments
 
-    private String listOptions(final String front, final List<T> options) {
+    private void listOptions(final String front, final List<T> options) {
         List<String> optionString = new ArrayList<>();
-        optionString.add(front);
+        System.out.println(front);
         for (int i = 0; i < options.size(); i++) {
             optionString.add(String.format("%d) %s", i + FIRST_ORDINAL, options.get(i)));
         }
-        return String.join("\n", optionString);
+        System.out.println(String.join("\n", optionString));
     }
 }

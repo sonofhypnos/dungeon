@@ -5,16 +5,16 @@ set timeout -1
 #command for intellij stuff
 spawn /home/tassilo/.jdks/corretto-11.0.10/bin/java -javaagent:/snap/intellij-idea-ultimate/341/lib/idea_rt.jar=43395:/snap/intellij-idea-ultimate/341/bin -Dfile.encoding=UTF-8 -classpath /home/tassilo/IdeaProjects/Proggen2/out/production/Proggen2 edu.kit.informatik.Application
 
-Welcome to Runa's Strive\r\nSelect Runa's character class\r\n1) Warrior\r\n2) Mage\r\n3) Paladin\r\nEnter number [1
---3]:\r\n
+# Welcome to Runa's Strive\r\nSelect Runa's character class\r\n1) Warrior\r\n2) Mage\r\n3) Paladin\r\nEnter number [1
+# --3]:\r\n
 #escape brackets!
 #
-expect "Welcome to Runa's Strive\r\nSelect Runa's character class\r\n1) Warrior\r\n2) Mage\r\n3) Paladin\r\nEnter number \[1--3\]:\r\n"
+expect -exact "Welcome to Runa's Strive\r\nSelect Runa's character class\r\n1) Warrior\r\n2) Mage\r\n3) Paladin\r\nEnter number \[1--3\]:\r\n"
 
 send -- "1\n"
-expect -exact "1\n"
+expect -exact "1\n\r"
 
-expect esact "To shuffle ability cards and monsters, enter two seeds\r
+expect -exact "To shuffle ability cards and monsters, enter two seeds\r
 Enter seeds \[1--2147483647\] separated by comma:\r"
 
 send -- "32,23\r"
