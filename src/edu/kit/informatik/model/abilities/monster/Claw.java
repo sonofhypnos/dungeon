@@ -4,6 +4,7 @@ import edu.kit.informatik.model.Damage;
 import edu.kit.informatik.model.Cards.DamageType;
 import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
+import edu.kit.informatik.model.abilities.AbilityType;
 
 /**
  * @author upkim
@@ -12,7 +13,7 @@ import edu.kit.informatik.model.Cards.Player;
 public class Claw extends MonsterAbility {
 
     public Claw(final int level) {
-        super(level);
+        super(level, AbilityType.OFFENSIV);
     }
 
     public void applyEffect(final Monster aggressor, final Player target) {

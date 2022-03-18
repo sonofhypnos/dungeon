@@ -1,11 +1,6 @@
 package edu.kit.informatik.ui.prompts;
 
-import edu.kit.informatik.ui.resources.Constants;
-import edu.kit.informatik.ui.resources.Message;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.lang.Integer.MAX_VALUE;
 
@@ -24,38 +19,17 @@ public class NumberPrompt extends SelectPrompt<Integer> {
     @Override
     public void prompt() {
         System.out.println(text);
-        entryPrompt();
     }
 
     @Override
     public void entryPrompt() {
-        System.out.println(String.format(this.entryPrompt, Constants.MIN_ORDINAL.getValue(), MAX_VALUE));
+        System.out.printf((this.entryPrompt) + "%n", FIRST_ORDINAL, MAX_VALUE);
     }
 
     @Override
     public Integer parseItem() {
         // TODO: 15.03.22 add while running
-        prompt();
-        Scanner scanner = ScannerSingleton.getInstance();
-        int arg;
-        while (true) {
-            String input = scanner.nextLine();
-            if (input == null) {
-                System.out.println("should not happen?");
-            }
-            try {
-                arg = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                entryPrompt();
-                continue;
-            }
-
-            if (arg < FIRST_ORDINAL || arg > this.maxOrdinal) {
-                continue;
-            }
-            break;
-        }
-        return arg;
+        return getInt(this.maxOrdinal);
     }
 
     //    public List<Integer> parseList(String input) {

@@ -14,12 +14,14 @@ import java.util.List;
  */
 public class Parry extends Ability<Player, List<Monster>> {
 
+    private static final int DAMAGE_FACTOR = 7;
+
     public Parry(final String name, final int level) {
         super(name, level, AbilityType.DEFENSIV);
     }
 
     public void applyEffect(final Player aggressor, final List<Monster> target) {
-        aggressor.setProtection(new Damage(DamageType.PHYSICAL, 7 * level));
+        aggressor.setProtection(new Damage(DamageType.PHYSICAL, DAMAGE_FACTOR * level));
     }
 
 

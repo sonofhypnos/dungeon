@@ -6,7 +6,7 @@ package edu.kit.informatik.model;
 
 import edu.kit.informatik.model.abilities.Ability;
 
-import edu.kit.informatik.ui.prompts.OutputInterFace;
+import edu.kit.informatik.ui.OutputInterFace;
 import java.util.List;
 
 /**

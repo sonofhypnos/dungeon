@@ -1,4 +1,4 @@
-package edu.kit.informatik.ui.prompts;
+package edu.kit.informatik.ui;
 
 import edu.kit.informatik.model.Agent;
 import edu.kit.informatik.model.Damage;
@@ -17,6 +17,7 @@ public class OutputInterFace {
     // TODO: 14.03.22 Make actually abstract functions to implement stuff from monster and agent (for UI?)
 
     public OutputInterFace() {
+        // TODO: 18.03.22 ist es erlaubt Runtime aufzurufen?
     }
 
     public void printStage(Player player, int stage, int level) {
@@ -47,15 +48,22 @@ public class OutputInterFace {
         System.out.printf("%s uses %s%n", agent.getName(), ability.toString());
     }
 
-    public void printDead(final Monster target) {
-        System.out.printf("%s dies%n", target.toString());
-    }
-
     public void printDamage(final Damage damage, final Agent<?,?> agent) {
         System.out.printf("%s takes %d %s damage%n", agent.toString(), damage.getAmount(),
                 damage.getType());
     }
 
+    public void getCard(final Player player, final Ability<Player, List<Monster>> card) {
+        System.out.printf("%s gets %s%n", player, card);
+    }
+
+    public void dies(final Agent<?,?> agent) {
+        System.out.printf("%s dies%n", agent);
+    }
+
+    public void won(final Player player) {
+        System.out.printf("%s won!%n",  player);
+    }
 
 
     // TODO: 14.03.22 do the thing you did in getString but just do it sepseparately because you can distinguish the

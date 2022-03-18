@@ -14,6 +14,12 @@ public class DiceRoll extends NumberPrompt{
     public DiceRoll(final Dice dice) {
         super(DICE_PROMPT, DICE_ENTRY_PROMPT,  dice.getValue());
     }
+
+
+    @Override
+    public void prompt() {
+        entryPrompt();
+    }
     // TODO: 14.03.22 make sure throws exception if prompt() is used?
     // TODO: 14.03.22 maybe separate prompt and other stuff?
 }

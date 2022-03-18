@@ -14,47 +14,47 @@ import java.util.List;
  * @version 1.0.0 10.03.22
  */
 public enum PlayerAbilities implements AbilityKind {
-//    /**
-//     * Slash player cards.
-//     */
-//    SLASH(new Slash("Slash", 0)),
-//    /**
-//     * Swing player cards.
-//     */
-//    SWING(new Swing("Swing", 0)),
-//    /**
-//     * Thrust player cards.
-//     */
+    /**
+     * Slash player cards.
+     */
+    SLASH(new Slash("Slash", 0)),
+    /**
+     * Swing player cards.
+     */
+    SWING(new Swing("Swing", 0)),
+    /**
+     * Thrust player cards.
+     */
     THRUST(new Thrust("Thrust", 0)),
-//    /**
-//     * Pierce player cards.
-//     */
-//    PIERCE(new Pierce("Pierce", 0)),
-//    /**
-//     * Parry player cards.
-//     */
+    /**
+     * Pierce player cards.
+     */
+    PIERCE(new Pierce("Pierce", 0)),
+    /**
+     * Parry player cards.
+     */
     PARRY(new Parry("Parry", 0)),
     FOCUS(new Focus<>("Focus", 0)),
-//    /**
-//     * Reflect player cards.
-//     */
-//    REFLECT(new Reflect("Reflect", 0)),
-//    /**
-//     * Water player cards.
-//     */
-//    WATER(new WaterPlayer("WaterPlayer", 0)),
-//    /**
-//     * Ice player cards.
-//     */
-//    ICE(new IcePlayer("IcePlayer", 0)),
-//    /**
-//     * Fire player cards.
-//     */
-//    FIRE(new FirePlayer("FirePlayer", 0)),
-//    /**
-//     * Lightning player cards.
-//     */
-//    LIGHTNING(new LightningPlayer("LightningPlayer", 0)),
+    /**
+     * Reflect player cards.
+     */
+    REFLECT(new Reflect("Reflect", 0)),
+    /**
+     * Water player cards.
+     */
+    WATER(new Water("WaterPlayer", 0)),
+    /**
+     * Ice player cards.
+     */
+    ICE(new Ice("IcePlayer", 0)),
+    /**
+     * Fire player cards.
+     */
+    FIRE(new Fire("FirePlayer", 0)),
+    /**
+     * Lightning player cards.
+     */
+    LIGHTNING(new Lightning("LightningPlayer", 0)),
     ;
 
     private final Ability<Player, List<Monster>> ability;

@@ -9,8 +9,8 @@ import edu.kit.informatik.model.Runa;
 /**
  * The Application. Creates the needed instances and runs the interactive command session.
  * 
- * @author Moritz Hertler
- * @version 1.0
+ * @author upkim
+ * @version 1.0 17-03-2022
  */
 public final class Application {
 
@@ -39,6 +39,6 @@ public final class Application {
 //        session.addCommand(new Quit(session));
 //        session.start();
         Runa game = new Runa();
-        game.run();
+        game.runGame();
     }
 }

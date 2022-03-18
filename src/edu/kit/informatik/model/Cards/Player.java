@@ -59,13 +59,13 @@ public class Player extends Agent<Player, List<Monster>> {
         // TODO: 14.03.22 make enum for this?
         switch (archetype) {
             case MAGE:
-//                cards = List.of(PlayerAbilities.FOCUS.getAbility(), PlayerAbilities.WATER.getAbility());
+                cards = List.of(PlayerAbilities.FOCUS.getAbility(), PlayerAbilities.WATER.getAbility());
                 break;
             case WARRIOR:
                 cards = List.of(PlayerAbilities.THRUST.getAbility(), PlayerAbilities.PARRY.getAbility());
                 break;
             case PALADIN:
-//                cards = List.of(PlayerAbilities.SLASH.getAbility(), PlayerAbilities.REFLECT.getAbility());
+                cards = List.of(PlayerAbilities.SLASH.getAbility(), PlayerAbilities.REFLECT.getAbility());
         }
         startingCards = cards;
     }
@@ -85,9 +85,10 @@ public class Player extends Agent<Player, List<Monster>> {
     }
 
     public void damage(final Damage damage, Monster aggressor) {
-        if (isReflect()) {
+        if (isReflect() & damage.getType() == DamageType.MAGIC) {
             if (damage.getAmount() > REFLECT_DAMAGE) {
                 damage.setAmount(damage.getAmount() - REFLECT_DAMAGE);
+                checkDamage(damage);
                 aggressor.damage(new Damage(damage.getType(), REFLECT_DAMAGE));
             } else {
                 aggressor.damage(damage);
@@ -99,6 +100,10 @@ public class Player extends Agent<Player, List<Monster>> {
 
     public List<Ability<Player, List<Monster>>> getCards() {
         return new ArrayList<>(cards);
+    }
+
+    public boolean removeCard(Ability<Player, List<Monster>> card) {
+        return this.cards.remove(card);
     }
 
     public Dice getDice() {
@@ -136,5 +141,12 @@ public class Player extends Agent<Player, List<Monster>> {
     public void reset() {
         super.reset();
         this.setReflect(false);
+    }
+
+    public void heal(final int heal) {
+        this.healthPoints += heal;
+        if (this.healthPoints > this.getMaxHealth()) {
+            this.healthPoints = this.getMaxHealth();
+        }
     }
 }

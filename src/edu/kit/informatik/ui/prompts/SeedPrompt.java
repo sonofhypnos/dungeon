@@ -15,19 +15,4 @@ public class SeedPrompt extends SelectNumbers {
     public SeedPrompt(int seedNumber) {
         super(Message.SEEDS.toString(), ENTER_SEEDS, MAX_SEED, seedNumber);
     }
-
-
-//    public List<Integer> parseList(String input) {
-//        List<Integer> args;
-//        try {
-//            args = Arrays.stream(input.split(SEP_REGEX, -1)) //undo terrible split defaults
-//                    .map(Integer::parseUnsignedInt).collect(Collectors.toList());
-//        } catch (NumberFormatException e) {
-//            return null;
-//        }
-//        return args;
-//    }
-
-
-
 }

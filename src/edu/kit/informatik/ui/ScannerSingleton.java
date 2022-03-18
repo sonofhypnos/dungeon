@@ -1,4 +1,4 @@
-package edu.kit.informatik.ui.prompts;
+package edu.kit.informatik.ui;
 
 import java.util.Scanner;
 
