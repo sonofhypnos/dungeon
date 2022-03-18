@@ -33,14 +33,7 @@ public interface Prompt <T> {
      *
      * @param input the input
      * @return the list
-     * @throws ParseException the parseList exception
+     * @throws ParseException the parse exception
      */
-    List<T> parseList();
-    // TODO: 15.03.22 add that maxOrdinal is inclusive
-
-    T parseItem();
-
-
-
-
+    T parse(String input);
 }

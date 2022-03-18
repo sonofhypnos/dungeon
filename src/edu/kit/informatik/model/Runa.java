@@ -4,15 +4,10 @@ import edu.kit.informatik.model.Cards.*;
 import edu.kit.informatik.model.Cards.Player;
 
 import edu.kit.informatik.model.abilities.Ability;
-import edu.kit.informatik.model.abilities.effects.Effect;
-import edu.kit.informatik.model.abilities.effects.rewards.newAbilityCards;
-import edu.kit.informatik.model.abilities.effects.rewards.newDice;
+import edu.kit.informatik.ui.GameState;
 import edu.kit.informatik.ui.OutputInterFace;
 import edu.kit.informatik.ui.prompts.Prompt;
-import edu.kit.informatik.ui.prompts.QuitException;
-import edu.kit.informatik.ui.prompts.SeedPrompt;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,11 +34,14 @@ public class Runa {
     private MonsterDeck monsterDeck;
     private int monsterNumber;
     private boolean lost;
+    private GameState state;
 
     public Runa() {
+        this.state = State.SELECT_CLASS;
         player = new Player("Runa");
         this.lost = false;
         interFace = new OutputInterFace();
+
     }
 
     public Player getPlayer() {
@@ -55,15 +53,14 @@ public class Runa {
      */
     public void runGame() {
         //character
-        Prompt<Archetype> archetypePrompt = new SelectPrompt<>(
-                String.format(SELECT_PLAYER_S_CHARACTER_CLASS, player.getName()), List.of(Archetype.values()));
-        this.player.setClass(archetypePrompt.parseItem());
+
+//        this.player.setClass(archetypePrompt.parseItem());
         setPlayerCardLevel(INITIAL_LEVEL);
         //seed
-        SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
+//        SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
         for (int level = INITIAL_LEVEL; level < MAX_LEVEL + INITIAL_LEVEL; level++) {
-            shuffle(prompt.parseList(), level);
-            fight(level);
+//            shuffle(prompt.parseList(), level);
+//            fight(level);
             if (this.lost) {
                 lost();
                 break;
@@ -73,29 +70,29 @@ public class Runa {
     }
     // TODO: 18.03.22 implement message 0 damage
 
-    private void fight(int level) {
-        for (int stage = INITIAL_STAGE; stage < STAGE_NUMBER + INITIAL_STAGE; stage++) {
-            startFight(stage, level);
-            while (true) {
-                interFace.printStatus(player, currentMonsters);
-                playerTurn();
-                if (currentMonsters.isEmpty()) {
-                    break;
-                }
-                monsterTurn();
-                if (player.isDead()) {
-                    this.lost = true;
-                    return;
-                }
-                if (currentMonsters.isEmpty()) {
-                    break;
-                }
-            }
-            collectRewards();
-            abilityUpgrade(stage, level);
-            healing();
-        }
-    }
+//    private void fight(int level) {
+//        for (int stage = INITIAL_STAGE; stage < STAGE_NUMBER + INITIAL_STAGE; stage++) {
+//            startFight(stage, level);
+//            while (true) {
+//                interFace.printStatus(player, currentMonsters);
+//                playerTurn();
+//                if (currentMonsters.isEmpty()) {
+//                    break;
+//                }
+//                monsterTurn();
+//                if (player.isDead()) {
+//                    this.lost = true;
+//                    return;
+//                }
+//                if (currentMonsters.isEmpty()) {
+//                    break;
+//                }
+//            }
+//            collectRewards();
+//            abilityUpgrade(stage, level);
+//            healing();
+//        }
+//    }
 
     private void monsterTurn() {
         for (Monster monster : currentMonsters) {
@@ -108,20 +105,20 @@ public class Runa {
         player.evalFocus();
     }
 
-    private void playerTurn() {
-        player.reset();
-        Prompt<Ability<Player, List<Monster>>> abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY,
-                player.getCards());
-        Ability<Player, List<Monster>> ability = abilityPrompt.parseItem();
-        interFace.printUsage(player, ability);
-        ability.applyEffect(player, currentMonsters);
-
-        currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead())
-                .collect(Collectors.toList());
-        for (Monster monster : currentMonsters) {
-            monster.evalFocus();
-        }
-    }
+//    private void playerTurn() {
+//        player.reset();
+//        Prompt<Ability<Player, List<Monster>>> abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY,
+//                player.getCards());
+//        Ability<Player, List<Monster>> ability = abilityPrompt.parseItem();
+//        interFace.printUsage(player, ability);
+//        ability.applyEffect(player, currentMonsters);
+//
+//        currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead())
+//                .collect(Collectors.toList());
+//        for (Monster monster : currentMonsters) {
+//            monster.evalFocus();
+//        }
+//    }
 
     private void lost() {
         interFace.dies(player);
@@ -139,30 +136,30 @@ public class Runa {
     }
 
 
-    private void healing() {
-        if (player.getHealthPoints() != player.getMaxHealth() && player.getCards().size() > MIN_CARDS) {
-            // TODO: 18.03.22 remove if none?
-            // TODO: 18.03.22 remove vars in code
-            var healingPrompt = new SelectPrompt<>("", player.getCards(), 0, player.getCards().size() - MIN_CARDS);
-            var toRemove = healingPrompt.parseList();
-            for (var card : toRemove) {
-                player.heal(HEAL_PER_CARD);
-                player.removeCard(card);
-            }
-        }
-    }
-
-    private void collectRewards() {
-        List<Effect<Player, Monster>> rewards = new ArrayList<>(
-                List.of(new newAbilityCards(this.playerDeck, this.monsterNumber)));
-        if (!this.player.getDice().isLast()) {
-            rewards.add(new newDice());
-        }
-        Prompt<Effect<Player, Monster>> rewardPrompt = new SelectPrompt<>(String.format("Choose %s's reward", player),
-                rewards);
-        Effect<Player, Monster> reward = rewardPrompt.parseItem();
-        reward.applyEffect(player, null);
-    }
+//    private void healing() {
+//        if (player.getHealthPoints() != player.getMaxHealth() && player.getCards().size() > MIN_CARDS) {
+//            // TODO: 18.03.22 remove if none?
+//            // TODO: 18.03.22 remove vars in code
+//            var healingPrompt = new SelectPrompts<>("", player.getCards(), 0, player.getCards().size() - MIN_CARDS);
+//            var toRemove = healingPrompt.parseList();
+//            for (var card : toRemove) {
+//                player.heal(HEAL_PER_CARD);
+//                player.removeCard(card);
+//            }
+//        }
+//    }
+//
+//    private void collectRewards() {
+//        List<Effect<Player, Monster>> rewards = new ArrayList<>(
+//                List.of(new newAbilityCards(this.playerDeck, this.monsterNumber)));
+//        if (!this.player.getDice().isLast()) {
+//            rewards.add(new newDice());
+//        }
+//        Prompt<Effect<Player, Monster>> rewardPrompt = new SelectPrompt<>(String.format("Choose %s's reward", player),
+//                rewards);
+//        Effect<Player, Monster> reward = rewardPrompt.parseItem();
+//        reward.applyEffect(player, null);
+//    }
 
 
     private void startFight(final int stage, final int level) {
@@ -195,6 +192,14 @@ public class Runa {
         monsterDeck = new MonsterDeck(level);
         playerDeck.shuffle(seeds.get(0));
         monsterDeck.shuffle(seeds.get(1));
+    }
+
+    public void prompt() {
+
+    }
+
+    public void run(final String input) {
+        this.state.run(input);
     }
 
 }
