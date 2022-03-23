@@ -1,8 +1,5 @@
 package edu.kit.informatik.ui.prompts;
 
-import edu.kit.informatik.model.exception.ParseException;
-import edu.kit.informatik.ui.resources.Constants;
-import edu.kit.informatik.ui.resources.ErrorMessage;
 import edu.kit.informatik.ui.resources.Message;
 
 import java.util.Arrays;
@@ -27,7 +24,7 @@ public class SeedPrompt implements Prompt<List<Integer>> {
 
     @Override
     public void entryPrompt() {
-        System.out.println(String.format(ENTER_SEEDS, Constants.MIN_ORDINAL.getValue(), MAX_VALUE));
+        System.out.printf((ENTER_SEEDS) + "%n", FIRST_ORDINAL, MAX_VALUE);
     }
 
     public List<Integer> parse(String input) {

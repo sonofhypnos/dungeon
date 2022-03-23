@@ -4,12 +4,9 @@
 
 package edu.kit.informatik.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
-import edu.kit.informatik.model.Runa;
+import edu.kit.informatik.model.GameContext;
 
 /**
  * This class describes a session for interactive command execution.
@@ -31,14 +28,14 @@ public class Session {
     public static final String QUIT = "quit";
 
     private final Scanner scanner;
-    private final Runa game;
+    private final GameContext game;
     private boolean running;
 
     /**
      * Constructs a new session.
      * @param game
      */
-    public Session(final Runa game) {
+    public Session(final GameContext game) {
         this.scanner = new Scanner(System.in);
         this.game = game;
         this.game.prompt();

@@ -6,6 +6,8 @@ import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.Cards.Monster;
 
 import edu.kit.informatik.model.abilities.Ability;
+import edu.kit.informatik.ui.prompts.Prompt;
+import edu.kit.informatik.ui.prompts.SelectPrompt;
 import java.util.List;
 
 /**
@@ -14,10 +16,15 @@ import java.util.List;
  */
 public class OutputInterFace {
     private static final String LINE_STRING = "----------------------------------------";
+    private static final String SELECT_CARD_TO_PLAY = "Select Card to play";
     // TODO: 14.03.22 Make actually abstract functions to implement stuff from monster and agent (for UI?)
 
     public OutputInterFace() {
         // TODO: 18.03.22 ist es erlaubt Runtime aufzurufen?
+    }
+
+    public static Prompt<Ability<Player, List<Monster>>> selectCardsToPlay(final List<Ability<Player, List<Monster>>> cards) {
+        return new SelectPrompt<>(SELECT_CARD_TO_PLAY, cards);
     }
 
     public void printStage(Player player, int stage, int level) {

@@ -1,5 +1,6 @@
 package edu.kit.informatik.ui.prompts;
 
+import edu.kit.informatik.model.Cards.Dice;
 import edu.kit.informatik.model.exception.ParseException;
 
 import java.util.List;

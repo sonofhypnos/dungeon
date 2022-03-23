@@ -4,7 +4,7 @@
 
 package edu.kit.informatik;
 
-import edu.kit.informatik.model.Runa;
+import edu.kit.informatik.model.GameContext;
 
 /**
  * The Application. Creates the needed instances and runs the interactive command session.
@@ -38,7 +38,7 @@ public final class Application {
 //        Session session = new Session();
 //        session.addCommand(new Quit(session));
 //        session.start();
-        Runa game = new Runa();
+        GameContext game = new GameContext();
         game.runGame();
     }
 }
