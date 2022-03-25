@@ -4,12 +4,13 @@ import edu.kit.informatik.model.Cards.*;
 import edu.kit.informatik.model.Cards.Player;
 
 import edu.kit.informatik.model.abilities.Ability;
+import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.model.abilities.effects.rewards.newAbilityCards;
 import edu.kit.informatik.model.abilities.effects.rewards.newDice;
 import edu.kit.informatik.ui.OutputInterFace;
+import edu.kit.informatik.ui.prompts.DiceRoll;
 import edu.kit.informatik.ui.prompts.Prompt;
-import edu.kit.informatik.ui.prompts.QuitException;
 import edu.kit.informatik.ui.prompts.SeedPrompt;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 import java.util.ArrayList;
@@ -34,11 +35,12 @@ public class Runa {
     private final PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
     private List<Monster> currentMonsters;
-    private OutputInterFace interFace;
+    private final OutputInterFace interFace;
     private List<Integer> seeds;
     private MonsterDeck monsterDeck;
     private int monsterNumber;
     private boolean lost;
+    private boolean quit = false;
 
     public Runa() {
         player = new Player("Runa");
@@ -50,6 +52,9 @@ public class Runa {
         return player;
     }
 
+    // TODO: 25.03.22 alternative approach to try: Create gamestates again: each gamestate also takes in the session
+    //  and sets the prompt for the session. The session in turn uses the parseInt and parseInteger functions from
+    //  the Sheet to decide whether to parse Input.
     /**
      * Process.
      */
@@ -57,12 +62,25 @@ public class Runa {
         //character
         Prompt<Archetype> archetypePrompt = new SelectPrompt<>(
                 String.format(SELECT_PLAYER_S_CHARACTER_CLASS, player.getName()), List.of(Archetype.values()));
-        this.player.setClass(archetypePrompt.parseItem());
+        // TODO: 25.03.22 add justification for not using gameStates: while my approach has the downside of having to
+        //  use return statements everywhere, the state-approach has the downside of basically being an awkward goto
+        //  (add justification)
+
+        var archetyp = archetypePrompt.parseItem();
+        // TODO: 25.03.22 add stuff about code repetition
+        if (checkQuit(archetyp)) {
+            return;
+        }
+        this.player.setClass(archetyp); //done
         setPlayerCardLevel(INITIAL_LEVEL);
         //seed
         SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
         for (int level = INITIAL_LEVEL; level < MAX_LEVEL + INITIAL_LEVEL; level++) {
-            shuffle(prompt.parseList(), level);
+            var seeds = prompt.parseList();
+            if (checkQuit(seeds)) {
+                return;
+            }
+            shuffle(seeds, level);
             fight(level);
             if (this.lost) {
                 lost();
@@ -71,6 +89,14 @@ public class Runa {
         }
         interFace.won(player);
     }
+
+    private <T> boolean checkQuit(final T input) { // TODO: 25.03.22 figure out how to defend this?
+        if (input == null) {
+            quit = true;
+        }
+        return quit;
+    }
+
     // TODO: 18.03.22 implement message 0 damage
 
     private void fight(int level) {
@@ -110,11 +136,34 @@ public class Runa {
 
     private void playerTurn() {
         player.reset();
-        Prompt<Ability<Player, List<Monster>>> abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY,
+        var abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY,
                 player.getCards());
-        Ability<Player, List<Monster>> ability = abilityPrompt.parseItem();
+        var ability = abilityPrompt.parseItem();
+
+        if (checkQuit(ability)) {
+            return;
+        }
+        // TODO: 25.03.22 explain conflict between object-orientation, separating ui and model and not using the exit
+        //  command
+        // TODO: 25.03.22 add that this was previously just put into the functions themselves (polymorphism), but
+        //  this had the issue of needing to communicate put sideeffects through chain, which was awkward
+        if (ability.isType(AbilityType.OFFENSIV)) {
+            Prompt<Integer> dicePrompt = new DiceRoll(player.getDice());
+            Integer roll = dicePrompt.parseItem();
+            if (checkQuit(roll)) {
+                return;
+            }
+            ability.setRoll(roll);
+            Prompt<Monster> monsterPrompt = new SelectPrompt<>(String.format("Select %s's target.", player.getName()),
+                    currentMonsters);
+            Monster monster = monsterPrompt.parseItem();
+            if (checkQuit(monster)) {
+                return;
+            }
+            // TODO: 25.03.22 can I write stuff like the above?
+        }
         interFace.printUsage(player, ability);
-        ability.applyEffect(player, currentMonsters);
+        ability.applyEffect(player, null);
 
         currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead())
                 .collect(Collectors.toList());
@@ -145,6 +194,9 @@ public class Runa {
             // TODO: 18.03.22 remove vars in code
             var healingPrompt = new SelectPrompt<>("", player.getCards(), 0, player.getCards().size() - MIN_CARDS);
             var toRemove = healingPrompt.parseList();
+            if (checkQuit(toRemove)) {
+                return;
+            }
             for (var card : toRemove) {
                 player.heal(HEAL_PER_CARD);
                 player.removeCard(card);
@@ -161,6 +213,9 @@ public class Runa {
         Prompt<Effect<Player, Monster>> rewardPrompt = new SelectPrompt<>(String.format("Choose %s's reward", player),
                 rewards);
         Effect<Player, Monster> reward = rewardPrompt.parseItem();
+        if (checkQuit(reward)) {
+            return;
+        }
         reward.applyEffect(player, null);
     }
 
@@ -195,6 +250,13 @@ public class Runa {
         monsterDeck = new MonsterDeck(level);
         playerDeck.shuffle(seeds.get(0));
         monsterDeck.shuffle(seeds.get(1));
+    }
+
+    enum States {
+        GetSeeds{
+
+        }
+
     }
 
 }

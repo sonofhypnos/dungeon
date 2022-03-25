@@ -19,6 +19,8 @@ public class OutputInterFace {
     public OutputInterFace() {
         // TODO: 18.03.22 ist es erlaubt Runtime aufzurufen?
     }
+    // TODO: 25.03.22 the programmieren guide doesn't like direct output of string stuff. Therefore make a
+    //  sepseparate method that creates a string for each
 
     public void printStage(Player player, int stage, int level) {
         System.out.printf("%s Enters Stage %d of Level %d%n", player.getName(), stage, level);
@@ -53,7 +55,7 @@ public class OutputInterFace {
                 damage.getType());
     }
 
-    public void getCard(final Player player, final Ability<Player, List<Monster>> card) {
+    public void getCard(final Player player, final Ability<Player, Monster> card) {
         System.out.printf("%s gets %s%n", player, card);
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class Pierce extends Ability<Player, List<Monster>> {
+public class Pierce extends Ability<Player, Monster> {
 
     private static final int BONUS_THRESHHOLD = 6;
     private static final int DAMAGE_FACTOR = 6;
@@ -21,8 +21,8 @@ public class Pierce extends Ability<Player, List<Monster>> {
         super(name, level, AbilityType.OFFENSIV);
     }
 
-    public void applyEffect(final Player aggressor, final List<Monster> targets) {
+    public void applyEffect(final Player aggressor, final Monster target) {
         var effect = new DamageWithThreshhold(BONUS_THRESHHOLD, DAMAGE_FACTOR, BONUS_FACTOR, this.level);
-        effect.applyEffect(aggressor, targets);
+        effect.applyEffect(aggressor, target);
     }
 }

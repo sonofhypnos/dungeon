@@ -11,7 +11,7 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class Swing extends Ability<Player, List<Monster>> {
+public class Swing extends Ability<Player, Monster> {
 
     private static final int DAMAGE_FACTOR = 5;
 
@@ -20,7 +20,7 @@ public class Swing extends Ability<Player, List<Monster>> {
     }
 
     @Override
-    public void applyEffect(final Player aggressor, final List<Monster> targets) {
+    public void applyEffect(final Player aggressor, final Monster target) {
         var effect = new DamageMonsterWithDice(DAMAGE_FACTOR, level);
     }
 }
