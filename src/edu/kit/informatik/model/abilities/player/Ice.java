@@ -12,7 +12,7 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class Ice extends Ability<Player, List<Monster>> {
+public class Ice extends Ability<Player, Monster> {
 
     private static final int DAMAGE_FACTOR = 2;
     private static final int DAMAGE_CONSTANT = 4;
@@ -24,9 +24,9 @@ public class Ice extends Ability<Player, List<Monster>> {
     }
 
     @Override
-    public void applyEffect(final Player aggressor, final List<Monster> targets) {
+    public void applyEffect(final Player aggressor, final Monster target) {
         var effect = new ElementPlayerEffect(MonsterType.WATER, DAMAGE_FACTOR, DAMAGE_CONSTANT, SECOND_DAMAGE_CONSTANT,
                 BONUS_DAMAGE_FACTOR, level);
-        effect.applyEffect(aggressor, targets);
+        effect.applyEffect(aggressor, target);
     }
 }

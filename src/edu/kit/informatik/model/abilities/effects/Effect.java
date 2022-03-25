@@ -3,6 +3,7 @@ package edu.kit.informatik.model.abilities.effects;
 import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.ui.OutputInterFace;
+import edu.kit.informatik.ui.prompts.DiceRoll;
 import edu.kit.informatik.ui.prompts.Prompt;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
  */
 public abstract class Effect<A, B> {
     protected OutputInterFace interFace;
+    private int roll;
+    private B target;
 
     public Effect() {
         this.interFace = new OutputInterFace();
@@ -20,11 +23,22 @@ public abstract class Effect<A, B> {
 
     public abstract void applyEffect(A aggressor, B target);
 
-    protected Monster getTargetMonster(Player player, List<Monster> monsters) {
-        player.roll();
-        Prompt<Monster> monsterPrompt = new SelectPrompt<>(String.format("Select %s's target.", player.getName()),
-                monsters);
-        return monsterPrompt.parseItem();
+
+    public B getTarget() {
+        return target;
     }
+
+    public void setTarget(final B target) {
+        this.target = target;
+    }
+
+    public int getRoll() {
+        return roll;
+    }
+
+    public void setRoll(final int roll) {
+        this.roll = roll;
+    }
+
 }
 

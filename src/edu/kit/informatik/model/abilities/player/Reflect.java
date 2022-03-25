@@ -10,7 +10,7 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class Reflect extends Ability<Player, List<Monster>> {
+public class Reflect extends Ability<Player, Monster> {
 
     public Reflect(final String name, final int level) {
         super(name, level, AbilityType.DEFENSIV);
@@ -18,7 +18,7 @@ public class Reflect extends Ability<Player, List<Monster>> {
 
 
     @Override
-    public void applyEffect(final Player aggressor, final List<Monster> target) {
+    public void applyEffect(final Player aggressor, final Monster target) {
         aggressor.setReflect(true);
     }
 }

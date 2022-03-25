@@ -5,8 +5,6 @@ import edu.kit.informatik.model.Damage;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.Archetype;
 import edu.kit.informatik.model.abilities.player.PlayerAbilities;
-import edu.kit.informatik.ui.prompts.DiceRoll;
-import edu.kit.informatik.ui.prompts.Prompt;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,11 +19,9 @@ public class Player extends Agent<Player, List<Monster>> {
     private static final int INITIAL_HEALTH = 50;
     private static final Dice INITIAL_DICE = Dice.D4;
     private static final int REFLECT_DAMAGE = 10;
-    private Archetype archetype;
-    private List<Ability<Player, List<Monster>>> cards;
-    private List<Ability<Player, List<Monster>>> startingCards;
+    private List<Ability<Player, Monster>> cards;
+    private List<Ability<Player, Monster>> startingCards;
     private Dice dice;
-    private int roll;
     private boolean reflect;
 
     // TODO: 13.03.22 implement stuff for Fähigkeiten
@@ -52,12 +48,11 @@ public class Player extends Agent<Player, List<Monster>> {
     }
 
     public void setClass(final Archetype gameArchetype) {
-        this.archetype = gameArchetype;
         // TODO: 13.03.22 make functions to set player abilities?
 
 
         // TODO: 14.03.22 make enum for this?
-        switch (archetype) {
+        switch (gameArchetype) {
             case MAGE:
                 cards = List.of(PlayerAbilities.FOCUS.getAbility(), PlayerAbilities.WATER.getAbility());
                 break;
@@ -98,12 +93,13 @@ public class Player extends Agent<Player, List<Monster>> {
         checkDamage(damage); // this is to be applied after other effects
     }
 
-    public List<Ability<Player, List<Monster>>> getCards() {
+    public List<Ability<Player, Monster>> getCards() {
         return new ArrayList<>(cards);
     }
 
-    public boolean removeCard(Ability<Player, List<Monster>> card) {
-        return this.cards.remove(card);
+    public void removeCard(Ability<Player, Monster> card) {
+        this.cards.remove(card);
+        // TODO: 25.03.22 there were some weird exceptions with cards maybe ask Johannes because I did not get it.
     }
 
     public Dice getDice() {
@@ -111,21 +107,12 @@ public class Player extends Agent<Player, List<Monster>> {
     }
 
     public void getNextDice() {
-        assert !dice.isLast();
+        assert !dice.isLast(); // TODO: 25.03.22 Needs to be checked above?
         this.dice = Dice.values()[dice.ordinal() + 1];
     }
 
-    public void roll() {
-        Prompt<Integer> dicePrompt = new DiceRoll(dice);
-        this.roll = dicePrompt.parseItem();
-    }
-
-    public int getRoll() {
-        return roll;
-    }
-
-    public List<Ability<Player, List<Monster>>> getStartingCards() {
-        return this.getCards().stream().filter((Ability<Player, List<Monster>> card) -> this.startingCards.contains(card))
+    public List<Ability<Player, Monster>> getStartingCards() {
+        return this.getCards().stream().filter((var card) -> this.startingCards.contains(card))
                 .collect(Collectors.toList());
     }
 
@@ -149,4 +136,5 @@ public class Player extends Agent<Player, List<Monster>> {
             this.healthPoints = this.getMaxHealth();
         }
     }
+
 }

@@ -8,7 +8,7 @@ import edu.kit.informatik.model.abilities.Focus;
 import java.util.List;
 
 /**
- * The enum Player cards.
+ * The enum Player Abilities.
  *
  * @author upkim
  * @version 1.0.0 10.03.22
@@ -57,21 +57,16 @@ public enum PlayerAbilities implements AbilityKind {
     LIGHTNING(new Lightning("LightningPlayer", 0)),
     ;
 
-    private final Ability<Player, List<Monster>> ability;
+    private final Ability<Player, Monster> ability;
 
-    PlayerAbilities(final Ability<Player, List<Monster>> ability) {
+    PlayerAbilities(final Ability<Player, Monster> ability) {
         ability.setIdentifier(this);
         this.ability = ability;
     }
 
-    public Ability<Player, List<Monster>> getAbility() {
+    public Ability<Player, Monster> getAbility() {
         return ability;
     }
-
-    public void applyEffect(final Player aggressor, final List<Monster> targets) {
-
-    }
-
 }
 
 

@@ -12,7 +12,7 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class Thrust extends Ability<Player, List<Monster>> {
+public class Thrust extends Ability<Player, Monster> {
     private Prompt<Integer> diceRoll;
 
     public Thrust(final String thrust, final int level) {
@@ -21,10 +21,9 @@ public class Thrust extends Ability<Player, List<Monster>> {
     }
 
     @Override
-    public void applyEffect(final Player aggressor, final List<Monster> targets) {
-        int dice = aggressor.getRoll(); //might also make this as effect
+    public void applyEffect(final Player aggressor, final Monster target) {
         var effect = new DamageWithThreshhold(6, 6, 4, this.level);
-        effect.applyEffect(aggressor, targets);
+        effect.applyEffect(aggressor, target);
         // TODO: 17.03.22 handle isDead in another place
     }
 }

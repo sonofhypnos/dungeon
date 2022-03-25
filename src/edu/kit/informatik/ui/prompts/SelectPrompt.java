@@ -21,13 +21,15 @@ public class SelectPrompt<T> implements Prompt<T> {
     /**
      * The constant FIRST_ORDINAL.
      */
+
+    private static boolean running = true;
     private static final String ENTER_PROMPT = "Enter number [%d--%d]:";
     private static final String ENTER_NUMBERS_D_D_SEPARATED_BY_COMMA = "Enter numbers [%d--%d] separated by comma:";
     private static final int SPLIT_LIMIT = -1;
     private static final String QUIT_REGEX = "quit";
-    private static final int EXIT_STATUS = 0;
     protected final String text;
     protected final String entryPrompt;
+
     /**
      * The Options.
      */
@@ -66,6 +68,7 @@ public class SelectPrompt<T> implements Prompt<T> {
         this.entryPrompt = String.format(entryPrompt, FIRST_ORDINAL, maxOrdinal);
     }
 
+
     /**
      * Instantiates a new Select prompt.
      *
@@ -82,18 +85,34 @@ public class SelectPrompt<T> implements Prompt<T> {
         this.entryPrompt = String.format(ENTER_NUMBERS_D_D_SEPARATED_BY_COMMA, FIRST_ORDINAL, options.size());
     }
 
+    public static boolean isRunning() {
+        return running;
+    }
+
+    public static void setRunning(final boolean running) {
+        SelectPrompt.running = running;
+    }
+
     @Override
     public void prompt() {
+
         listOptions(text, this.options);
     }
 
     @Override
     public void entryPrompt() {
+
+        if (!SelectPrompt.isRunning()) {
+            return;
+        }
         System.out.println(entryPrompt);
     }
 
     @Override
     public List<T> parseList() {
+        if (!SelectPrompt.isRunning()) {
+            return null;
+        }
         List<Integer> args = getIntegers(separator, this.minOptionNumber, this.maxOrdinal, maxOptionNumber);
         return args.stream().map((Integer x) -> options.get(x)).collect(Collectors.toList());
     }
@@ -105,22 +124,33 @@ public class SelectPrompt<T> implements Prompt<T> {
         // TODO: 15.03.22 document we don't let user choose if 1 option
         // TODO: 18.03.22 use getIntegers here against code duplication
 
+        if (!SelectPrompt.isRunning()) {
+            return null;
+        }
         if (options.size() == 1) return options.get(0);
         // TODO: 15.03.22 add while running
         int arg = getInt(this.maxOrdinal);
+        if (!SelectPrompt.isRunning()) {
+            return null;
+        }
         return options.get(arg - FIRST_ORDINAL);
         // TODO: 17.03.22 figure out what happens if you first enter wrong and then correct values
+
     }
 
     protected List<Integer> getIntegers(final String separator, final int maxOrdinal, final int minOptionNumber,
                                         final int maxOptionNumber) {
 
-        List<Integer> args;
+        // TODO: 23.03.22 hübsscher (mach weninger wenn nicht laufend)
+        List<Integer> args = null;
         Scanner scanner = ScannerSingleton.getInstance();
-        while (true) {
+        while (isRunning()) {
             entryPrompt();
             String input = scanner.nextLine();
             quit(input);
+            if (!isRunning()) {
+                return args;
+            }
             assert input != null;
             try {
                 args = Arrays.stream(Objects.requireNonNull(input).split(separator, SPLIT_LIMIT)).map(Integer::parseUnsignedInt)
@@ -137,7 +167,7 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     private void quit(final String input) {
         if (QUIT_REGEX.equals(input)) {
-            Runtime.getRuntime().exit(EXIT_STATUS);
+            SelectPrompt.setRunning(false);
         }
     }
 
@@ -146,14 +176,17 @@ public class SelectPrompt<T> implements Prompt<T> {
     }
 
 
-    protected int getInt(int maxOrdinal) {
+    protected Integer getInt(int maxOrdinal) {
         this.prompt();
         Scanner scanner = ScannerSingleton.getInstance();
-        int arg;
+        Integer arg = null;
         while (true) {
             entryPrompt();
             String input = scanner.nextLine();
             quit(input);
+            if (!isRunning()) {
+                return arg;
+            }
             assert input != null;
             try {
                 arg = Integer.parseInt(input);

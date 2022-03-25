@@ -12,7 +12,7 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class Parry extends Ability<Player, List<Monster>> {
+public class Parry extends Ability<Player, Monster> {
 
     private static final int DAMAGE_FACTOR = 7;
 
@@ -20,7 +20,7 @@ public class Parry extends Ability<Player, List<Monster>> {
         super(name, level, AbilityType.DEFENSIV);
     }
 
-    public void applyEffect(final Player aggressor, final List<Monster> target) {
+    public void applyEffect(final Player aggressor, final Monster target) {
         aggressor.setProtection(new Damage(DamageType.PHYSICAL, DAMAGE_FACTOR * level));
     }
 
