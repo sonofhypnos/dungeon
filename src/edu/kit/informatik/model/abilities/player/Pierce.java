@@ -18,6 +18,7 @@ public class Pierce extends Ability<Player, Monster> {
 
     public Pierce(final String name, final int level) {
         super(name, level, AbilityType.OFFENSIV);
+        this.setDiceNeed(true);
     }
 
     public void applyEffect(final Player aggressor, final Monster target) {

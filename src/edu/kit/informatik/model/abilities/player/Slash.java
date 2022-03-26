@@ -17,10 +17,12 @@ public class Slash extends Ability<Player, Monster> {
 
     public Slash(final String slash, final int level) {
         super(slash, level, AbilityType.OFFENSIV);
+        this.setDiceNeed(true);
     }
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
         var effect = new DamageMonsterWithDice(DAMAGE_FACTOR, level);
+        effect.applyEffect(aggressor, target);
     }
 }

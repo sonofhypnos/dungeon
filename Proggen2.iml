@@ -11,6 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/src/edu/kit/informatik/model/Monster" />
       <excludeFolder url="file://$MODULE_DIR$/src/edu/kit/informatik/model/states" />
+      <excludeFolder url="file://$MODULE_DIR$/stuff" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

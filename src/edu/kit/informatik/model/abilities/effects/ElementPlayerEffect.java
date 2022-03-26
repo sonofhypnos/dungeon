@@ -38,6 +38,7 @@ public class ElementPlayerEffect extends Effect<Player, Monster> {
             damageAmount += bonusDamageFactor * level;
         }
         var effect = new DamageMonster(new Damage(DamageType.MAGIC, damageAmount));
+        effect.applyEffect(aggressor, target);
     }
 
 }

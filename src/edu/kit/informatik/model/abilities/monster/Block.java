@@ -15,8 +15,7 @@ public class Block extends MonsterAbility {
     private static final String BLOCK = "Block";
 
     public Block(final int level) {
-        super(level, AbilityType.DEFENSIV);
-        this.name = BLOCK;
+        super(BLOCK, level, AbilityType.DEFENSIV);
     }
 
     @Override

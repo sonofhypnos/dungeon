@@ -101,7 +101,10 @@ public class OutputInterFace {
     }
 
     public void focus(final Agent<?, ?> agent, final int points) {
-        System.out.println(gainFocus(agent, points));
+        // TODO: 26.03.22 make pretty (isFocusing check again)
+        if (agent.isFocusing()) {
+            System.out.println(gainFocus(agent, points));
+        }
     }
 
     private String gainFocus(final Agent<?, ?> agent, final int points) {

@@ -14,6 +14,7 @@ public abstract class Ability<A, T> extends Effect<A, T> {
     protected AbilityKind identifier;
     protected String name;
     protected int level;
+    private boolean needsDice;
 
     protected Ability(String name, int level, AbilityType type) {
         super();
@@ -75,6 +76,17 @@ public abstract class Ability<A, T> extends Effect<A, T> {
         return true;
     }
 
+
+    // TODO: 26.03.22 make this in a way that effects inherit the needs of what they call?
+    // TODO: 26.03.22 one could make a list of effects and each effect in turn has a list of characteristics that it
+    //  needs
+    public boolean needsDice() {
+        return needsDice;
+    }
+
+    public void setDiceNeed(final boolean needsDice) {
+        this.needsDice = needsDice;
+    }
 
     // TODO: 14.03.22 setLevel?
 }

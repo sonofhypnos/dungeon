@@ -15,7 +15,7 @@ public class Smash extends MonsterAbility {
     private static final int DAMAGE_FACTOR = 8;
 
     public Smash(final int level) {
-        super(level, AbilityType.OFFENSIV);
+        super("Smash", level, AbilityType.OFFENSIV);
     }
 
     public void applyEffect(final Monster aggressor, final Player target) {
@@ -23,8 +23,4 @@ public class Smash extends MonsterAbility {
     }
 
 
-    @Override
-    public String toString() {
-        return String.format("Smash", level);
-    }
 }

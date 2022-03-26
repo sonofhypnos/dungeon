@@ -14,11 +14,4 @@ public class Lightning extends ElementMonsterAbility {
     public Lightning(final int level) {
         super(LIGHTNING, level, DAMAGE_FACTOR, DAMAGE_CONSTANT);
     }
-
-    @Override
-    public String toString() {
-        return String.format(LIGHTNING, level);
-    }
-
-
 }
