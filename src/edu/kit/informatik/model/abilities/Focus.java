@@ -16,6 +16,7 @@ public class Focus <A extends Agent<?,?>, T> extends Ability <A,T> {
 
     public  void applyEffect(final A aggressor, final T target) {
         aggressor.focus(level);
+        interFace.focus(aggressor, level);
     }
 
 

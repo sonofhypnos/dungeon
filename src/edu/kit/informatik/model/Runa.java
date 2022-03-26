@@ -73,6 +73,9 @@ public class Runa {
             return;
         }
         this.player.setClass(archetyp); //done
+        for (var card : player.getStartingCards()) {
+            playerDeck.remove(card);
+        }
         setPlayerCardLevel(INITIAL_LEVEL);
         //seed
         SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
@@ -88,7 +91,10 @@ public class Runa {
                 break;
             }
         }
-        interFace.won(player);
+        if (!this.lost) {
+            interFace.won(player);
+            // TODO: 26.03.22 initialisiere die Fähigkeitskarten des Spielers bei 1
+        }
     }
 
     public <T> boolean checkQuit(final T input) { // TODO: 25.03.22 figure out how to defend this?
@@ -198,8 +204,11 @@ public class Runa {
             if (checkQuit(cardToRemove)) {
                 return;
             }
+
+            int healthPrev = player.getHealthPoints();
+            player.heal(HEAL_PER_CARD * cardToRemove.size());
+            interFace.printHeal(player, healthPrev);
             for (var card : cardToRemove) {
-                player.heal(HEAL_PER_CARD);
                 player.removeCard(card);
             }
         }

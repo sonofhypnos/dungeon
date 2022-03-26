@@ -19,7 +19,7 @@ public class Player extends Agent<Player, List<Monster>> {
     private static final Dice INITIAL_DICE = Dice.D4;
     private static final int INITIAL_FOCUS = 1;
     private static final int REFLECT_DAMAGE = 10;
-    private List<Ability<Player, Monster>> cards;
+    private List<Ability<Player, Monster>> cards; // TODO: 26.03.22 maybe make also card deck?
     private List<Ability<Player, Monster>> startingCards;
     private Dice dice;
     private boolean reflect;
@@ -61,7 +61,7 @@ public class Player extends Agent<Player, List<Monster>> {
 
     @Override
     public String getFocusPointStatus() {
-        return String.format("%d/%d FP", focusPoints, MAX_FOCUS_POINTS);
+        return String.format("%d/%d FP", focusPoints, getMaxFocusPoints());
     }
 
 

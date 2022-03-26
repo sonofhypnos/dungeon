@@ -76,6 +76,8 @@ public class OutputInterFace {
     }
 
     public List<Ability<Player, Monster>> heal(final Player player) {
+
+        // TODO: 26.03.22 none does not work. Needs prompt?
         Prompt<Ability<Player, Monster>> healingPrompt = new SelectPrompt<>(String.format(DISCARD_CARDS,
                 player.toString(), player.getHealthStatus()),
                 player.getCards(), NEGLIGABLE_DAMAGE, player.getCards().size() - 1); //
@@ -83,9 +85,30 @@ public class OutputInterFace {
     }
 
     public Monster getTarget(final Player player, final List<Monster> currentMonsters) {
-        Prompt<Monster> monsterPrompt = new SelectPrompt<>(String.format("Select %s's target.", player.getName()),
+        Prompt<Monster> monsterPrompt = new SelectPrompt<>(selectTarget(player),
                 currentMonsters);
         return monsterPrompt.parseItem();
+    }
+
+    private String selectTarget(final Player player) {
+        return String.format("Select %s's target.", player.getName());
+    }
+
+    public void printHeal(final Player player, final int healthPrev) {
+        System.out.println(getHeal(player, healthPrev));
+
+    }
+
+    private String getHeal(final Player player, final int healthPrev) {
+        return String.format("%s gains %d health", player, (player.getHealthPoints() - healthPrev));
+    }
+
+    public void focus(final Agent<?,?> agent, final int points) {
+        System.out.println(gainFocus(agent, points));
+    }
+
+    private String gainFocus(final Agent<?, ?> agent, final int points) {
+        return String.format("%s gains %d focus", agent, points);
     }
 
 

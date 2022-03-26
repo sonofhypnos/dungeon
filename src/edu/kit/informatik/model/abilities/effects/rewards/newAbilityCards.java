@@ -37,8 +37,8 @@ public class newAbilityCards extends Effect<Player, Monster> {
             return;
         }
         for (var card : loot) {
-            player.addCard(card.getAbility());
-            interFace.getCard(player, card.getAbility());
+            player.addCard(card);
+            interFace.getCard(player, card);
         }
     }
 
