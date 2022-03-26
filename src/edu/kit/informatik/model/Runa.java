@@ -150,7 +150,6 @@ public class Runa {
         if (checkQuit(ability)) {
             return;
         }
-        interFace.printUsage(player, ability);
         // TODO: 25.03.22 explain conflict between object-orientation, separating ui and model and not using the exit
         //  command
         // TODO: 25.03.22 add that this was previously just put into the functions themselves (polymorphism), but
@@ -170,7 +169,7 @@ public class Runa {
             // TODO: 26.03.22 target should come before the dice throw
             // TODO: 25.03.22 can I write stuff like the above?
         }
-
+        interFace.printUsage(player, ability);
         ability.applyEffect(player, target);
 
         currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead())
