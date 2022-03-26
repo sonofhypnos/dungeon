@@ -32,6 +32,7 @@ public class Runa {
     private static final String SELECT_CARD_TO_PLAY = "Select card to play";
     private static final int INITIAL_STAGE = 1;
     private static final int HEAL_PER_CARD = 10;
+    private static final int CARD_POOL_MULTIPLE = 2;
     private final PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
     private List<Monster> currentMonsters;
@@ -90,7 +91,7 @@ public class Runa {
         interFace.won(player);
     }
 
-    private <T> boolean checkQuit(final T input) { // TODO: 25.03.22 figure out how to defend this?
+    public <T> boolean checkQuit(final T input) { // TODO: 25.03.22 figure out how to defend this?
         if (input == null) {
             quit = true;
         }
@@ -143,27 +144,28 @@ public class Runa {
         if (checkQuit(ability)) {
             return;
         }
+        interFace.printUsage(player, ability);
         // TODO: 25.03.22 explain conflict between object-orientation, separating ui and model and not using the exit
         //  command
         // TODO: 25.03.22 add that this was previously just put into the functions themselves (polymorphism), but
         //  this had the issue of needing to communicate put sideeffects through chain, which was awkward
+        Monster target = null;
         if (ability.isType(AbilityType.OFFENSIV)) {
+            target = interFace.getTarget(player, currentMonsters);
+            if (checkQuit(target)) {
+                return;
+            }
             Prompt<Integer> dicePrompt = new DiceRoll(player.getDice());
             Integer roll = dicePrompt.parseItem();
             if (checkQuit(roll)) {
                 return;
             }
             ability.setRoll(roll);
-            Prompt<Monster> monsterPrompt = new SelectPrompt<>(String.format("Select %s's target.", player.getName()),
-                    currentMonsters);
-            Monster monster = monsterPrompt.parseItem();
-            if (checkQuit(monster)) {
-                return;
-            }
+            // TODO: 26.03.22 target should come before the dice throw
             // TODO: 25.03.22 can I write stuff like the above?
         }
-        interFace.printUsage(player, ability);
-        ability.applyEffect(player, null);
+
+        ability.applyEffect(player, target);
 
         currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead())
                 .collect(Collectors.toList());
@@ -192,12 +194,11 @@ public class Runa {
         if (player.getHealthPoints() != player.getMaxHealth() && player.getCards().size() > MIN_CARDS) {
             // TODO: 18.03.22 remove if none?
             // TODO: 18.03.22 remove vars in code
-            var healingPrompt = new SelectPrompt<>("", player.getCards(), 0, player.getCards().size() - MIN_CARDS);
-            var toRemove = healingPrompt.parseList();
-            if (checkQuit(toRemove)) {
+            var cardToRemove = interFace.heal(player);
+            if (checkQuit(cardToRemove)) {
                 return;
             }
-            for (var card : toRemove) {
+            for (var card : cardToRemove) {
                 player.heal(HEAL_PER_CARD);
                 player.removeCard(card);
             }
@@ -206,7 +207,7 @@ public class Runa {
 
     private void collectRewards() {
         List<Effect<Player, Monster>> rewards = new ArrayList<>(
-                List.of(new newAbilityCards(this.playerDeck, this.monsterNumber)));
+                List.of(new newAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber, this)));
         if (!this.player.getDice().isLast()) {
             rewards.add(new newDice());
         }
@@ -239,7 +240,7 @@ public class Runa {
         // TODO: 14.03.22 Update of abilities comes with prompt and only after boss level the second time around
     }
 
-    private void setPlayerCardLevel(int level) {
+    private void setPlayerCardLevel(final int level) {
         for (Ability<?, ?> card : player.getStartingCards()) {
             card.setLevel(level);
         }
@@ -247,16 +248,9 @@ public class Runa {
 
 
     public void shuffle(List<Integer> seeds, int level) {
+        // TODO: 26.03.22 make sure the cards from runa's class are not included!
         monsterDeck = new MonsterDeck(level);
         playerDeck.shuffle(seeds.get(0));
         monsterDeck.shuffle(seeds.get(1));
     }
-
-    enum States {
-        GetSeeds{
-
-        }
-
-    }
-
 }

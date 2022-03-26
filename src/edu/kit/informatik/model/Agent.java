@@ -22,7 +22,7 @@ public abstract class Agent<A, T> {
     protected int focusPoints;
     protected int newFocus = 0;
     private boolean isDead = false;
-    private Damage protection;
+    private Damage protection = new Damage();
 
     public int getMaxHealth() {
         return maxHealth;
@@ -55,6 +55,9 @@ public abstract class Agent<A, T> {
 //    }
 
     protected void checkDamage(final Damage damage) {
+        if (protection.getType().equals(damage.getType())) {
+            damage.setAmount(damage.getAmount() - protection.getAmount());
+        }
         if (healthPoints > damage.getAmount()) {
             healthPoints -= damage.getAmount();
         } else {
@@ -62,6 +65,7 @@ public abstract class Agent<A, T> {
             isDead = true;
         }
 
+        // TODO: 26.03.22 only add damage, if damage not 0.
         new OutputInterFace().printDamage(damage, this);
         // TODO: 17.03.22 how much damage if dies?
     }

@@ -26,12 +26,6 @@ public class NumberPrompt extends SelectPrompt<Integer> {
         System.out.printf((this.entryPrompt) + "%n", FIRST_ORDINAL, MAX_VALUE);
     }
 
-    @Override
-    public Integer parseItem() {
-        // TODO: 15.03.22 add while running
-        return getInt(this.maxOrdinal);
-    }
-
     //    public List<Integer> parseList(String input) {
 //        List<Integer> args;
 //        try {

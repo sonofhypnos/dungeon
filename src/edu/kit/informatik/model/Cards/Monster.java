@@ -49,13 +49,13 @@ public class Monster extends Agent<Monster, Player> {
 
     @Override
     public String getFocusPointStatus() {
-        return String.format("%d", focusPoints);
+        return String.format("%d FP", focusPoints);
 
     }
 
 
     public String getHealthStatus() {
-        return String.format("%d", healthPoints);
+        return String.format("%d HP", healthPoints);
     }
 
     public void damage(final Damage damage) {
