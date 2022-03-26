@@ -51,7 +51,7 @@ public class SelectPrompt<T> implements Prompt<T> {
     public SelectPrompt(String text, List<T> options) {
         this.text = text;
         this.options = options;
-        this.maxOrdinal = options.size() + FIRST_ORDINAL; // TODO: 18.03.22 why here not same as below?
+        this.maxOrdinal = options.size(); // TODO: 18.03.22 why here not same as below?
         this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
     }
 
@@ -95,13 +95,11 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     @Override
     public void prompt() {
-
         listOptions(text, this.options);
     }
 
     @Override
     public void entryPrompt() {
-
         if (!SelectPrompt.isRunning()) {
             return;
         }
@@ -114,7 +112,7 @@ public class SelectPrompt<T> implements Prompt<T> {
             return null;
         }
         List<Integer> args = getIntegers(separator, this.minOptionNumber, this.maxOrdinal, maxOptionNumber);
-        return args.stream().map((Integer x) -> options.get(x)).collect(Collectors.toList());
+        return args.stream().map((Integer x) -> options.get(x-1)).collect(Collectors.toList());
     }
 
 
@@ -129,10 +127,11 @@ public class SelectPrompt<T> implements Prompt<T> {
         }
         if (options.size() == 1) return options.get(0);
         // TODO: 15.03.22 add while running
-        int arg = getInt(this.maxOrdinal);
+        Integer arg = getInt(this.maxOrdinal);
         if (!SelectPrompt.isRunning()) {
             return null;
         }
+        // TODO: 25.03.22 we get index out of bounds if 1 above correct value
         return options.get(arg - FIRST_ORDINAL);
         // TODO: 17.03.22 figure out what happens if you first enter wrong and then correct values
 
@@ -140,7 +139,7 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     protected List<Integer> getIntegers(final String separator, final int maxOrdinal, final int minOptionNumber,
                                         final int maxOptionNumber) {
-
+        this.prompt();
         // TODO: 23.03.22 hübsscher (mach weninger wenn nicht laufend)
         List<Integer> args = null;
         Scanner scanner = ScannerSingleton.getInstance();

@@ -9,8 +9,13 @@ import edu.kit.informatik.model.Cards.DamageType;
 public class Damage {
     private DamageType type;
 
+    public Damage() {
+        this.amount = 0;
+        this.type = DamageType.PHYSICAL;
+    }
+
     public void setAmount(final int amount) {
-        this.amount = amount;
+        this.amount = Math.max(amount, 0);
     }
 
     private int amount;

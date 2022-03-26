@@ -13,7 +13,6 @@ import java.util.List;
  * @version 1.0.0 2022-03-11
  */
 public class Thrust extends Ability<Player, Monster> {
-    private Prompt<Integer> diceRoll;
 
     public Thrust(final String thrust, final int level) {
         super(thrust, level, AbilityType.OFFENSIV);
@@ -22,7 +21,7 @@ public class Thrust extends Ability<Player, Monster> {
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        var effect = new DamageWithThreshhold(6, 6, 4, this.level);
+        var effect = new DamageWithThreshhold(6, 6, 4, this.level, this.getRoll());
         effect.applyEffect(aggressor, target);
         // TODO: 17.03.22 handle isDead in another place
     }

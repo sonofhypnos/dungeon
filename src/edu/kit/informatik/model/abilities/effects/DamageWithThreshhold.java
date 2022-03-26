@@ -17,19 +17,20 @@ public class DamageWithThreshhold extends Effect<Player, Monster> {
     private final int damageFactor;
     private final int bonusFactor;
     private final int level;
+    private final int diceRoll;
 
-    public DamageWithThreshhold(int bonusThreshhold, int damageFactor, int bonusFactor, int level) {
+    public DamageWithThreshhold(int bonusThreshhold, int damageFactor, int bonusFactor, int level, final int diceRoll) {
         this.bonusThreshhold = bonusThreshhold;
         this.damageFactor = damageFactor;
         this.bonusFactor = bonusFactor;
         this.level = level;
+        this.diceRoll = diceRoll;
     }
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        int dice = this.getRoll(); //might also make this as effect
-        int damageAmount = damageFactor * level + dice;
-        if (dice > bonusThreshhold) {
+        int damageAmount = damageFactor * level + diceRoll;
+        if (diceRoll >= bonusThreshhold) {
             damageAmount += bonusFactor * level;
         }
         var effect = new DamageMonster(new Damage(DamageType.PHYSICAL, damageAmount));

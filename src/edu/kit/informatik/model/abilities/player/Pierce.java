@@ -5,7 +5,6 @@ import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.DamageWithThreshhold;
-import java.util.List;
 
 /**
  * @author upkim
@@ -22,7 +21,8 @@ public class Pierce extends Ability<Player, Monster> {
     }
 
     public void applyEffect(final Player aggressor, final Monster target) {
-        var effect = new DamageWithThreshhold(BONUS_THRESHHOLD, DAMAGE_FACTOR, BONUS_FACTOR, this.level);
+        var effect = new DamageWithThreshhold(BONUS_THRESHHOLD, DAMAGE_FACTOR, BONUS_FACTOR, this.level,
+                this.getRoll());
         effect.applyEffect(aggressor, target);
     }
 }

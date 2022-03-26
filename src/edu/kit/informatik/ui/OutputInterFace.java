@@ -6,6 +6,9 @@ import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.Cards.Monster;
 
 import edu.kit.informatik.model.abilities.Ability;
+import edu.kit.informatik.ui.prompts.Prompt;
+import edu.kit.informatik.ui.prompts.SelectPrompt;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +17,8 @@ import java.util.List;
  */
 public class OutputInterFace {
     private static final String LINE_STRING = "----------------------------------------";
+    private static final int NEGLIGABLE_DAMAGE = 0;
+    private static final String DISCARD_CARDS = "%s (%s) can discard ability cards for healing (or none)";
     // TODO: 14.03.22 Make actually abstract functions to implement stuff from monster and agent (for UI?)
 
     public OutputInterFace() {
@@ -38,7 +43,7 @@ public class OutputInterFace {
     }
 
     private String agentToStatus(Agent<?,?> agent){
-        return String.format("%s (%s HP, %s FP)", agent.getName(), agent.getHealthStatus(),
+        return String.format("%s (%s, %s)", agent.getName(), agent.getHealthStatus(),
                 agent.getFocusPointStatus());
     }
 
@@ -51,11 +56,14 @@ public class OutputInterFace {
     }
 
     public void printDamage(final Damage damage, final Agent<?,?> agent) {
+        if (damage.getAmount() == NEGLIGABLE_DAMAGE) {
+            return;
+        }
         System.out.printf("%s takes %d %s damage%n", agent.toString(), damage.getAmount(),
                 damage.getType());
     }
 
-    public void getCard(final Player player, final Ability<Player, Monster> card) {
+    public void getCard(final Player player, final Ability<?, ?> card) {
         System.out.printf("%s gets %s%n", player, card);
     }
 
@@ -65,6 +73,19 @@ public class OutputInterFace {
 
     public void won(final Player player) {
         System.out.printf("%s won!%n",  player);
+    }
+
+    public List<Ability<Player, Monster>> heal(final Player player) {
+        Prompt<Ability<Player, Monster>> healingPrompt = new SelectPrompt<>(String.format(DISCARD_CARDS,
+                player.toString(), player.getHealthStatus()),
+                player.getCards(), NEGLIGABLE_DAMAGE, player.getCards().size() - 1); //
+        return new ArrayList<>(healingPrompt.parseList());
+    }
+
+    public Monster getTarget(final Player player, final List<Monster> currentMonsters) {
+        Prompt<Monster> monsterPrompt = new SelectPrompt<>(String.format("Select %s's target.", player.getName()),
+                currentMonsters);
+        return monsterPrompt.parseItem();
     }
 
 

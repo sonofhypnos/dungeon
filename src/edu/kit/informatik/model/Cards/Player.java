@@ -28,6 +28,7 @@ public class Player extends Agent<Player, List<Monster>> {
 
     public Player(String name) {
         this.name = name;
+        maxHealth = INITIAL_HEALTH;
         healthPoints = INITIAL_HEALTH;
         focusPoints = MAX_FOCUS_POINTS;
         dice = INITIAL_DICE;
@@ -54,13 +55,16 @@ public class Player extends Agent<Player, List<Monster>> {
         // TODO: 14.03.22 make enum for this?
         switch (gameArchetype) {
             case MAGE:
-                cards = List.of(PlayerAbilities.FOCUS.getAbility(), PlayerAbilities.WATER.getAbility());
+                cards = new ArrayList<>(
+                        List.of(PlayerAbilities.FOCUS.getAbility(), PlayerAbilities.WATER.getAbility()));
                 break;
             case WARRIOR:
-                cards = List.of(PlayerAbilities.THRUST.getAbility(), PlayerAbilities.PARRY.getAbility());
+                cards = new ArrayList<>(
+                        List.of(PlayerAbilities.THRUST.getAbility(), PlayerAbilities.PARRY.getAbility()));
                 break;
             case PALADIN:
-                cards = List.of(PlayerAbilities.SLASH.getAbility(), PlayerAbilities.REFLECT.getAbility());
+                cards = new ArrayList<>(
+                        List.of(PlayerAbilities.SLASH.getAbility(), PlayerAbilities.REFLECT.getAbility()));
         }
         startingCards = cards;
     }
@@ -71,12 +75,12 @@ public class Player extends Agent<Player, List<Monster>> {
 
     @Override
     public String getFocusPointStatus() {
-        return String.format("%d/%d", focusPoints, MAX_FOCUS_POINTS);
+        return String.format("%d/%d FP", focusPoints, MAX_FOCUS_POINTS);
     }
 
 
     public String getHealthStatus(){
-        return String.format("%d/%d", healthPoints, INITIAL_HEALTH);
+        return String.format("%d/%d HP", healthPoints, INITIAL_HEALTH);
     }
 
     public void damage(final Damage damage, Monster aggressor) {
@@ -100,6 +104,10 @@ public class Player extends Agent<Player, List<Monster>> {
     public void removeCard(Ability<Player, Monster> card) {
         this.cards.remove(card);
         // TODO: 25.03.22 there were some weird exceptions with cards maybe ask Johannes because I did not get it.
+    }
+
+    public void addCard(Ability<Player, Monster> card) {
+        this.cards.add(card);
     }
 
     public Dice getDice() {
