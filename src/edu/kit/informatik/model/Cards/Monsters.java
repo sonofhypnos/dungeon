@@ -20,7 +20,7 @@ public enum Monsters {
     SPIDER_KING("Spider King", 1, 50, List.of(MonsterType.LIGHTNING, MonsterType.BOSS),
             List.of(new Bite(1), new Block(1), new Focus<>(1), new Lightning(1))),
     FROG("Frog", 1, 16, List.of(MonsterType.WATER), List.of(new Focus<>(1), new Water(1))),
-    GHOST("Ghost", 1, 15, List.of(MonsterType.ICE), List.of(new Focus<>(1), new Water(1))),
+    GHOST("Ghost", 1, 15, List.of(MonsterType.ICE), List.of(new Focus<>(1), new Ice(1))),
     GORGON("Gorgon", 1, 13, List.of(MonsterType.FIRE), List.of(new Focus<>(1), new Fire(1))),
     SKELETON("Skeleton", 1, 14, List.of(MonsterType.LIGHTNING), List.of(new Focus<>(1), new Lightning(1))),
     SPIDER("Spider", 1, 15, List.of(), List.of(new Bite(1), new Block(1))),

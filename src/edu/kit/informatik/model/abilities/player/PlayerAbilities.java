@@ -7,17 +7,18 @@ import edu.kit.informatik.model.abilities.AbilityKind;
 import edu.kit.informatik.model.abilities.Focus;
 
 public enum PlayerAbilities implements AbilityKind {
-    SLASH(new Slash("Slash", 0)),
-    SWING(new Swing("Swing", 0)),
-    THRUST(new Thrust("Thrust", 0)),
-    PIERCE(new Pierce("Pierce", 0)),
-    PARRY(new Parry("Parry", 0)),
-    FOCUS(new Focus<>(0)),
-    REFLECT(new Reflect("Reflect", 0)),
-    WATER(new Water("WaterPlayer", 0)),
-    ICE(new Ice("IcePlayer", 0)),
-    FIRE(new Fire("FirePlayer", 0)),
-    LIGHTNING(new Lightning("LightningPlayer", 0));
+    SLASH(new Slash("Slash", Constants.INITIAL_LEVEL)),
+    SWING(new Swing("Swing", Constants.INITIAL_LEVEL)),
+    THRUST(new Thrust("Thrust", Constants.INITIAL_LEVEL)),
+    PIERCE(new Pierce("Pierce", Constants.INITIAL_LEVEL)),
+    PARRY(new Parry("Parry", Constants.INITIAL_LEVEL)),
+    FOCUS(new Focus<>(Constants.INITIAL_LEVEL)),
+    REFLECT(new Reflect("Reflect", Constants.INITIAL_LEVEL)),
+    WATER(new Water("Water", Constants.INITIAL_LEVEL)),
+    ICE(new Ice("Ice", Constants.INITIAL_LEVEL)),
+    FIRE(new Fire("Fire", Constants.INITIAL_LEVEL)),
+    LIGHTNING(new Lightning("Lightning", Constants.INITIAL_LEVEL));
+    // TODO: 26.03.22 there are the wrong cards to be seen on the screen
 
     private final Ability<Player, Monster> ability;
 

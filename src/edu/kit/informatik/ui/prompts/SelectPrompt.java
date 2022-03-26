@@ -111,7 +111,7 @@ public class SelectPrompt<T> implements Prompt<T> {
         if (!SelectPrompt.isRunning()) {
             return null;
         }
-        List<Integer> args = getIntegers(separator, this.minOptionNumber, this.maxOrdinal, maxOptionNumber);
+        List<Integer> args = getIntegers(separator, this.maxOrdinal, this.minOptionNumber, maxOptionNumber);
         return args.stream().map((Integer x) -> options.get(x-1)).collect(Collectors.toList());
     }
 
@@ -157,6 +157,7 @@ public class SelectPrompt<T> implements Prompt<T> {
             } catch (NumberFormatException e) {
                 continue;
             }
+            System.out.println("args:" + args);
             if (args.size() < minOptionNumber || args.size() > maxOptionNumber || args.stream()
                     .anyMatch(i -> inIntervall(i, maxOrdinal))) continue;
             break;

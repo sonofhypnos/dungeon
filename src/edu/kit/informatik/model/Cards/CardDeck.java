@@ -64,4 +64,7 @@ public class CardDeck<T> {
         }
         return values;
     }
+    public void remove(T card) {
+        this.cards.remove(card);
+    }
 }
