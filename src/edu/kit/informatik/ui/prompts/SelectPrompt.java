@@ -1,12 +1,10 @@
 package edu.kit.informatik.ui.prompts;
 
-import edu.kit.informatik.ui.ScannerSingleton;
+import edu.kit.informatik.model.exception.ParseException;
+import edu.kit.informatik.ui.resources.ErrorMessage;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 /**
  * The type Select prompt.
@@ -24,12 +22,15 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     private static boolean running = true;
     private static final String ENTER_PROMPT = "Enter number [%d--%d]:";
+<<<<<<< HEAD
     private static final String ENTER_NUMBERS_D_D_SEPARATED_BY_COMMA = "Enter numbers [%d--%d] separated by comma:";
     private static final int SPLIT_LIMIT = -1;
     private static final String QUIT_REGEX = "quit";
     protected final String text;
     protected final String entryPrompt;
 
+=======
+>>>>>>> main
     /**
      * The Options.
      */
@@ -38,9 +39,9 @@ public class SelectPrompt<T> implements Prompt<T> {
      * The Max ordinal.
      */
     int maxOrdinal;
-    private int minOptionNumber;
-    private int maxOptionNumber;
-    private String separator;
+    private final String text;
+    private final String entryPrompt;
+    // TODO: 18.03.22 dürfuen wir überhaupt System.print verwenden?
 
     /**
      * Instantiates a new Select prompt.
@@ -51,6 +52,7 @@ public class SelectPrompt<T> implements Prompt<T> {
     public SelectPrompt(String text, List<T> options) {
         this.text = text;
         this.options = options;
+<<<<<<< HEAD
         this.maxOrdinal = options.size(); // TODO: 18.03.22 why here not same as below?
         this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
     }
@@ -97,9 +99,15 @@ public class SelectPrompt<T> implements Prompt<T> {
         SelectPrompt.running = running;
     }
 
+=======
+        this.maxOrdinal = options.size() + FIRST_ORDINAL;
+        this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
+    }
+
+>>>>>>> main
     @Override
     public void prompt() {
-        listOptions(text, this.options);
+        System.out.println(listOptions(text, this.options));
     }
 
     @Override
@@ -111,6 +119,7 @@ public class SelectPrompt<T> implements Prompt<T> {
     }
 
     @Override
+<<<<<<< HEAD
     public List<T> parseList() {
         if (!SelectPrompt.isRunning()) {
             return null;
@@ -214,17 +223,28 @@ public class SelectPrompt<T> implements Prompt<T> {
                 continue;
             }
             break;
+=======
+    public T parse(String input){
+        int arg;
+        try {
+            arg = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return null;
+>>>>>>> main
         }
-        return arg;
+        if (arg < FIRST_ORDINAL || arg > this.maxOrdinal) {
+            return null;
+        }
+        return options.get(arg - FIRST_ORDINAL);
     }
-    // TODO: 18.03.22 throw exception if arguments
 
-    private void listOptions(final String front, final List<T> options) {
+    private String listOptions(final String front, final List<T> options) {
         List<String> optionString = new ArrayList<>();
-        System.out.println(front);
+        optionString.add(front);
         for (int i = 0; i < options.size(); i++) {
             optionString.add(String.format("%d) %s", i + FIRST_ORDINAL, options.get(i)));
         }
-        System.out.println(String.join("\n", optionString));
+        optionString.add(entryPrompt);
+        return String.join("\n", optionString);
     }
 }

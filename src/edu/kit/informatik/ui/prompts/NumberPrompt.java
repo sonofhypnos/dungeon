@@ -1,31 +1,29 @@
 package edu.kit.informatik.ui.prompts;
 
-import java.util.Scanner;
-
-import static java.lang.Integer.MAX_VALUE;
+import java.util.List;
 
 /**
  * @author upkim
  * @version 1.0.0 2022-03-10
  */
-public class NumberPrompt extends SelectPrompt<Integer> {
+public class NumberPrompt implements Prompt<Integer> {
 
-    private static final String ENTER_NUMBER = "Enter number [%d--%d]";
+    public static final int FIRST_ORDINAL = 1;
+    private static final String ENTER_NUMBER = "Enter number [%d--%d] separated by comma:";
+    private int maxOrdinal;
 
-    public NumberPrompt(String text, String entryPrompt, int maxOrdinal) {
-        super(text, entryPrompt, maxOrdinal);
-    }
 
     @Override
     public void prompt() {
-        System.out.println(text);
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void entryPrompt() {
-        System.out.printf((this.entryPrompt) + "%n", FIRST_ORDINAL, MAX_VALUE);
+        throw new UnsupportedOperationException("");
     }
 
+<<<<<<< HEAD
     //    public List<Integer> parseList(String input) {
 //        List<Integer> args;
 //        try {
@@ -36,5 +34,10 @@ public class NumberPrompt extends SelectPrompt<Integer> {
 //        }
 //        return args;
 //    }
+=======
+    public Integer parse(String input) throws NumberFormatException {
+        return Integer.parseInt(input);
+    }
+>>>>>>> main
 
 }
