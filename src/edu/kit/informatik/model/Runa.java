@@ -19,10 +19,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Moritz Hertler
+ * @author upkim
  * @version 1.0
  */
 public class Runa {
+    // TODO: 26.03.22 make sure there are no getter functions that can change somethign about an object
     private static final int MIN_CARDS = 1;
     private static final int INITIAL_LEVEL = 1;
     private static final int STAGE_NUMBER = 4;
@@ -76,10 +77,11 @@ public class Runa {
         for (var card : player.getStartingCards()) {
             playerDeck.remove(card);
         }
-        setPlayerCardLevel(INITIAL_LEVEL);
         //seed
         SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
         for (int level = INITIAL_LEVEL; level < MAX_LEVEL + INITIAL_LEVEL; level++) {
+            setPlayerCardLevel(level);
+            // TODO: 26.03.22 add message about card update (maybe even include initial stage
             var seeds = prompt.parseList();
             if (checkQuit(seeds)) {
                 return;
@@ -133,12 +135,16 @@ public class Runa {
     private void monsterTurn() {
         for (Monster monster : currentMonsters) {
             monster.reset();
-            Ability<Monster, Player> monsterAbility = monster.activateNextAbility();
+            Ability<Monster, Player> monsterAbility;
+            //It is assumed that there is alway
+            do {
+                monsterAbility = monster.activateNextAbility();
+            } while (!monsterAbility.canBeUsed(monster));
             interFace.printUsage(monster, monsterAbility);
             monsterAbility.applyEffect(monster, player);
         }
 
-        player.evalFocus();
+        evalFocus(player);
     }
 
     private void playerTurn() {
@@ -160,6 +166,11 @@ public class Runa {
             if (checkQuit(target)) {
                 return;
             }
+            // TODO: 26.03.22 find pretty solution for diceRoll
+
+        }
+        interFace.printUsage(player, ability);
+        if (ability.needsDice()) {
             Prompt<Integer> dicePrompt = new DiceRoll(player.getDice());
             Integer roll = dicePrompt.parseItem();
             if (checkQuit(roll)) {
@@ -169,14 +180,20 @@ public class Runa {
             // TODO: 26.03.22 target should come before the dice throw
             // TODO: 25.03.22 can I write stuff like the above?
         }
-        interFace.printUsage(player, ability);
         ability.applyEffect(player, target);
 
         currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()); // TODO: 26.03.22 this might not need to be done here(is done in apply
+        // effect (which also might be unnecessary??
+
         for (Monster monster : currentMonsters) {
-            monster.evalFocus();
+            evalFocus(monster);
         }
+    }
+
+    private void evalFocus(final Agent<?, ?> agent) {
+        int focusPoints = agent.evalFocus();
+        interFace.focus(agent, focusPoints);
     }
 
     private void lost() {
@@ -229,6 +246,7 @@ public class Runa {
     }
 
 
+    // TODO: 26.03.22 dont forget todos in emacs scratchpad!
     private void startFight(final int stage, final int level) {
         if (stage == 4) {
             currentMonsters = Arrays.stream(Monsters.values())

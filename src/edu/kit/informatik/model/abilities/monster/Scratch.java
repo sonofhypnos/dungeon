@@ -12,8 +12,10 @@ import edu.kit.informatik.model.abilities.AbilityType;
  */
 public class Scratch extends MonsterAbility {
 
+    private static final String SCRATCH_REGEX = "Scratch";
+
     public Scratch(final int level) {
-        super(level, AbilityType.OFFENSIV);
+        super(SCRATCH_REGEX, level, AbilityType.OFFENSIV);
     }
 
     public void applyEffect(final Monster aggressor, final Player target) {
@@ -22,8 +24,4 @@ public class Scratch extends MonsterAbility {
         target.damage(new Damage(DamageType.PHYSICAL, 5 * level), aggressor);
     }
 
-    @Override
-    public String toString() {
-        return String.format("Scratch", level);
-    }
 }

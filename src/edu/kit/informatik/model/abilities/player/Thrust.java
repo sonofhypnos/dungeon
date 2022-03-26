@@ -17,6 +17,7 @@ public class Thrust extends Ability<Player, Monster> {
     public Thrust(final String thrust, final int level) {
         super(thrust, level, AbilityType.OFFENSIV);
         this.type = AbilityType.OFFENSIV;
+        this.setDiceNeed(true);
     }
 
     @Override

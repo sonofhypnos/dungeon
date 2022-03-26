@@ -78,11 +78,14 @@ public abstract class Agent<A, T> {
         return newFocus != 0;
     }
 
-    public void evalFocus() {
-        if (isFocusing()) {
+    // TODO: 26.03.22 document sideeffect
+    public int evalFocus() {
+        if (!isFocusing()) {
+            // TODO: 26.03.22 maybe do the io stuff somewhere else?
             focusPoints += newFocus;
             resetFocus();
         }
+        return newFocus;
     }
 
     public void focus(int focusPoints){

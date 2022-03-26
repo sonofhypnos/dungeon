@@ -15,17 +15,11 @@ public class Bite extends MonsterAbility {
     private static final int DAMAGE_FACTOR = 10;
 
     public Bite(final int level) {
-        super(level, AbilityType.OFFENSIV);
+        super("Bite", level, AbilityType.OFFENSIV);
     }
 
     public void applyEffect(final Monster aggressor, final Player target) {
         target.damage(new Damage(DamageType.PHYSICAL, DAMAGE_FACTOR * level), aggressor);
     }
-
-    @Override
-    public String toString() {
-        return String.format("Bite(%d)", level);
-    }
-
 }
 

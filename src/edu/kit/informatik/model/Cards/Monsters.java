@@ -27,7 +27,7 @@ public enum Monsters {
     GOBLIN("Goblin", 1, 12, List.of(), List.of(new Smash(1), new Bite(1))),
     RAT("Rat", 1, 14, List.of(), List.of(new Block(1), new Claw(1))),
     MUSHROOMLIN("Mushroomlin", 1, 20, List.of(), List.of(new Deflect(1), new Scratch(1))),
-    MEGA_SAURUS("Mega Saurus", 1, 100, List.of(MonsterType.BOSS),
+    MEGA_SAURUS("Mega Saurus", 2, 100, List.of(MonsterType.BOSS),
             List.of(new Bite(2), new Block(2), new Focus<>(2), new Fire(1), new Lightning(1))),
     SNAKE("Snake", 2, 31, List.of(MonsterType.ICE), List.of(new Bite(2), new Focus<>(2), new Ice(2))),
     DARK_ELF("Dark Elf", 2, 34, List.of(), List.of(new Focus<>(2), new Water(1), new Lightning(1))),

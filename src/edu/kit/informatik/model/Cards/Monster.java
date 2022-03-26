@@ -29,7 +29,8 @@ public class Monster extends Agent<Monster, Player> {
     }
 
     public Ability<Monster, Player> getNextAbility() {
-        return abilities.get(DRAW_INDEX); // TODO: 11.03.22 never 0?
+        // TODO: 26.03.22 skip if not usable
+        return abilities.get(DRAW_INDEX); // TODO: 11.03.22 never 0? // TODO: 26.03.22
     }
 
     public Ability<Monster, Player> activateNextAbility() {

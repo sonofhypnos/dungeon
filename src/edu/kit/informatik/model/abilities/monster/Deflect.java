@@ -11,20 +11,15 @@ import edu.kit.informatik.model.abilities.AbilityType;
  * @version 1.0.0 2022-03-11
  */
 public class Deflect extends MonsterAbility {
-    public static final String DEFLECT = "Deflect";
+    public static final String DEFLECT_REGEX = "Deflect";
 
     public Deflect(final int level) {
-        super(DEFLECT, level, AbilityType.DEFENSIV);
+        super(DEFLECT_REGEX, level, AbilityType.DEFENSIV);
     }
 
     @Override
     public void applyEffect(final Monster aggressor, final Player target) {
         aggressor.setProtection(new Damage(DamageType.PHYSICAL, 11 * level + 2));
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Deflect", level);
     }
 
 }

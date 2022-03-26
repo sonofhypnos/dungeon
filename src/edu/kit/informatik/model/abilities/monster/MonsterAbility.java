@@ -16,9 +16,6 @@ public abstract class MonsterAbility extends Ability<Monster, Player> {
         super(name, level, type);
     }
 
-    public MonsterAbility(final int level, final AbilityType type){
-        super("placeholder", level, type);
-    }
 
     @Override
     public abstract void applyEffect(final Monster aggressor, final Player target);
