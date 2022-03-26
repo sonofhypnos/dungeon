@@ -21,6 +21,5 @@ public class Block extends MonsterAbility {
     @Override
     public void applyEffect(final Monster aggressor, final Player target) {
         aggressor.setProtection(new Damage(DamageType.PHYSICAL, 7 * level));
-
     }
 }

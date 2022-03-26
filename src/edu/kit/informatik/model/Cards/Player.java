@@ -1,9 +1,9 @@
 package edu.kit.informatik.model.Cards;
 
 import edu.kit.informatik.model.Agent;
+import edu.kit.informatik.model.Archetype;
 import edu.kit.informatik.model.Damage;
 import edu.kit.informatik.model.abilities.Ability;
-import edu.kit.informatik.model.Archetype;
 import edu.kit.informatik.model.abilities.player.PlayerAbilities;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,8 @@ public class Player extends Agent<Player, List<Monster>> {
 
     private static final int INITIAL_HEALTH = 50;
     private static final Dice INITIAL_DICE = Dice.D4;
-    private static final int INITIAL_FOCUS = 1;
     private static final int REFLECT_DAMAGE = 10;
+    private static final int MIN_FOCUS = 1;
     private List<Ability<Player, Monster>> cards; // TODO: 26.03.22 maybe make also card deck?
     private List<Ability<Player, Monster>> startingCards;
     private Dice dice;
@@ -27,11 +27,13 @@ public class Player extends Agent<Player, List<Monster>> {
     // TODO: 13.03.22 implement stuff for Fähigkeiten
 
     public Player(String name) {
+        // TODO: 26.03.22 add other stuff in constructor
+        super(MIN_FOCUS);
         this.name = name;
         maxHealth = INITIAL_HEALTH;
         healthPoints = INITIAL_HEALTH;
         dice = INITIAL_DICE;
-        focusPoints = INITIAL_FOCUS;
+        focusPoints = MIN_FOCUS;
     }
 
     public void setClass(final Archetype gameArchetype) {
@@ -51,8 +53,12 @@ public class Player extends Agent<Player, List<Monster>> {
             case PALADIN:
                 cards = new ArrayList<>(
                         List.of(PlayerAbilities.SLASH.getAbility(), PlayerAbilities.REFLECT.getAbility()));
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + gameArchetype); // TODO: 27.03.22 is this
+                // supposed to be here?
         }
-        startingCards = cards;
+        startingCards = new ArrayList<>(cards);
     }
 
     public int getMaxFocusPoints() {
@@ -65,7 +71,7 @@ public class Player extends Agent<Player, List<Monster>> {
     }
 
 
-    public String getHealthStatus(){
+    public String getHealthStatus() {
         return String.format("%d/%d HP", healthPoints, INITIAL_HEALTH);
     }
 

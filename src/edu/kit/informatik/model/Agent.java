@@ -14,15 +14,21 @@ import java.util.List;
  */
 public abstract class Agent<A, T> {
     private static final int DEFAULT_PROTECTION = 0;
+    private static final int MIN_HEALTH = 0;
     protected List<Ability<A, T>> abilities;
     protected Ability<A, T> playedAbility;
     protected String name;
     protected int maxHealth;
     protected int healthPoints;
     protected int focusPoints;
-    protected int newFocus = 0;
+    protected int newFocus;
+    private final int minFocus;
     private boolean isDead = false;
     private Damage protection = new Damage();
+
+    protected Agent(int minFocus) {
+        this.minFocus = minFocus;
+    }
 
     public int getMaxHealth() {
         return maxHealth;
@@ -61,7 +67,7 @@ public abstract class Agent<A, T> {
         if (healthPoints > damage.getAmount()) {
             healthPoints -= damage.getAmount();
         } else {
-            healthPoints = 0;
+            healthPoints = MIN_HEALTH;
             isDead = true;
         }
 
@@ -80,12 +86,13 @@ public abstract class Agent<A, T> {
 
     // TODO: 26.03.22 document sideeffect
     public int evalFocus() {
-        if (!isFocusing()) {
+        final int output = newFocus;
+        if (isFocusing()) {
             // TODO: 26.03.22 maybe do the io stuff somewhere else?
             focusPoints += newFocus;
             resetFocus();
         }
-        return newFocus;
+        return output;
     }
 
     public void focus(int focusPoints){
@@ -115,8 +122,9 @@ public abstract class Agent<A, T> {
         resetProtection();
     }
 
-    public void setFocus(final int focusPoints) {
-        this.focusPoints = focusPoints;
+    public void reduceFocus(final int focusPointReduction) {
+        final int newFocusPoints = focusPoints - focusPointReduction;
+        this.focusPoints = Math.max(newFocusPoints, minFocus);
     }
 }
 

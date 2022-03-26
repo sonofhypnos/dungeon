@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class ElementPlayerEffect extends Effect<Player, Monster> {
 
+    private static final int FOCUS_POINT_COST = 1;
     private MonsterType monsterType;
     private int damageFactor;
     private int damageConstant;
@@ -32,13 +33,14 @@ public class ElementPlayerEffect extends Effect<Player, Monster> {
     }
 
     @Override
-    public void applyEffect(final Player aggressor, final Monster target) {
-        int damageAmount = (damageFactor * level + damageConstant) * aggressor.getFocusPoints() + secondDamageConstant;
+    public void applyEffect(final Player player, final Monster target) {
+        int damageAmount = (damageFactor * level + damageConstant) * player.getFocusPoints() + secondDamageConstant;
         if (target.isType(monsterType)) {
             damageAmount += bonusDamageFactor * level;
         }
         var effect = new DamageMonster(new Damage(DamageType.MAGIC, damageAmount));
-        effect.applyEffect(aggressor, target);
+        player.reduceFocus(FOCUS_POINT_COST);
+        effect.applyEffect(player, target);
     }
 
 }

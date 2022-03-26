@@ -26,7 +26,7 @@ public class Runa {
     // TODO: 26.03.22 make sure there are no getter functions that can change somethign about an object
     private static final int MIN_CARDS = 1;
     private static final int INITIAL_LEVEL = 1;
-    private static final int STAGE_NUMBER = 4;
+    private static final int BOSS_STAGE = 4;
     private static final int SEED_NUMBER = 2;
     private static final int MAX_LEVEL = 2;
     private static final String SELECT_PLAYER_S_CHARACTER_CLASS = "Select %s's character class";
@@ -38,7 +38,6 @@ public class Runa {
     private final Player player;
     private List<Monster> currentMonsters;
     private final OutputInterFace interFace;
-    private List<Integer> seeds;
     private MonsterDeck monsterDeck;
     private int monsterNumber;
     private boolean lost;
@@ -77,21 +76,20 @@ public class Runa {
         for (var card : player.getStartingCards()) {
             playerDeck.remove(card);
         }
-        //seed
-        SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
         for (int level = INITIAL_LEVEL; level < MAX_LEVEL + INITIAL_LEVEL; level++) {
-            setPlayerCardLevel(level);
-            // TODO: 26.03.22 add message about card update (maybe even include initial stage
+            SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
             var seeds = prompt.parseList();
             if (checkQuit(seeds)) {
                 return;
             }
+            // TODO: 26.03.22 add message about card update (maybe even include initial stage
             shuffle(seeds, level);
             fight(level);
             if (this.lost) {
                 lost();
                 break;
             }
+            setPlayerCardLevel(level);
         }
         if (!this.lost) {
             interFace.won(player);
@@ -109,9 +107,9 @@ public class Runa {
     // TODO: 18.03.22 implement message 0 damage
 
     private void fight(int level) {
-        for (int stage = INITIAL_STAGE; stage < STAGE_NUMBER + INITIAL_STAGE; stage++) {
+        for (int stage = INITIAL_STAGE; stage < BOSS_STAGE + INITIAL_STAGE; stage++) {
             startFight(stage, level);
-            while (true) {
+            while (SelectPrompt.isRunning()) {
                 interFace.printStatus(player, currentMonsters);
                 playerTurn();
                 if (currentMonsters.isEmpty()) {
@@ -126,8 +124,11 @@ public class Runa {
                     break;
                 }
             }
-            collectRewards();
-            abilityUpgrade(stage, level);
+            if (stage == BOSS_STAGE) {
+                abilityUpgrade(stage, level);
+            } else {
+                collectRewards();
+            }
             healing();
         }
     }
@@ -142,6 +143,9 @@ public class Runa {
             } while (!monsterAbility.canBeUsed(monster));
             interFace.printUsage(monster, monsterAbility);
             monsterAbility.applyEffect(monster, player);
+            if (player.isDead()) {
+                return;
+            }
         }
 
         evalFocus(player);
@@ -221,9 +225,10 @@ public class Runa {
                 return;
             }
 
-            int healthPrev = player.getHealthPoints();
+            final int healthPrev = player.getHealthPoints();
+
             player.heal(HEAL_PER_CARD * cardToRemove.size());
-            interFace.printHeal(player, healthPrev);
+            interFace.printHeal(player, player.getHealthPoints() - healthPrev);
             for (var card : cardToRemove) {
                 player.removeCard(card);
             }
@@ -232,7 +237,10 @@ public class Runa {
 
     private void collectRewards() {
         List<Effect<Player, Monster>> rewards = new ArrayList<>(
-                List.of(new newAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber, this)));
+                List.of());
+        if (this.playerDeck.size() != 0) {
+            rewards.add(new newAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber, this));
+        }
         if (!this.player.getDice().isLast()) {
             rewards.add(new newDice());
         }
@@ -273,7 +281,7 @@ public class Runa {
     }
 
 
-    public void shuffle(List<Integer> seeds, int level) {
+    private void shuffle(List<Integer> seeds, int level) {
         // TODO: 26.03.22 make sure the cards from runa's class are not included!
         monsterDeck = new MonsterDeck(level);
         playerDeck.shuffle(seeds.get(0));

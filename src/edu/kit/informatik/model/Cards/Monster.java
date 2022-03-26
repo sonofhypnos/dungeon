@@ -14,13 +14,16 @@ import java.util.List;
  */
 public class Monster extends Agent<Monster, Player> {
     private static final int DRAW_INDEX = 0;
+    private static final int INITIAL_FOCUS = 0;
+    private static final int MIN_FOCUS = 0;
     // TODO: 17.03.22 check everywhere for illegal giving of list without copy
     private final List<MonsterType> monsterTypes;
     private final int level;
 
     public Monster(String name, int initialHealth, List<MonsterType> monsterTypes,
                    List<Ability<Monster, Player>> abilities, final int level) {
-        focusPoints = 0;
+        super(MIN_FOCUS);
+        focusPoints = INITIAL_FOCUS;
         this.name = name;
         this.healthPoints = initialHealth;
         this.abilities = new ArrayList<>(abilities);

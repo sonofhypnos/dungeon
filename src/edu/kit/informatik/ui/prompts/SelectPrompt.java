@@ -82,7 +82,11 @@ public class SelectPrompt<T> implements Prompt<T> {
         this.minOptionNumber = minOptionNumber;
         this.maxOptionNumber = maxOptionNumber;
         this.separator = ",";
-        this.entryPrompt = String.format(ENTER_NUMBERS_D_D_SEPARATED_BY_COMMA, FIRST_ORDINAL, options.size());
+        if (minOptionNumber == maxOptionNumber && minOptionNumber == 1) {
+            this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
+        } else {
+            this.entryPrompt = String.format(ENTER_NUMBERS_D_D_SEPARATED_BY_COMMA, FIRST_ORDINAL, options.size());
+        }
     }
 
     public static boolean isRunning() {
@@ -112,6 +116,9 @@ public class SelectPrompt<T> implements Prompt<T> {
             return null;
         }
         List<Integer> args = getIntegers(separator, this.maxOrdinal, this.minOptionNumber, maxOptionNumber);
+        if (!SelectPrompt.isRunning()) {
+            return null;
+        }
         return args.stream().map((Integer x) -> options.get(x-1)).collect(Collectors.toList());
     }
 
@@ -150,7 +157,7 @@ public class SelectPrompt<T> implements Prompt<T> {
             String input = scanner.nextLine();
             quit(input);
             if (!isRunning()) {
-                return args;
+                return null;
             }
             assert input != null;
             // TODO: 26.03.22 this here also causes a but, since optionnumber is if undefined also 0
@@ -166,7 +173,8 @@ public class SelectPrompt<T> implements Prompt<T> {
                 continue;
             }
             if (args.size() < minOptionNumber || args.size() > maxOptionNumber || args.stream()
-                    .anyMatch(i -> inIntervall(i, maxOrdinal))) continue;
+                    .anyMatch(i -> inIntervall(i, maxOrdinal))) continue; // TODO: 27.03.22 anyMatch is a horror for
+            // all int!
             break;
         }
         return args;
