@@ -32,8 +32,13 @@ public final class Application {
         // TODO: 10.03.22 Add check for 0 arguments
         // TODO: 10.03.22 check what kinds of input/output is allowed.
         // TODO: 10.03.22 make sure there is no final \n when exiting?
+        // TODO: 27.03.22  throw excpetions if there are arguments
 
         // TODO: 15.03.22 figure out if this is too much?
+        if (args.length != 0) {
+            throw new IllegalArgumentException("Application does not take any arguments");
+        }
+
         System.out.println("Welcome to Runa's Strive"); // TODO: 15.03.22 somewhere?
 //        Session session = new Session();
 //        session.addCommand(new Quit(session));
