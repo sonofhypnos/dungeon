@@ -1,10 +1,9 @@
 package edu.kit.informatik.ui;
 
 import edu.kit.informatik.model.Agent;
-import edu.kit.informatik.model.Damage;
-import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.Cards.Monster;
-
+import edu.kit.informatik.model.Cards.Player;
+import edu.kit.informatik.model.Damage;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.ui.prompts.Prompt;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
@@ -28,65 +27,63 @@ public class OutputInterFace {
     //  sepseparate method that creates a string for each
 
     public void printStage(Player player, int stage, int level) {
-        System.out.printf("%s Enters Stage %d of Level %d%n", player.getName(), stage, level);
+        System.out.printf("%s enters Stage %d of Level %d%n", player.getName(), stage, level);
     }
 
     public void printStatus(Player player, List<Monster> monsters) {
         System.out.println(LINE_STRING);
         System.out.println(agentToStatus(player));
         System.out.println("vs.");
-        for (Monster monster: monsters) {
+        for (Monster monster : monsters) {
             // TODO: 14.03.22 sort?
             System.out.println(monsterToStatus(monster));
         }
         System.out.println(LINE_STRING);
     }
 
-    private String agentToStatus(Agent<?,?> agent){
-        return String.format("%s (%s, %s)", agent.getName(), agent.getHealthStatus(),
-                agent.getFocusPointStatus());
+    private String agentToStatus(Agent<?, ?> agent) {
+        return String.format("%s (%s, %s)", agent.getName(), agent.getHealthStatus(), agent.getFocusPointStatus());
     }
 
-    private String monsterToStatus(Monster monster){
+    private String monsterToStatus(Monster monster) {
         return String.format("%s: attempts %s next", agentToStatus(monster), monster.getNextAbility().toString());
     }
 
-    public void printUsage(Agent<?,?> agent, final Ability<?,?> ability) {
+    // TODO: 26.03.22 maybe change all the print names to something like display?
+    public void printUsage(Agent<?, ?> agent, final Ability<?, ?> ability) {
         System.out.printf("%s uses %s%n", agent.getName(), ability.toString());
     }
 
-    public void printDamage(final Damage damage, final Agent<?,?> agent) {
+    public void printDamage(final Damage damage, final Agent<?, ?> agent) {
         if (damage.getAmount() == NEGLIGABLE_DAMAGE) {
             return;
         }
-        System.out.printf("%s takes %d %s damage%n", agent.toString(), damage.getAmount(),
-                damage.getType());
+        System.out.printf("%s takes %d %s damage%n", agent.toString(), damage.getAmount(), damage.getType());
     }
 
     public void getCard(final Player player, final Ability<?, ?> card) {
         System.out.printf("%s gets %s%n", player, card.toString());
     }
 
-    public void dies(final Agent<?,?> agent) {
+    public void dies(final Agent<?, ?> agent) {
         System.out.printf("%s dies%n", agent);
     }
 
     public void won(final Player player) {
-        System.out.printf("%s won!%n",  player);
+        System.out.printf("%s won!%n", player);
     }
 
     public List<Ability<Player, Monster>> heal(final Player player) {
 
         // TODO: 26.03.22 none does not work. Needs prompt?
-        Prompt<Ability<Player, Monster>> healingPrompt = new SelectPrompt<>(String.format(DISCARD_CARDS,
-                player.toString(), player.getHealthStatus()),
-                player.getCards(), NEGLIGABLE_DAMAGE, player.getCards().size() - 1); //
+        Prompt<Ability<Player, Monster>> healingPrompt = new SelectPrompt<>(
+                String.format(DISCARD_CARDS, player.toString(), player.getHealthStatus()), player.getCards(),
+                NEGLIGABLE_DAMAGE, player.getCards().size() - 1); //
         return new ArrayList<>(healingPrompt.parseList());
     }
 
     public Monster getTarget(final Player player, final List<Monster> currentMonsters) {
-        Prompt<Monster> monsterPrompt = new SelectPrompt<>(selectTarget(player),
-                currentMonsters);
+        Prompt<Monster> monsterPrompt = new SelectPrompt<>(selectTarget(player), currentMonsters);
         return monsterPrompt.parseItem();
     }
 
@@ -103,7 +100,7 @@ public class OutputInterFace {
         return String.format("%s gains %d health", player, (player.getHealthPoints() - healthPrev));
     }
 
-    public void focus(final Agent<?,?> agent, final int points) {
+    public void focus(final Agent<?, ?> agent, final int points) {
         System.out.println(gainFocus(agent, points));
     }
 

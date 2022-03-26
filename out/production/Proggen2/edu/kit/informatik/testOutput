@@ -1,16 +1,16 @@
 
-spawn /home/tassilo/.jdks/corretto-11.0.10/bin/java -javaagent:/snap/intellij-idea-ultimate/341/lib/idea_rt.jar=43395:/snap/intellij-idea-ultimate/341/bin -Dfile.encoding=UTF-8 -classpath /home/tassilo/IdeaProjects/Proggen2/out/production/Proggen2 edu.kit.informatik.Application
+spawn /home/tassilo/.jdks/corretto-11.0.10/bin/java -Dfile.encoding=UTF-8 -classpath /home/tassilo/IdeaProjects/Proggen2/out/production/Proggen2 edu.kit.informatik.Application
 Welcome to Runa's Strive
 Select Runa's character class
 1) Warrior
 2) Mage
 3) Paladin
-Enter number [1--3]:
-1
+1Enter number [1--3]:
+
 To shuffle ability cards and monsters, enter two seeds
 Enter seeds [1--2147483647] separated by comma:
 32,23
-Runa Enters Stage 1 of Level 1
+Runa enters Stage 1 of Level 1
 ----------------------------------------
 Runa (50/50 HP, 1/4 FP)
 vs.
@@ -21,24 +21,25 @@ Select card to play
 2) Parry(1)
 Enter number [1--2]:
 1
-Runa uses Thrust(1)
 Enter dice roll [1--4]:
 4
+Runa uses Thrust(1)
 Ghost takes 10 phy. damage
 Ghost uses Focus(1)
+Ghost gains 1 focus
 ----------------------------------------
 Runa (50/50 HP, 1/4 FP)
 vs.
-Ghost (5 HP, 0 FP): attempts Water(1) next
+Ghost (5 HP, 0 FP): attempts Ice(1) next
 ----------------------------------------
 Select card to play
 1) Thrust(1)
 2) Parry(1)
 Enter number [1--2]:
 1
-Runa uses Thrust(1)
 Enter dice roll [1--4]:
 3
+Runa uses Thrust(1)
 Ghost takes 9 phy. damage
 Ghost dies
 Choose Runa's reward
@@ -47,7 +48,7 @@ Choose Runa's reward
 Enter number [1--2]:
 2
 Runa upgrades her die to a D6
-Runa Enters Stage 2 of Level 1
+Runa enters Stage 2 of Level 1
 ----------------------------------------
 Runa (50/50 HP, 1/6 FP)
 vs.
@@ -58,49 +59,29 @@ Select card to play
 1) Thrust(1)
 2) Parry(1)
 Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-6
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
+2
+Runa uses Parry(1)
 Spider uses Bite(1)
-Runa takes 10 phy. damage
+Runa takes 3 phy. damage
 Rat uses Block(1)
 ----------------------------------------
-Runa (40/50 HP, 1/6 FP)
+Runa (47/50 HP, 1/6 FP)
 vs.
-Spider (4 HP, 0 FP): attempts Block(1) next
+Spider (15 HP, 0 FP): attempts Block(1) next
 Rat (14 HP, 0 FP): attempts Claw next
 ----------------------------------------
 Select card to play
 1) Thrust(1)
 2) Parry(1)
 Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-5
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider dies
+2
+Runa uses Parry(1)
+Spider uses Block(1)
 Rat uses Claw
-Runa takes 6 phy. damage
 ----------------------------------------
-Runa (34/50 HP, 1/6 FP)
+Runa (47/50 HP, 1/6 FP)
 vs.
+Spider (15 HP, 0 FP): attempts Bite(1) next
 Rat (14 HP, 0 FP): attempts Block(1) next
 ----------------------------------------
 Select card to play
@@ -108,9 +89,92 @@ Select card to play
 2) Parry(1)
 Enter number [1--2]:
 1
-Runa uses Thrust(1)
+Select Runa's target.
+1) Spider
+2) Rat
+Enter number [1--2]:
+1
 Enter dice roll [1--6]:
 6
+Runa uses Thrust(1)
+Spider takes 9 phy. damage
+Spider uses Bite(1)
+Runa takes 10 phy. damage
+Rat uses Block(1)
+----------------------------------------
+Runa (37/50 HP, 1/6 FP)
+vs.
+Spider (6 HP, 0 FP): attempts Block(1) next
+Rat (14 HP, 0 FP): attempts Claw next
+----------------------------------------
+Select card to play
+1) Thrust(1)
+2) Parry(1)
+Enter number [1--2]:
+1
+Select Runa's target.
+1) Spider
+2) Rat
+Enter number [1--2]:
+2
+Enter dice roll [1--6]:
+5
+Runa uses Thrust(1)
+Rat takes 4 phy. damage
+Spider uses Block(1)
+Rat uses Claw
+Runa takes 6 phy. damage
+----------------------------------------
+Runa (31/50 HP, 1/6 FP)
+vs.
+Spider (6 HP, 0 FP): attempts Bite(1) next
+Rat (10 HP, 0 FP): attempts Block(1) next
+----------------------------------------
+Select card to play
+1) Thrust(1)
+2) Parry(1)
+Enter number [1--2]:
+1
+Select Runa's target.
+1) Spider
+2) Rat
+Enter number [1--2]:
+1
+Enter dice roll [1--6]:
+6
+Runa uses Thrust(1)
+Spider takes 9 phy. damage
+Spider dies
+Rat uses Block(1)
+----------------------------------------
+Runa (31/50 HP, 1/6 FP)
+vs.
+Rat (10 HP, 0 FP): attempts Claw next
+----------------------------------------
+Select card to play
+1) Thrust(1)
+2) Parry(1)
+Enter number [1--2]:
+1
+Enter dice roll [1--6]:
+6
+Runa uses Thrust(1)
+Rat takes 9 phy. damage
+Rat uses Claw
+Runa takes 6 phy. damage
+----------------------------------------
+Runa (25/50 HP, 1/6 FP)
+vs.
+Rat (1 HP, 0 FP): attempts Block(1) next
+----------------------------------------
+Select card to play
+1) Thrust(1)
+2) Parry(1)
+Enter number [1--2]:
+1
+Enter dice roll [1--6]:
+6
+Runa uses Thrust(1)
 Rat takes 16 phy. damage
 Rat dies
 Choose Runa's reward
@@ -124,1186 +188,214 @@ Pick 2 card(s) as loot
 3) Lightning(1)
 4) Ice(1)
 Enter numbers [1--4] separated by comma:
-6 2,3
+2,3
 Runa gets Slash(1)
 Runa gets Lightning(1)
-Runa (34/50 HP) can discard ability cards for healing (or none)
+Runa (25/50 HP) can discard ability cards for healing (or none)
 1) Thrust(1)
 2) Parry(1)
 3) Slash(1)
 4) Lightning(1)
 Enter numbers [1--4] separated by comma:
-
-Enter numbers [1--4] separated by comma:
-1 1, 
-Runa Enters Stage 3 of Level 1
+3
+Runa gains 10 health
+Runa enters Stage 3 of Level 1
 ----------------------------------------
-Runa (44/50 HP, 1/6 FP)
+Runa (35/50 HP, 1/6 FP)
 vs.
 Frog (16 HP, 0 FP): attempts Focus(1) next
 Gorgon (13 HP, 0 FP): attempts Focus(1) next
 ----------------------------------------
 Select card to play
-1) Parry(1)
-2) Slash(1)
+1) Thrust(1)
+2) Parry(1)
 3) Lightning(1)
 Enter number [1--3]:
-i 
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-5 4 3
-Runa uses Lightning(1)
+3
 Select Runa's target.
 1) Frog
 2) Gorgon
 Enter number [1--2]:
 1
 Enter dice roll [1--6]:
-6
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
 1
-Runa uses Parry(1)
+Runa uses Lightning(1)
 Frog uses Focus(1)
+Frog gains 1 focus
 Gorgon uses Focus(1)
+Gorgon gains 1 focus
 ----------------------------------------
-Runa (20/50 HP, 1/6 FP)
+Runa (35/50 HP, 1/6 FP)
 vs.
 Frog (16 HP, 0 FP): attempts Water(1) next
 Gorgon (13 HP, 0 FP): attempts Fire(1) next
 ----------------------------------------
 Select card to play
-1) Parry(1)
-2) Slash(1)
+1) Thrust(1)
+2) Parry(1)
 3) Lightning(1)
 Enter number [1--3]:
 1
-Runa uses Parry(1)
-Frog uses Water(1)
-Runa takes 10 mag. damage
+Select Runa's target.
+1) Frog
+2) Gorgon
+Enter number [1--2]:
+6
+Enter number [1--2]:
+1
+Enter dice roll [1--6]:
+6
+Runa uses Thrust(1)
+Frog takes 16 phy. damage
+Frog dies
 Gorgon uses Fire(1)
 Runa takes 14 mag. damage
-Runa dies
-spawn /home/tassilo/.jdks/corretto-11.0.10/bin/java -javaagent:/snap/intellij-idea-ultimate/341/lib/idea_rt.jar=43395:/snap/intellij-idea-ultimate/341/bin -Dfile.encoding=UTF-8 -classpath /home/tassilo/IdeaProjects/Proggen2/out/production/Proggen2 edu.kit.informatik.Application
-Welcome to Runa's Strive
-Select Runa's character class
-1) Warrior
-2) Mage
-3) Paladin
+----------------------------------------
+Runa (21/50 HP, 1/6 FP)
+vs.
+Gorgon (13 HP, 0 FP): attempts Focus(1) next
+----------------------------------------
+Select card to play
+1) Thrust(1)
+2) Parry(1)
+3) Lightning(1)
 Enter number [1--3]:
 1
-To shuffle ability cards and monsters, enter two seeds
-Enter seeds [1--2147483647] separated by comma:
-32,23
-Runa Enters Stage 1 of Level 1
+Enter dice roll [1--6]:
+3,4
+Enter dice roll [1--6]:
+1
+Runa uses Thrust(1)
+Gorgon takes 7 phy. damage
+Gorgon uses Focus(1)
+Gorgon gains 1 focus
 ----------------------------------------
-Runa (50/50 HP, 1/4 FP)
+Runa (21/50 HP, 1/6 FP)
 vs.
-Ghost (15 HP, 0 FP): attempts Focus(1) next
+Gorgon (6 HP, 0 FP): attempts Fire(1) next
 ----------------------------------------
 Select card to play
 1) Thrust(1)
 2) Parry(1)
-Enter number [1--2]:
+3) Lightning(1)
+Enter number [1--3]:
 1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
+Enter dice roll [1--6]:
 4
-Ghost takes 10 phy. damage
-Ghost uses Focus(1)
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (5 HP, 0 FP): attempts Water(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
 Runa uses Thrust(1)
-Enter dice roll [1--4]:
-3
-Ghost takes 9 phy. damage
-Ghost dies
+Gorgon takes 10 phy. damage
+Gorgon dies
 Choose Runa's reward
 1) new ability cards
 2) next player dice
 Enter number [1--2]:
 2
-Runa upgrades her die to a D6
-Runa Enters Stage 2 of Level 1
-----------------------------------------
-Runa (50/50 HP, 1/6 FP)
-vs.
-Spider (15 HP, 0 FP): attempts Bite(1) next
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
+Runa upgrades her die to a D8
+Runa (21/50 HP) can discard ability cards for healing (or none)
 1) Thrust(1)
 2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-6
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider uses Bite(1)
-Runa takes 10 phy. damage
-Rat uses Block(1)
-----------------------------------------
-Runa (40/50 HP, 1/6 FP)
-vs.
-Spider (4 HP, 0 FP): attempts Block(1) next
-Rat (14 HP, 0 FP): attempts Claw next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-5
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider dies
-Rat uses Claw
-Runa takes 6 phy. damage
-----------------------------------------
-Runa (34/50 HP, 1/6 FP)
-vs.
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--6]:
-6
-Rat takes 16 phy. damage
-Rat dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
-Enter number [1--2]:
-1
-Pick 2 card(s) as loot
-1) Fire(1)
-2) Slash(1)
 3) Lightning(1)
-4) Ice(1)
-Enter numbers [1--4] separated by comma:
-6 2,3
-Runa gets Slash(1)
-Runa gets Lightning(1)
-Runa (34/50 HP) can discard ability cards for healing (or none)
-1) Thrust(1)
-2) Parry(1)
-3) Slash(1)
-4) Lightning(1)
-Enter numbers [1--4] separated by comma:
-
-Enter numbers [1--4] separated by comma:
-1 1, 
-Runa Enters Stage 3 of Level 1
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-i 
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-5 4 3
-Runa uses Lightning(1)
-Select Runa's target.
-1) Frog
-2) Gorgon
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-6
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-Runa dies
-spawn /home/tassilo/.jdks/corretto-11.0.10/bin/java -javaagent:/snap/intellij-idea-ultimate/341/lib/idea_rt.jar=43395:/snap/intellij-idea-ultimate/341/bin -Dfile.encoding=UTF-8 -classpath /home/tassilo/IdeaProjects/Proggen2/out/production/Proggen2 edu.kit.informatik.Application
-Welcome to Runa's Strive
-Select Runa's character class
-1) Warrior
-2) Mage
-3) Paladin
-Enter number [1--3]:
-1
-To shuffle ability cards and monsters, enter two seeds
-Enter seeds [1--2147483647] separated by comma:
-32,23
-Runa Enters Stage 1 of Level 1
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (15 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
-4
-Ghost takes 10 phy. damage
-Ghost uses Focus(1)
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (5 HP, 0 FP): attempts Water(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
+Enter numbers [1--3] separated by comma:
 3
-Ghost takes 9 phy. damage
-Ghost dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
+Runa gains 10 health
+Runa enters Stage 4 of Level 1
+----------------------------------------
+Runa (31/50 HP, 1/8 FP)
+vs.
+Spider King (50 HP, 0 FP): attempts Bite(1) next
+Mega Saurus (100 HP, 0 FP): attempts Bite(2) next
+----------------------------------------
+Select card to play
+1) Thrust(1)
+2) Parry(1)
+Enter number [1--2]:
+6
+Enter number [1--2]:
+1
+Select Runa's target.
+1) Spider King
+2) Mega Saurus
 Enter number [1--2]:
 2
-Runa upgrades her die to a D6
-Runa Enters Stage 2 of Level 1
-----------------------------------------
-Runa (50/50 HP, 1/6 FP)
-vs.
-Spider (15 HP, 0 FP): attempts Bite(1) next
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
+Enter dice roll [1--8]:
+2
 Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-6
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider uses Bite(1)
+Mega Saurus takes 8 phy. damage
+Spider King uses Bite(1)
 Runa takes 10 phy. damage
-Rat uses Block(1)
+Mega Saurus uses Bite(2)
+Runa takes 20 phy. damage
 ----------------------------------------
-Runa (40/50 HP, 1/6 FP)
+Runa (1/50 HP, 1/8 FP)
 vs.
-Spider (4 HP, 0 FP): attempts Block(1) next
-Rat (14 HP, 0 FP): attempts Claw next
+Spider King (50 HP, 0 FP): attempts Block(1) next
+Mega Saurus (92 HP, 0 FP): attempts Block(2) next
 ----------------------------------------
 Select card to play
 1) Thrust(1)
 2) Parry(1)
 Enter number [1--2]:
+1,2,3,4
+Enter number [1--2]:
+42,24
+Enter number [1--2]:
 1
-Runa uses Thrust(1)
 Select Runa's target.
-1) Spider
-2) Rat
+1) Spider King
+2) Mega Saurus
 Enter number [1--2]:
-5
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider dies
-Rat uses Claw
-Runa takes 6 phy. damage
-----------------------------------------
-Runa (34/50 HP, 1/6 FP)
-vs.
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--6]:
 6
-Rat takes 16 phy. damage
-Rat dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
-Enter number [1--2]:
-1
-Pick 2 card(s) as loot
-1) Fire(1)
-2) Slash(1)
-3) Lightning(1)
-4) Ice(1)
-Enter numbers [1--4] separated by comma:
-6 2,3
-Runa gets Slash(1)
-Runa gets Lightning(1)
-Runa (34/50 HP) can discard ability cards for healing (or none)
-1) Thrust(1)
-2) Parry(1)
-3) Slash(1)
-4) Lightning(1)
-Enter numbers [1--4] separated by comma:
-
-Enter numbers [1--4] separated by comma:
-1 1, 
-Runa Enters Stage 3 of Level 1
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-i 
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-5 4 3
-Runa uses Lightning(1)
-Select Runa's target.
-1) Frog
-2) Gorgon
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-6
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-Runa dies
-spawn /home/tassilo/.jdks/corretto-11.0.10/bin/java -javaagent:/snap/intellij-idea-ultimate/341/lib/idea_rt.jar=43395:/snap/intellij-idea-ultimate/341/bin -Dfile.encoding=UTF-8 -classpath /home/tassilo/IdeaProjects/Proggen2/out/production/Proggen2 edu.kit.informatik.Application
-Welcome to Runa's Strive
-Select Runa's character class
-1) Warrior
-2) Mage
-3) Paladin
-Enter number [1--3]:
-1
-To shuffle ability cards and monsters, enter two seeds
-Enter seeds [1--2147483647] separated by comma:
-32,23
-Runa Enters Stage 1 of Level 1
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (15 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
-4
-Ghost takes 10 phy. damage
-Ghost uses Focus(1)
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (5 HP, 0 FP): attempts Water(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
-3
-Ghost takes 9 phy. damage
-Ghost dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
 Enter number [1--2]:
 2
-Runa upgrades her die to a D6
-Runa Enters Stage 2 of Level 1
+Enter dice roll [1--8]:
+1
+Runa uses Thrust(1)
+Mega Saurus takes 7 phy. damage
+Spider King uses Block(1)
+Mega Saurus uses Block(2)
 ----------------------------------------
-Runa (50/50 HP, 1/6 FP)
+Runa (1/50 HP, 1/8 FP)
 vs.
-Spider (15 HP, 0 FP): attempts Bite(1) next
-Rat (14 HP, 0 FP): attempts Block(1) next
+Spider King (50 HP, 0 FP): attempts Focus(1) next
+Mega Saurus (85 HP, 0 FP): attempts Focus(2) next
 ----------------------------------------
 Select card to play
 1) Thrust(1)
 2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-6
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider uses Bite(1)
-Runa takes 10 phy. damage
-Rat uses Block(1)
-----------------------------------------
-Runa (40/50 HP, 1/6 FP)
-vs.
-Spider (4 HP, 0 FP): attempts Block(1) next
-Rat (14 HP, 0 FP): attempts Claw next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
 Enter number [1--2]:
 5
 Enter number [1--2]:
 1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider dies
-Rat uses Claw
-Runa takes 6 phy. damage
-----------------------------------------
-Runa (34/50 HP, 1/6 FP)
-vs.
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--6]:
-6
-Rat takes 16 phy. damage
-Rat dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
-Enter number [1--2]:
-1
-Pick 2 card(s) as loot
-1) Fire(1)
-2) Slash(1)
-3) Lightning(1)
-4) Ice(1)
-Enter numbers [1--4] separated by comma:
-6 2,3
-Runa gets Slash(1)
-Runa gets Lightning(1)
-Runa (34/50 HP) can discard ability cards for healing (or none)
-1) Thrust(1)
-2) Parry(1)
-3) Slash(1)
-4) Lightning(1)
-Enter numbers [1--4] separated by comma:
-
-Enter numbers [1--4] separated by comma:
-1 1, 
-Runa Enters Stage 3 of Level 1
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-i 
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-5 4 3
-Runa uses Lightning(1)
 Select Runa's target.
-1) Frog
-2) Gorgon
+1) Spider King
+2) Mega Saurus
+Enter number [1--2]:
+5
 Enter number [1--2]:
 1
-Enter dice roll [1--6]:
+Enter dice roll [1--8]:
 6
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
+Runa uses Thrust(1)
+Spider King takes 9 phy. damage
+Spider King uses Focus(1)
+Spider King gains 1 focus
+Mega Saurus uses Focus(2)
+Mega Saurus gains 2 focus
 ----------------------------------------
-Runa (20/50 HP, 1/6 FP)
+Runa (1/50 HP, 1/8 FP)
 vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-Runa dies
-spawn /home/tassilo/.jdks/corretto-11.0.10/bin/java -javaagent:/snap/intellij-idea-ultimate/341/lib/idea_rt.jar=43395:/snap/intellij-idea-ultimate/341/bin -Dfile.encoding=UTF-8 -classpath /home/tassilo/IdeaProjects/Proggen2/out/production/Proggen2 edu.kit.informatik.Application
-Welcome to Runa's Strive
-Select Runa's character class
-1) Warrior
-2) Mage
-3) Paladin
-Enter number [1--3]:
-1
-To shuffle ability cards and monsters, enter two seeds
-Enter seeds [1--2147483647] separated by comma:
-32,23
-Runa Enters Stage 1 of Level 1
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (15 HP, 0 FP): attempts Focus(1) next
+Spider King (41 HP, 0 FP): attempts Lightning next
+Mega Saurus (85 HP, 0 FP): attempts Fire(1) next
 ----------------------------------------
 Select card to play
 1) Thrust(1)
 2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
-4
-Ghost takes 10 phy. damage
-Ghost uses Focus(1)
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (5 HP, 0 FP): attempts Water(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
-3
-Ghost takes 9 phy. damage
-Ghost dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
 Enter number [1--2]:
 2
-Runa upgrades her die to a D6
-Runa Enters Stage 2 of Level 1
-----------------------------------------
-Runa (50/50 HP, 1/6 FP)
-vs.
-Spider (15 HP, 0 FP): attempts Bite(1) next
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-6
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider uses Bite(1)
-Runa takes 10 phy. damage
-Rat uses Block(1)
-----------------------------------------
-Runa (40/50 HP, 1/6 FP)
-vs.
-Spider (4 HP, 0 FP): attempts Block(1) next
-Rat (14 HP, 0 FP): attempts Claw next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-5
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider dies
-Rat uses Claw
-Runa takes 6 phy. damage
-----------------------------------------
-Runa (34/50 HP, 1/6 FP)
-vs.
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--6]:
-6
-Rat takes 16 phy. damage
-Rat dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
-Enter number [1--2]:
-1
-Pick 2 card(s) as loot
-1) Fire(1)
-2) Slash(1)
-3) Lightning(1)
-4) Ice(1)
-Enter numbers [1--4] separated by comma:
-6 2,3
-Runa gets Slash(1)
-Runa gets Lightning(1)
-Runa (34/50 HP) can discard ability cards for healing (or none)
-1) Thrust(1)
-2) Parry(1)
-3) Slash(1)
-4) Lightning(1)
-Enter numbers [1--4] separated by comma:
-
-Enter numbers [1--4] separated by comma:
-1 1, 
-Runa Enters Stage 3 of Level 1
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-i 
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-1
 Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-5 4 3
-Runa uses Lightning(1)
-Select Runa's target.
-1) Frog
-2) Gorgon
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-6
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
+Spider King uses Lightning
+Runa takes 16 mag. damage
+Mega Saurus uses Fire(1)
 Runa takes 14 mag. damage
 Runa dies
-spawn /home/tassilo/.jdks/corretto-11.0.10/bin/java -javaagent:/snap/intellij-idea-ultimate/341/lib/idea_rt.jar=43395:/snap/intellij-idea-ultimate/341/bin -Dfile.encoding=UTF-8 -classpath /home/tassilo/IdeaProjects/Proggen2/out/production/Proggen2 edu.kit.informatik.Application
-Welcome to Runa's Strive
-Select Runa's character class
-1) Warrior
-2) Mage
-3) Paladin
-Enter number [1--3]:
-1
-To shuffle ability cards and monsters, enter two seeds
-Enter seeds [1--2147483647] separated by comma:
-32,23
-Runa Enters Stage 1 of Level 1
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (15 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
-4
-Ghost takes 10 phy. damage
-Ghost uses Focus(1)
-----------------------------------------
-Runa (50/50 HP, 1/4 FP)
-vs.
-Ghost (5 HP, 0 FP): attempts Water(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--4]:
-3
-Ghost takes 9 phy. damage
-Ghost dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
-Enter number [1--2]:
-2
-Runa upgrades her die to a D6
-Runa Enters Stage 2 of Level 1
-----------------------------------------
-Runa (50/50 HP, 1/6 FP)
-vs.
-Spider (15 HP, 0 FP): attempts Bite(1) next
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-6
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider uses Bite(1)
-Runa takes 10 phy. damage
-Rat uses Block(1)
-----------------------------------------
-Runa (40/50 HP, 1/6 FP)
-vs.
-Spider (4 HP, 0 FP): attempts Block(1) next
-Rat (14 HP, 0 FP): attempts Claw next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Select Runa's target.
-1) Spider
-2) Rat
-Enter number [1--2]:
-5
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-5
-Spider takes 11 phy. damage
-Spider dies
-Rat uses Claw
-Runa takes 6 phy. damage
-----------------------------------------
-Runa (34/50 HP, 1/6 FP)
-vs.
-Rat (14 HP, 0 FP): attempts Block(1) next
-----------------------------------------
-Select card to play
-1) Thrust(1)
-2) Parry(1)
-Enter number [1--2]:
-1
-Runa uses Thrust(1)
-Enter dice roll [1--6]:
-6
-Rat takes 16 phy. damage
-Rat dies
-Choose Runa's reward
-1) new ability cards
-2) next player dice
-Enter number [1--2]:
-1
-Pick 2 card(s) as loot
-1) Fire(1)
-2) Slash(1)
-3) Lightning(1)
-4) Ice(1)
-Enter numbers [1--4] separated by comma:
-6 2,3
-Runa gets Slash(1)
-Runa gets Lightning(1)
-Runa (34/50 HP) can discard ability cards for healing (or none)
-1) Thrust(1)
-2) Parry(1)
-3) Slash(1)
-4) Lightning(1)
-Enter numbers [1--4] separated by comma:
-
-Enter numbers [1--4] separated by comma:
-1 1, 
-Runa Enters Stage 3 of Level 1
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-i 
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (44/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-5 4 3
-Runa uses Lightning(1)
-Select Runa's target.
-1) Frog
-2) Gorgon
-Enter number [1--2]:
-1
-Enter dice roll [1--6]:
-6
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Focus(1) next
-Gorgon (13 HP, 0 FP): attempts Focus(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Focus(1)
-Gorgon uses Focus(1)
-----------------------------------------
-Runa (20/50 HP, 1/6 FP)
-vs.
-Frog (16 HP, 0 FP): attempts Water(1) next
-Gorgon (13 HP, 0 FP): attempts Fire(1) next
-----------------------------------------
-Select card to play
-1) Parry(1)
-2) Slash(1)
-3) Lightning(1)
-Enter number [1--3]:
-1
-Runa uses Parry(1)
-Frog uses Water(1)
-Runa takes 10 mag. damage
-Gorgon uses Fire(1)
-Runa takes 14 mag. damage
-Runa dies
+quit

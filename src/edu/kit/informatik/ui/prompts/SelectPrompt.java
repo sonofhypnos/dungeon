@@ -141,7 +141,9 @@ public class SelectPrompt<T> implements Prompt<T> {
                                         final int maxOptionNumber) {
         this.prompt();
         // TODO: 23.03.22 hübsscher (mach weninger wenn nicht laufend)
+        // TODO: 26.03.22 make all of this pretty (make einheitlich mit getInt (or refactor everything anyway?)
         List<Integer> args = null;
+        // TODO: 26.03.22 if there is a newline inputted, then this is also null! maybe make more pretty?
         Scanner scanner = ScannerSingleton.getInstance();
         while (isRunning()) {
             entryPrompt();
@@ -151,13 +153,18 @@ public class SelectPrompt<T> implements Prompt<T> {
                 return args;
             }
             assert input != null;
+            // TODO: 26.03.22 this here also causes a but, since optionnumber is if undefined also 0
+            if (minOptionNumber == 0 && input.equals("")) { //check for 0 integers, since parseUnsignedInt would throw
+                // an exception here.
+                return List.of();
+            }
             try {
+                // TODO: 26.03.22 make sure we do not match things like +4 (which parseInt parses) maybe check for +.
                 args = Arrays.stream(Objects.requireNonNull(input).split(separator, SPLIT_LIMIT)).map(Integer::parseUnsignedInt)
                         .collect(Collectors.toList());
             } catch (NumberFormatException e) {
                 continue;
             }
-            System.out.println("args:" + args);
             if (args.size() < minOptionNumber || args.size() > maxOptionNumber || args.stream()
                     .anyMatch(i -> inIntervall(i, maxOrdinal))) continue;
             break;
@@ -166,6 +173,7 @@ public class SelectPrompt<T> implements Prompt<T> {
     }
 
     private void quit(final String input) {
+        // TODO: 26.03.22 there is all kinds of stuff that still gets printed on quit!
         if (QUIT_REGEX.equals(input)) {
             SelectPrompt.setRunning(false);
         }
