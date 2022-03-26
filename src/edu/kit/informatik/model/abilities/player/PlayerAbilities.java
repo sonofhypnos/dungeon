@@ -29,6 +29,11 @@ public enum PlayerAbilities implements AbilityKind {
     public Ability<Player, Monster> getAbility() {
         return ability;
     }
+
+    @Override
+    public String toString() {
+        return this.ability.toString();
+    }
 }
 
 

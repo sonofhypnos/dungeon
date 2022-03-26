@@ -48,7 +48,7 @@ public class OutputInterFace {
     }
 
     private String monsterToStatus(Monster monster){
-        return String.format("%s attempts %s next", agentToStatus(monster), monster.getNextAbility().toString());
+        return String.format("%s: attempts %s next", agentToStatus(monster), monster.getNextAbility().toString());
     }
 
     public void printUsage(Agent<?,?> agent, final Ability<?,?> ability) {
@@ -64,7 +64,7 @@ public class OutputInterFace {
     }
 
     public void getCard(final Player player, final Ability<?, ?> card) {
-        System.out.printf("%s gets %s%n", player, card);
+        System.out.printf("%s gets %s%n", player, card.toString());
     }
 
     public void dies(final Agent<?,?> agent) {

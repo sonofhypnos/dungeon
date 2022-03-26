@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
  */
 public class Player extends Agent<Player, List<Monster>> {
 
-    private static final int MAX_FOCUS_POINTS = 5;
     private static final int INITIAL_HEALTH = 50;
     private static final Dice INITIAL_DICE = Dice.D4;
+    private static final int INITIAL_FOCUS = 1;
     private static final int REFLECT_DAMAGE = 10;
     private List<Ability<Player, Monster>> cards;
     private List<Ability<Player, Monster>> startingCards;
@@ -30,22 +30,8 @@ public class Player extends Agent<Player, List<Monster>> {
         this.name = name;
         maxHealth = INITIAL_HEALTH;
         healthPoints = INITIAL_HEALTH;
-        focusPoints = MAX_FOCUS_POINTS;
         dice = INITIAL_DICE;
-    }
-
-    /**
-     * Constructs a new player.
-     *
-     * @param name              the name
-     * @param initialHealth     the initial health points
-     * @param focusPoints the initial focus points
-     */
-    public Player(final String name, final int initialHealth, final int focusPoints) {
-        this.name = name;
-        // TODO: 13.03.22 remove this constructor?
-        this.healthPoints = initialHealth;
-        this.focusPoints = focusPoints;
+        focusPoints = INITIAL_FOCUS;
     }
 
     public void setClass(final Archetype gameArchetype) {
@@ -69,8 +55,8 @@ public class Player extends Agent<Player, List<Monster>> {
         startingCards = cards;
     }
 
-    public static int getMaxFocusPoints() {
-        return MAX_FOCUS_POINTS;
+    public int getMaxFocusPoints() {
+        return this.dice.getValue();
     }
 
     @Override
