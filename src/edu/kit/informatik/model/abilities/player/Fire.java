@@ -27,6 +27,7 @@ public class Fire extends Ability<Player, Monster> {
     public void applyEffect(final Player aggressor, final Monster target) {
         var effect = new ElementPlayerEffect(MonsterType.ICE, DAMAGE_FACTOR, DAMAGE_CONSTANT, SECOND_DAMAGE_CONSTANT,
                 BONUS_DAMAGE_FACTOR, level);
+        effect.applyEffect(aggressor, target);
     }
 }
 

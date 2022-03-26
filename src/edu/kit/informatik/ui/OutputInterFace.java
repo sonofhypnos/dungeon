@@ -15,10 +15,12 @@ import java.util.List;
  * @version 1.0.0 2022-03-11
  */
 public class OutputInterFace {
+
     private static final String LINE_STRING = "----------------------------------------";
-    private static final int NEGLIGABLE_DAMAGE = 0;
     private static final String DISCARD_CARDS = "%s (%s) can discard ability cards for healing (or none)";
+    private static final int MIN_CARDS = 0;
     // TODO: 14.03.22 Make actually abstract functions to implement stuff from monster and agent (for UI?)
+
 
     public OutputInterFace() {
         // TODO: 18.03.22 ist es erlaubt Runtime aufzurufen?
@@ -27,18 +29,18 @@ public class OutputInterFace {
     //  sepseparate method that creates a string for each
 
     public void printStage(Player player, int stage, int level) {
-        System.out.printf("%s enters Stage %d of Level %d%n", player.getName(), stage, level);
+        println(String.format("%s enters Stage %d of Level %d", player.getName(), stage, level));
     }
 
     public void printStatus(Player player, List<Monster> monsters) {
-        System.out.println(LINE_STRING);
-        System.out.println(agentToStatus(player));
-        System.out.println("vs.");
+        println(LINE_STRING);
+        println(agentToStatus(player));
+        println("vs.");
         for (Monster monster : monsters) {
             // TODO: 14.03.22 sort?
-            System.out.println(monsterToStatus(monster));
+            println(monsterToStatus(monster));
         }
-        System.out.println(LINE_STRING);
+        println(LINE_STRING);
     }
 
     private String agentToStatus(Agent<?, ?> agent) {
@@ -51,35 +53,38 @@ public class OutputInterFace {
 
     // TODO: 26.03.22 maybe change all the print names to something like display?
     public void printUsage(Agent<?, ?> agent, final Ability<?, ?> ability) {
-        System.out.printf("%s uses %s%n", agent.getName(), ability.toString());
+        println(String.format("%s uses %s", agent.getName(), ability.toString()));
     }
 
     public void printDamage(final Damage damage, final Agent<?, ?> agent) {
-        if (damage.getAmount() == NEGLIGABLE_DAMAGE) {
-            return;
-        }
-        System.out.printf("%s takes %d %s damage%n", agent.toString(), damage.getAmount(), damage.getType());
+        printIfPositive(String.format("%s takes %d %s damage", agent.toString(), damage.getAmount(),
+                damage.getType()), damage.getAmount());
     }
 
     public void getCard(final Player player, final Ability<?, ?> card) {
-        System.out.printf("%s gets %s%n", player, card.toString());
+        println(String.format("%s gets %s", player, card.toString()));
     }
 
     public void dies(final Agent<?, ?> agent) {
-        System.out.printf("%s dies%n", agent);
+        println(String.format("%s dies", agent));
     }
 
     public void won(final Player player) {
-        System.out.printf("%s won!%n", player);
+        println(String.format("%s won!", player));
     }
 
     public List<Ability<Player, Monster>> heal(final Player player) {
 
         // TODO: 26.03.22 none does not work. Needs prompt?
         Prompt<Ability<Player, Monster>> healingPrompt = new SelectPrompt<>(
-                String.format(DISCARD_CARDS, player.toString(), player.getHealthStatus()), player.getCards(),
-                NEGLIGABLE_DAMAGE, player.getCards().size() - 1); //
-        return new ArrayList<>(healingPrompt.parseList());
+                String.format(DISCARD_CARDS, player.toString(), player.getHealthStatus()), player.getCards(), MIN_CARDS,
+                player.getCards().size() - 1); //
+        var cards = healingPrompt.parseList();
+        // TODO: 26.03.22 do the healingThing correctly
+        if (cards == null) {
+            return null;
+        }
+        return new ArrayList<>(cards);
     }
 
     public Monster getTarget(final Player player, final List<Monster> currentMonsters) {
@@ -91,24 +96,33 @@ public class OutputInterFace {
         return String.format("Select %s's target.", player.getName());
     }
 
-    public void printHeal(final Player player, final int healthPrev) {
-        System.out.println(getHeal(player, healthPrev));
-
+    public void printHeal(final Player player, final int healthGain) {
+        printIfPositive(getHeal(player, healthGain), healthGain);
     }
 
-    private String getHeal(final Player player, final int healthPrev) {
-        return String.format("%s gains %d health", player, (player.getHealthPoints() - healthPrev));
+    private String getHeal(final Player player, final int healthGain) {
+        return String.format("%s gains %d health", player, (healthGain));
     }
 
     public void focus(final Agent<?, ?> agent, final int points) {
         // TODO: 26.03.22 make pretty (isFocusing check again)
-        if (agent.isFocusing()) {
-            System.out.println(gainFocus(agent, points));
+        printIfPositive(gainFocus(agent, points), points);
+    }
+
+    private void printIfPositive(String string, int value) {
+        if (value != 0) {
+            println(string);
         }
     }
 
     private String gainFocus(final Agent<?, ?> agent, final int points) {
         return String.format("%s gains %d focus", agent, points);
+    }
+
+    private void println(String string) {
+        if (SelectPrompt.isRunning()) {
+            System.out.println(string);
+        }
     }
 
 

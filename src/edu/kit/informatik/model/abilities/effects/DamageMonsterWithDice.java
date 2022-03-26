@@ -14,17 +14,18 @@ public class DamageMonsterWithDice extends Effect<Player, Monster> {
 
     private final int damageFactor;
     private int level;
+    private int roll;
 
-    public DamageMonsterWithDice(int damageFactor, int level ) {
+    public DamageMonsterWithDice(int damageFactor, int level, int roll) {
         this.damageFactor = damageFactor;
         this.level = level;
+        this.roll = roll;
     }
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        int dice = this.getRoll();
         var effect = new DamageMonster(new Damage(DamageType.PHYSICAL,
-                        damageFactor * level + dice));
+                        damageFactor * level + roll));
         effect.applyEffect(aggressor, target);
         target.resetFocus();
     }

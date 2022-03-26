@@ -22,7 +22,7 @@ public class Slash extends Ability<Player, Monster> {
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        var effect = new DamageMonsterWithDice(DAMAGE_FACTOR, level);
+        var effect = new DamageMonsterWithDice(DAMAGE_FACTOR, level, this.getRoll());
         effect.applyEffect(aggressor, target);
     }
 }

@@ -44,8 +44,8 @@ public enum Monsters {
     private final Monster monster;
 
     Monsters(final String name, final int level, final int lifePoints, List<MonsterType> monsterTypes,
-             List<Ability<Monster, Player>> monsterAbilites) {
-        this.monster = new Monster(name, lifePoints, monsterTypes, monsterAbilites, level);
+             List<Ability<Monster, Player>> monsterAbilities) {
+        this.monster = new Monster(name, lifePoints, monsterTypes, monsterAbilities, level);
     }
 
     public Monster getMonster() {

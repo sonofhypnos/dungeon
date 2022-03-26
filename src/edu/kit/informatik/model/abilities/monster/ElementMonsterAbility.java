@@ -30,7 +30,7 @@ public class ElementMonsterAbility extends MonsterAbility {
 
     public void applyEffect(final Monster aggressor, final Player target) {
         assert canBeUsed(aggressor);
-        aggressor.setFocus(aggressor.getFocusPoints() - this.level);
+        aggressor.reduceFocus(this.level);
         target.damage(new Damage(DamageType.MAGIC, damageFactor * level + damageConstant), aggressor);
     }
 }

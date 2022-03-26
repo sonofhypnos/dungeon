@@ -55,7 +55,7 @@ public abstract class Ability<A, T> extends Effect<A, T> {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Ability)) return false;
-        Ability<?,?> ability = (Ability<?,?>) o;
+        Ability<?, ?> ability = (Ability<?, ?>) o;
         return identifier.equals(ability.identifier);
     }
 
@@ -72,7 +72,7 @@ public abstract class Ability<A, T> extends Effect<A, T> {
     @Override
     public abstract void applyEffect(final A aggressor, final T target);
 
-    public boolean canBeUsed(Agent<?,?> agent){
+    public boolean canBeUsed(Agent<?, ?> agent) {
         return true;
     }
 
