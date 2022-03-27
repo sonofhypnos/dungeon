@@ -1,5 +1,7 @@
 package edu.kit.informatik.model.Cards;
 
+import java.util.Arrays;
+
 /**
  * The enum Dice.
  *
@@ -57,8 +59,8 @@ public enum Dice {
      */
     public boolean isLast() {
         // TODO: 14.03.22 figure out functional
-        //return Arrays.stream(Dice.values()).mapToInt(Dice::getValue).max().getAsInt();
-        return Dice.values().length == this.ordinal() - 1; //-1 because 0-indexed
+        //return Arrays.stream(Dice.values()).mapToInt(Dice::getValue).max().getAsInt() == 12;
+        return Dice.values().length == this.ordinal() - 1;
     }
 
     @Override

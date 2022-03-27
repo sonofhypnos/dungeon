@@ -30,7 +30,7 @@ public final class Application {
      */
     public static void main(String[] args) {
         if (args.length != ARGUMENT_NUMBER) {
-            throw new IllegalArgumentException(ERROR_GAME_DOES_NOT_EXPECT_ANY_ARGUMENTS);
+            System.err.println(ERROR_GAME_DOES_NOT_EXPECT_ANY_ARGUMENTS);
         }
         Runa game = new Runa();
         game.runGame();
