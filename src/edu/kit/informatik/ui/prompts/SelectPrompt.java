@@ -102,7 +102,7 @@ public class SelectPrompt<T> implements Prompt<T> {
         this.minOptionNumber = minOptionNumber;
         this.maxOptionNumber = maxOptionNumber;
         this.separator = ",";
-        if (minOptionNumber == maxOptionNumber && minOptionNumber == 1) {
+        if (maxOptionNumber == 1) {
             this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
             // TODO: 27.03.22 there is still something confusing about abilitycards!
         } else {
@@ -246,7 +246,6 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     private String listOptions(final String front, final List<T> options) {
         List<String> optionString = new ArrayList<>();
-        interFace.println(front);
         for (int i = 0; i < options.size(); i++) {
             optionString.add(String.format(OPTION_ITEM, i + FIRST_ORDINAL, options.get(i)));
         }

@@ -6,6 +6,7 @@ import edu.kit.informatik.model.Cards.PlayerDeck;
 import edu.kit.informatik.model.Runa;
 import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
+import java.util.Map;
 
 /**
  * The type New ability cards.
@@ -14,9 +15,9 @@ import edu.kit.informatik.ui.prompts.SelectPrompt;
  * @version 1.0.0 2022-03-17
  */
 public class NewAbilityCards extends Effect<Player, Monster> {
+    private static final String PICK_S_CARD_S_AS_LOOT = "Pick %s card(s) as loot";
     private final PlayerDeck cards;
     private final int cardNumber;
-    private final Runa runa;
     private final int cardPoolSize;
 
     /**
@@ -27,11 +28,10 @@ public class NewAbilityCards extends Effect<Player, Monster> {
      * @param cardPoolSize the card pool size
      * @param runa         the runa
      */
-    public NewAbilityCards(PlayerDeck cards, int cardNumber, int cardPoolSize, Runa runa) {
+    public NewAbilityCards(PlayerDeck cards, int cardNumber, int cardPoolSize) {
         this.cards = cards;
         this.cardNumber = cardNumber;
         this.cardPoolSize = cardPoolSize;
-        this.runa = runa;
     }
 
 
@@ -39,17 +39,20 @@ public class NewAbilityCards extends Effect<Player, Monster> {
     public void applyEffect(final Player player, final Monster target) {
         // TODO: 26.03.22 The number of cards is more than what is the stuff!
         var newCards = this.cards.draw(cardPoolSize);
-        var abilityPrompt = new SelectPrompt<>(
-                String.format(String.format("Pick %s card(s) as loot", cardNumber), newCards.size()), newCards,
-                cardNumber, cardNumber);
+        int optionNumber = Math.min(newCards.size(), cardNumber);
+        if (optionNumber != 0) {
+            var abilityPrompt = new SelectPrompt<>(
+                    String.format(String.format(PICK_S_CARD_S_AS_LOOT, cardNumber), newCards.size()), newCards,
+                    optionNumber, optionNumber);
 
-        var loot = abilityPrompt.parseList();
-        if (SelectPrompt.isRunning()) {
-            return;
-        }
-        for (var card : loot) {
-            player.addCard(card);
-            interFace.getCard(player, card);
+            var loot = abilityPrompt.parseList();
+            if (!SelectPrompt.isRunning()) {
+                return;
+            }
+            for (var card : loot) {
+                player.addCard(card);
+                interFace.getCard(player, card);
+            }
         }
     }
 
