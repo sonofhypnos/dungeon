@@ -14,6 +14,12 @@ import edu.kit.informatik.model.abilities.effects.ElementPlayerEffect;
  * @version 1.0.0 2022-03-11
  */
 public class Water extends Ability<Player, Monster> {
+
+    private static final int DAMAGE_FACTOR = 2;
+    private static final int DAMAGE_CONSTANT = 4;
+    private static final int SECOND_DAMAGE_CONSTANT = 0;
+    private static final int BONUS_DAMAGE_FACTOR = 2;
+
     /**
      * Instantiates new WaterAbility
      *  @param name  the name
@@ -26,7 +32,8 @@ public class Water extends Ability<Player, Monster> {
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        var effect = new ElementPlayerEffect(MonsterType.LIGHTNING, 2, 4, 0, 2, level);
+        var effect = new ElementPlayerEffect(MonsterType.LIGHTNING, DAMAGE_FACTOR, DAMAGE_CONSTANT,
+                SECOND_DAMAGE_CONSTANT, BONUS_DAMAGE_FACTOR, level);
         effect.applyEffect(aggressor, target);
     }
 

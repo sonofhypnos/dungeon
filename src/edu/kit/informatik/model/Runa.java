@@ -44,6 +44,9 @@ public class Runa {
     private static final int HEAL_PER_CARD = 10;
     private static final int CARD_POOL_MULTIPLE = 2;
     private static final String PLAYER_NAME = "Runa";
+    private static final int FIRST_STAGE = 1;
+    private static final int FIRST_STAGE_MONSTER_NUMBER = 1;
+    private static final int DEFAULT_MONSTER_NUMBER = 2;
     private final PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
     private final OutputInterFace interFace;
@@ -260,13 +263,13 @@ public class Runa {
 
     // TODO: 26.03.22 dont forget todos in emacs scratchpad!
     private void startFight(final int stage, final int level) {
-        if (stage == 4) {
+        if (stage == BOSS_STAGE) {
             currentMonsters = getBoss(level);
         } else {
-            if (stage == 1) {
-                monsterNumber = 1;
+            if (stage == FIRST_STAGE) {
+                monsterNumber = FIRST_STAGE_MONSTER_NUMBER;
             } else {
-                monsterNumber = 2;
+                monsterNumber = DEFAULT_MONSTER_NUMBER;
             }
             currentMonsters = this.monsterDeck.draw(monsterNumber);
         }

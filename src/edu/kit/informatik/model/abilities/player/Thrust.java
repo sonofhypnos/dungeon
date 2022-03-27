@@ -14,6 +14,10 @@ import edu.kit.informatik.model.abilities.effects.DamageWithThreshhold;
  */
 public class Thrust extends Ability<Player, Monster> {
 
+    private static final int BONUS_FACTOR = 4;
+    private static final int BONUS_THRESHHOLD = 6;
+    private static final int DAMAGE_FACTOR = 6;
+
     /**
      * Instantiates a new Thrust.
      *  @param thrust the thrust
@@ -28,7 +32,7 @@ public class Thrust extends Ability<Player, Monster> {
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        var effect = new DamageWithThreshhold(6, 6, 4, this.level, this.getRoll());
+        var effect = new DamageWithThreshhold(BONUS_THRESHHOLD, DAMAGE_FACTOR, BONUS_FACTOR, this.level, this.getRoll());
         effect.applyEffect(aggressor, target);
         // TODO: 17.03.22 handle isDead in another place
     }

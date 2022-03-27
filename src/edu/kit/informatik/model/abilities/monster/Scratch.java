@@ -15,6 +15,7 @@ import edu.kit.informatik.model.abilities.AbilityType;
 public class Scratch extends MonsterAbility {
 
     private static final String SCRATCH_REGEX = "Scratch";
+    private static final int FACTOR = 5;
 
     /**
      * Instantiates a new Scratch.
@@ -29,7 +30,7 @@ public class Scratch extends MonsterAbility {
     public void applyEffect(final Monster aggressor, final Player target) {
         target.resetFocus();
         // TODO: 17.03.22 check for message when breaking focus?
-        target.damage(new Damage(DamageType.PHYSICAL, 5 * level), aggressor);
+        target.damage(new Damage(DamageType.PHYSICAL, FACTOR * level), aggressor);
     }
 
 }
