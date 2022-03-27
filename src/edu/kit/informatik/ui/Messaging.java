@@ -167,7 +167,7 @@ public class Messaging {
      * @return the target
      */
     public Monster getTarget(final Player player, final List<Monster> currentMonsters) {
-        Prompt<Monster> monsterPrompt = new SelectPrompt<>(selectTarget(player), currentMonsters, false);
+        Prompt<Monster> monsterPrompt = new SelectPrompt<>(selectTarget(player), currentMonsters);
         return monsterPrompt.parseItem();
     }
     private String selectTarget(final Player player) {
