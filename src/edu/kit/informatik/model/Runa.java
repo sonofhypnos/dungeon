@@ -11,7 +11,6 @@ import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.model.abilities.effects.rewards.NewAbilityCards;
 import edu.kit.informatik.model.abilities.effects.rewards.NewDice;
-import edu.kit.informatik.model.abilities.player.PlayerAbilities;
 import edu.kit.informatik.ui.OutputInterFace;
 import edu.kit.informatik.ui.prompts.DiceRoll;
 import edu.kit.informatik.ui.prompts.Prompt;
@@ -80,6 +79,8 @@ public class Runa {
      * Runs the main logic of the game.
      */
     public void runGame() {
+
+
         Prompt<Archetype> archetypePrompt = new SelectPrompt<>(
                 String.format(SELECT_PLAYER_S_CHARACTER_CLASS, player.getName()), List.of(Archetype.values()));
         // TODO: 25.03.22 add justification for not using gameStates: while my approach has the downside of having to
@@ -139,8 +140,9 @@ public class Runa {
             if (stage == BOSS_STAGE && level != MAX_LEVEL) {
                 final int newLevel = level + 1;
                 player.upgradeCards(newLevel);
-                player.getStartingCards()
-                        .forEach((PlayerAbilities x) -> interFace.getCard(player, x.getLevel(newLevel)));
+                for (var card : player.getStartingCards()) {
+                    interFace.getCard(player, card.getLevel(newLevel));
+                }
             } else {
                 collectRewards();
             }
@@ -223,7 +225,7 @@ public class Runa {
         if (player.getHealthPoints() != player.getMaxHealth() && player.getHand().size() > MIN_CARDS) {
             // TODO: 18.03.22 remove if none?
             // TODO: 18.03.22 remove vars in code
-            var cardToRemove = interFace.heal(player);
+            var cardToRemove = interFace.heal(player, HEAL_PER_CARD);
             if (!SelectPrompt.isRunning()) {
                 return;
             }
@@ -241,7 +243,7 @@ public class Runa {
     private void collectRewards() {
         List<Effect<Player, Monster>> rewards = new ArrayList<>(List.of());
         if (this.playerDeck.size() != 0) {
-            rewards.add(new NewAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber, this));
+            rewards.add(new NewAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber));
         }
         if (!this.player.getDice().isLast()) {
             rewards.add(new NewDice());

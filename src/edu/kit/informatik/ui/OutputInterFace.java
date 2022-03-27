@@ -140,14 +140,17 @@ public class OutputInterFace {
      * Heal list.
      *
      * @param player the player
+     * @param healPerCard
      * @return the list
      */
-    public List<Ability<Player, Monster>> heal(final Player player) {
+    public List<Ability<Player, Monster>> heal(final Player player, final int healPerCard) {
 
         // TODO: 26.03.22 none does not work. Needs prompt?
+        int maxCardThroughHeal = player.getMaxHealth() - player.getHealthPoints() / healPerCard;
+        final int maxCards = Math.min(maxCardThroughHeal, player.getHand().size() - 1);
         Prompt<Ability<Player, Monster>> healingPrompt = new SelectPrompt<>(
-                String.format(DISCARD_CARDS, player.toString(), player.getHealthStatus()), player.getHand(), MIN_CARDS,
-                player.getHand().size() - 1); //
+                String.format(DISCARD_CARDS, player, player.getHealthStatus()), player.getHand(), MIN_CARDS,
+                maxCards); //
         var cards = healingPrompt.parseList();
         // TODO: 26.03.22 do the healingThing correctly
         if (cards == null) {
@@ -232,6 +235,6 @@ public class OutputInterFace {
      * @param dice      the dice
      */
     public void upgrade(final Player aggressor, final Dice dice) {
-        println(String.format("%s upgrades her die to a %s%n", aggressor, dice));
+        println(String.format("%s upgrades her die to a %s", aggressor, dice));
     }
 }
