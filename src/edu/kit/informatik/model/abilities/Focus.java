@@ -1,6 +1,7 @@
 package edu.kit.informatik.model.abilities;
 
 import edu.kit.informatik.model.Agent;
+import edu.kit.informatik.model.abilities.player.PlayerAbilities;
 
 /**
  * The type Focus.
@@ -21,6 +22,10 @@ public class Focus<A extends Agent<?, ?>, T> extends Ability<A, T> {
      */
     public Focus(final int level) {
         super(FOCUS_REGEX, level, AbilityType.FOCUS);
+    }
+
+    public Focus(final int initialLevel, final PlayerAbilities playerAbilities) {
+        super(FOCUS_REGEX, initialLevel, AbilityType.FOCUS, playerAbilities);
     }
 
     @Override

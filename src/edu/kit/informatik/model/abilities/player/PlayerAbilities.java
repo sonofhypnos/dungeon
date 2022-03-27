@@ -16,7 +16,7 @@ public enum PlayerAbilities implements AbilityKind {
     SLASH {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Slash("Slash", Constants.INITIAL_LEVEL);
+            return new Slash("Slash", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -25,7 +25,7 @@ public enum PlayerAbilities implements AbilityKind {
     SWING {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Swing("Swing", Constants.INITIAL_LEVEL);
+            return new Swing("Swing", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -34,7 +34,7 @@ public enum PlayerAbilities implements AbilityKind {
     THRUST {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Thrust("Thrust", Constants.INITIAL_LEVEL);
+            return new Thrust("Thrust", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -43,7 +43,7 @@ public enum PlayerAbilities implements AbilityKind {
     PIERCE {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Pierce("Pierce", Constants.INITIAL_LEVEL);
+            return new Pierce("Pierce", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -52,7 +52,7 @@ public enum PlayerAbilities implements AbilityKind {
     PARRY {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Parry("Parry", Constants.INITIAL_LEVEL);
+            return new Parry("Parry", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -61,7 +61,7 @@ public enum PlayerAbilities implements AbilityKind {
     FOCUS {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Focus<>(Constants.INITIAL_LEVEL);
+            return new Focus<>(Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -70,7 +70,7 @@ public enum PlayerAbilities implements AbilityKind {
     REFLECT {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Reflect("Reflect", Constants.INITIAL_LEVEL);
+            return new Reflect("Reflect", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -79,7 +79,7 @@ public enum PlayerAbilities implements AbilityKind {
     WATER {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Water("Water", Constants.INITIAL_LEVEL);
+            return new Water("Water", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -88,7 +88,7 @@ public enum PlayerAbilities implements AbilityKind {
     ICE {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Ice("Ice", Constants.INITIAL_LEVEL);
+            return new Ice("Ice", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -97,7 +97,7 @@ public enum PlayerAbilities implements AbilityKind {
     FIRE {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Fire("Fire", Constants.INITIAL_LEVEL);
+            return new Fire("Fire", Constants.INITIAL_LEVEL, this);
         }
     },
     /**
@@ -106,7 +106,7 @@ public enum PlayerAbilities implements AbilityKind {
     LIGHTNING {
         @Override
         public Ability<Player, Monster> getAbility() {
-            return new Lightning("Lightning", Constants.INITIAL_LEVEL);
+            return new Lightning("Lightning", Constants.INITIAL_LEVEL, this);
         }
     };
     // TODO: 26.03.22 there are the wrong cards to be seen on the screen

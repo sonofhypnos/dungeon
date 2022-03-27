@@ -16,12 +16,12 @@ import edu.kit.informatik.model.abilities.effects.ElementPlayerEffect;
 public class Water extends Ability<Player, Monster> {
     /**
      * Instantiates new WaterAbility
-     *
-     * @param name  the name
+     *  @param name  the name
      * @param level the level
+     * @param playerAbilities
      */
-    public Water(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIVE);
+    public Water(final String name, final int level, final PlayerAbilities playerAbilities) {
+        super(name, level, AbilityType.OFFENSIVE, playerAbilities);
     }
 
     @Override

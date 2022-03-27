@@ -22,12 +22,12 @@ public class Lightning extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Lightning.
-     *
-     * @param name  the name
+     *  @param name  the name
      * @param level the level
+     * @param playerAbilities
      */
-    public Lightning(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIVE);
+    public Lightning(final String name, final int level, final PlayerAbilities playerAbilities) {
+        super(name, level, AbilityType.OFFENSIVE, playerAbilities);
     }
 
     @Override

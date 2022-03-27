@@ -16,12 +16,12 @@ public class Thrust extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Thrust.
-     *
-     * @param thrust the thrust
+     *  @param thrust the thrust
      * @param level  the level
+     * @param playerAbilities
      */
-    public Thrust(final String thrust, final int level) {
-        super(thrust, level, AbilityType.OFFENSIVE);
+    public Thrust(final String thrust, final int level, final PlayerAbilities playerAbilities) {
+        super(thrust, level, AbilityType.OFFENSIVE, playerAbilities);
         this.type = AbilityType.OFFENSIVE;
         this.setDiceNeed(true);
     }

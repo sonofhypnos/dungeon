@@ -15,12 +15,12 @@ public class Reflect extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Reflect.
-     *
-     * @param name  the name
+     *  @param name  the name
      * @param level the level
+     * @param playerAbilities
      */
-    public Reflect(final String name, final int level) {
-        super(name, level, AbilityType.DEFENSIVE);
+    public Reflect(final String name, final int level, final PlayerAbilities playerAbilities) {
+        super(name, level, AbilityType.DEFENSIVE, playerAbilities);
     }
 
 

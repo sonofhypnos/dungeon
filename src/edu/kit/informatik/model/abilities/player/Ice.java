@@ -22,13 +22,14 @@ public class Ice extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Ice.
-     *
-     * @param name  the name
+     *  @param name  the name
      * @param level the level
+     * @param playerAbilities
      */
-    public Ice(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIVE);
+    public Ice(final String name, final int level, final PlayerAbilities playerAbilities) {
+        super(name, level, AbilityType.OFFENSIVE, playerAbilities);
     }
+
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {

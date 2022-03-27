@@ -18,12 +18,12 @@ public class Swing extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Swing.
-     *
-     * @param name  the name
+     *  @param name  the name
      * @param level the level
+     * @param playerAbilities
      */
-    public Swing(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIVE);
+    public Swing(final String name, final int level, final PlayerAbilities playerAbilities) {
+        super(name, level, AbilityType.OFFENSIVE, playerAbilities);
         this.setDiceNeed(true);
     }
 

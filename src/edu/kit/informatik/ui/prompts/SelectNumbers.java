@@ -41,7 +41,7 @@ public class SelectNumbers extends SelectPrompt<Integer> {
 
     @Override
     public void entryPrompt() {
-        interFace.println(String.format((this.entryPrompt) + PROMPT_DELIMITER, FIRST_ORDINAL, MAX_VALUE));
+        interFace.println(String.format((this.entryPrompt), FIRST_ORDINAL, MAX_VALUE));
     }
 
     @Override

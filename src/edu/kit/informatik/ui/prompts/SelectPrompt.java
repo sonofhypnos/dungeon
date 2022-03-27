@@ -27,8 +27,9 @@ public class SelectPrompt<T> implements Prompt<T> {
     private static final String OPTION_DELIMITER = "\n";
     private static final String PLUS_SIGN = "+";
     private static final String EMPTY_STRING = "";
+    private static final String DEFAULT_SEPARATOR = ",";
 
-    private static boolean running;
+    private static boolean running = true;
     /**
      * The Text.
      */
@@ -51,7 +52,7 @@ public class SelectPrompt<T> implements Prompt<T> {
     List<T> options;
     private final int minOptionNumber;
     private final int maxOptionNumber;
-    private String separator;
+    private String separator = DEFAULT_SEPARATOR;
 
     /**
      * Instantiates a new Select prompt.
