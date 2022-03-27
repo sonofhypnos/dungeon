@@ -345,14 +345,14 @@ Enter number [1--4]:
 Runa uses Pierce(1)
 Enter dice roll [1--6]:
 6
-Spider King takes 16 phy. damage
+Spider King takes 18 phy. damage
 Spider King gains 1 focus
 Spider King uses Lightning(1)
 Runa takes 16 mag. damage
 ----------------------------------------
 Runa (12/50 HP, 1/6 FP)
 vs.
-Spider King (18 HP, 0 FP): attempts Bite(1) next
+Spider King (16 HP, 0 FP): attempts Bite(1) next
 ----------------------------------------
 Select card to play
 1) Parry(1)
@@ -367,7 +367,7 @@ Runa takes 3 phy. damage
 ----------------------------------------
 Runa (9/50 HP, 1/6 FP)
 vs.
-Spider King (18 HP, 0 FP): attempts Block(1) next
+Spider King (16 HP, 0 FP): attempts Block(1) next
 ----------------------------------------
 Select card to play
 1) Parry(1)
@@ -382,7 +382,7 @@ Spider King uses Block(1)
 ----------------------------------------
 Runa (9/50 HP, 1/6 FP)
 vs.
-Spider King (9 HP, 0 FP): attempts Focus(1) next
+Spider King (7 HP, 0 FP): attempts Focus(1) next
 ----------------------------------------
 Select card to play
 1) Parry(1)
@@ -394,37 +394,114 @@ Enter number [1--4]:
 Runa uses Lightning(1)
 Spider King takes 9 mag. damage
 Spider King dies
-Runa gets Parry(1)
+Runa gets Thrust(2)
+Runa gets Parry(2)
 Runa (9/50 HP) can discard ability cards for healing (or none)
-1) Parry(1)
+1) Parry(2)
 2) Lightning(1)
 3) Pierce(1)
 4) Focus(1)
-Enter numbers [1--4] separated by comma:
+5) Thrust(2)
+6) Parry(2)
+Enter numbers [1--6] separated by comma:
 1,2,3,4
-Enter numbers [1--4] separated by comma:
-42,24
-Enter numbers [1--4] separated by comma:
-1
-Runa gains 10 health
+Runa gains 40 health
 To shuffle ability cards and monsters, enter two seeds
 Enter seeds [1--2147483647] separated by comma:
+42,24
+Runa enters Stage 1 of Level 2
+----------------------------------------
+Runa (49/50 HP, 1/6 FP)
+vs.
+Mushroomlon (50 HP, 0 FP): attempts Deflect(2) next
+----------------------------------------
+Select card to play
+1) Thrust(2)
+2) Parry(2)
+Enter number [1--2]:
+1
+Runa uses Thrust(2)
+Enter dice roll [1--6]:
 6
-Enter seeds [1--2147483647] separated by comma:
+Mushroomlon takes 26 phy. damage
+Mushroomlon uses Deflect(2)
+----------------------------------------
+Runa (49/50 HP, 1/6 FP)
+vs.
+Mushroomlon (24 HP, 0 FP): attempts Scratch(2) next
+----------------------------------------
+Select card to play
+1) Thrust(2)
+2) Parry(2)
+Enter number [1--2]:
 2
-Enter seeds [1--2147483647] separated by comma:
+Runa uses Parry(2)
+Mushroomlon uses Scratch(2)
+----------------------------------------
+Runa (49/50 HP, 1/6 FP)
+vs.
+Mushroomlon (24 HP, 0 FP): attempts Block(2) next
+----------------------------------------
+Select card to play
+1) Thrust(2)
+2) Parry(2)
+Enter number [1--2]:
 1
-Enter seeds [1--2147483647] separated by comma:
+Runa uses Thrust(2)
+Enter dice roll [1--6]:
 5
-Enter seeds [1--2147483647] separated by comma:
+Mushroomlon takes 17 phy. damage
+Mushroomlon uses Block(2)
+----------------------------------------
+Runa (49/50 HP, 1/6 FP)
+vs.
+Mushroomlon (7 HP, 0 FP): attempts Deflect(2) next
+----------------------------------------
+Select card to play
+1) Thrust(2)
+2) Parry(2)
+Enter number [1--2]:
 1
-Enter seeds [1--2147483647] separated by comma:
+Runa uses Thrust(2)
+Enter dice roll [1--6]:
 5
-Enter seeds [1--2147483647] separated by comma:
+Mushroomlon takes 3 phy. damage
+Mushroomlon uses Deflect(2)
+----------------------------------------
+Runa (49/50 HP, 1/6 FP)
+vs.
+Mushroomlon (4 HP, 0 FP): attempts Scratch(2) next
+----------------------------------------
+Select card to play
+1) Thrust(2)
+2) Parry(2)
+Enter number [1--2]:
 1
-Enter seeds [1--2147483647] separated by comma:
+Runa uses Thrust(2)
+Enter dice roll [1--6]:
 6
-Enter seeds [1--2147483647] separated by comma:
+Mushroomlon takes 2 phy. damage
+Mushroomlon uses Scratch(2)
+Runa takes 10 phy. damage
+----------------------------------------
+Runa (39/50 HP, 1/6 FP)
+vs.
+Mushroomlon (2 HP, 0 FP): attempts Block(2) next
+----------------------------------------
+Select card to play
+1) Thrust(2)
+2) Parry(2)
+Enter number [1--2]:
 2
-Enter seeds [1--2147483647] separated by comma:
+Runa uses Parry(2)
+Mushroomlon uses Block(2)
+----------------------------------------
+Runa (39/50 HP, 1/6 FP)
+vs.
+Mushroomlon (2 HP, 0 FP): attempts Deflect(2) next
+----------------------------------------
+Select card to play
+1) Thrust(2)
+2) Parry(2)
+Enter number [1--2]:
 quit

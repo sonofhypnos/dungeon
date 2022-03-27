@@ -31,6 +31,12 @@ public enum PlayerAbilities implements AbilityKind {
         return ability;
     }
 
+    public Ability<Player, Monster> getLevel(int level) {
+        var newAbility = ability;
+        newAbility.setLevel(level);
+        return newAbility;
+    }
+
     @Override
     public String toString() {
         return this.ability.toString();

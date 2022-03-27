@@ -13,8 +13,8 @@ import edu.kit.informatik.model.abilities.effects.DamageWithThreshhold;
 public class Pierce extends Ability<Player, Monster> {
 
     private static final int BONUS_THRESHHOLD = 6;
-    private static final int DAMAGE_FACTOR = 6;
-    private static final int BONUS_FACTOR = 4;
+    private static final int DAMAGE_FACTOR = 7;
+    private static final int BONUS_FACTOR = 5;
 
     public Pierce(final String name, final int level) {
         super(name, level, AbilityType.OFFENSIV);

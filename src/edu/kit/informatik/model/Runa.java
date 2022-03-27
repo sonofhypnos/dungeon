@@ -8,6 +8,7 @@ import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.model.abilities.effects.rewards.newAbilityCards;
 import edu.kit.informatik.model.abilities.effects.rewards.newDice;
+import edu.kit.informatik.model.abilities.player.PlayerAbilities;
 import edu.kit.informatik.ui.OutputInterFace;
 import edu.kit.informatik.ui.prompts.DiceRoll;
 import edu.kit.informatik.ui.prompts.Prompt;
@@ -74,7 +75,7 @@ public class Runa {
         }
         this.player.setClass(archetyp); //done
         for (var card : player.getStartingCards()) {
-            playerDeck.remove(card);
+            playerDeck.remove(card.getAbility());
         }
         for (int level = INITIAL_LEVEL; level < MAX_LEVEL + INITIAL_LEVEL; level++) {
             SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
@@ -89,7 +90,6 @@ public class Runa {
                 lost();
                 break;
             }
-            setPlayerCardLevel(level);
         }
         if (!this.lost) {
             interFace.won(player);
@@ -124,8 +124,11 @@ public class Runa {
                     break;
                 }
             }
-            if (stage == BOSS_STAGE) {
-                abilityUpgrade(stage, level);
+            if (stage == BOSS_STAGE && level != MAX_LEVEL) {
+                final int newLevel = level + 1;
+                player.upgradeCards(newLevel);
+                player.getStartingCards()
+                        .forEach((PlayerAbilities x) -> interFace.getCard(player, x.getLevel(newLevel)));
             } else {
                 collectRewards();
             }
@@ -154,7 +157,7 @@ public class Runa {
     private void playerTurn() {
         player.reset();
         var abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY,
-                player.getCards());
+                player.getHand());
         var ability = abilityPrompt.parseItem();
 
         if (checkQuit(ability)) {
@@ -204,20 +207,10 @@ public class Runa {
         interFace.dies(player);
     }
 
-    private void abilityUpgrade(final int stage, final int level) {
-        if (stage == 4) {
-            var oldCards = player.getCards().stream().filter((var card) -> player.getStartingCards().contains(card))
-                    .collect(Collectors.toList());
-            for (var card : oldCards) {
-                card.setLevel(level);
-                interFace.getCard(player, card);
-            }
-        }
-    }
 
 
     private void healing() {
-        if (player.getHealthPoints() != player.getMaxHealth() && player.getCards().size() > MIN_CARDS) {
+        if (player.getHealthPoints() != player.getMaxHealth() && player.getHand().size() > MIN_CARDS) {
             // TODO: 18.03.22 remove if none?
             // TODO: 18.03.22 remove vars in code
             var cardToRemove = interFace.heal(player);
@@ -257,10 +250,7 @@ public class Runa {
     // TODO: 26.03.22 dont forget todos in emacs scratchpad!
     private void startFight(final int stage, final int level) {
         if (stage == 4) {
-            currentMonsters = Arrays.stream(Monsters.values())
-                    .map(Monsters::getMonster) //Map enums to contained monsters
-                    .filter((Monster m) -> m.isType(MonsterType.BOSS) && m.getLevel() == level)
-                    .collect(Collectors.toList());
+            currentMonsters = getBoss(level);
         } else {
             if (stage == 1) {
                 monsterNumber = 1;
@@ -274,10 +264,10 @@ public class Runa {
         // TODO: 14.03.22 Update of abilities comes with prompt and only after boss level the second time around
     }
 
-    private void setPlayerCardLevel(final int level) {
-        for (Ability<?, ?> card : player.getStartingCards()) {
-            card.setLevel(level);
-        }
+    private List<Monster> getBoss(final int level) {
+        return Arrays.stream(Monsters.values()).map(Monsters::getMonster) //Map enums to contained monsters
+                .filter((Monster m) -> m.isType(MonsterType.BOSS) && m.getLevel() == level)
+                .collect(Collectors.toList());
     }
 
 
