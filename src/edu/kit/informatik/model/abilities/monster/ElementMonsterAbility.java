@@ -34,13 +34,12 @@ public class ElementMonsterAbility extends MonsterAbility {
 
     @Override
     public boolean canBeUsed(final Agent<?, ?> agent) {
-        return agent.getFocusPoints() <= this.level;
+        return agent.getFocusPoints() >= this.level;
     }
 
 
     @Override
     public void applyEffect(final Monster aggressor, final Player target) {
-        assert canBeUsed(aggressor);
         aggressor.reduceFocus(this.level);
         target.damage(new Damage(DamageType.MAGIC, damageFactor * level + damageConstant), aggressor);
     }

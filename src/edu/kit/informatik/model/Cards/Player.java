@@ -104,6 +104,7 @@ public class Player extends Agent<Player, List<Monster>> {
                 aggressor.damage(damage);
                 return;
             }
+            return;
         }
         checkDamage(damage); // this is to be applied after other effects
     }

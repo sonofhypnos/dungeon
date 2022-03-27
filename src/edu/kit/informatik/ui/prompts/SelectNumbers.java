@@ -27,8 +27,8 @@ public class SelectNumbers extends SelectPrompt<Integer> {
      * @param separatorRegex the separator regex
      */
     public SelectNumbers(final String text, final String entryPrompt, final int maxOrdinal, int optionNumber,
-                         final String separatorRegex) {
-        super(text, entryPrompt, maxOrdinal);
+                         final String separatorRegex, boolean allowDuplicates) {
+        super(text, entryPrompt, maxOrdinal, allowDuplicates);
         this.separator = separatorRegex;
         this.optionNumber = optionNumber;
     }

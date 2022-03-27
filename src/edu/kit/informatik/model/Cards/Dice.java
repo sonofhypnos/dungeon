@@ -58,8 +58,6 @@ public enum Dice {
      * @return the boolean
      */
     public boolean isLast() {
-        // TODO: 14.03.22 figure out functional
-        //return Arrays.stream(Dice.values()).mapToInt(Dice::getValue).max().getAsInt() == 12;
         return Dice.values().length == this.ordinal() - 1;
     }
 
