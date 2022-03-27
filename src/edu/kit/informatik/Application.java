@@ -15,7 +15,7 @@ import edu.kit.informatik.ui.ScannerSingleton;
  */
 public final class Application {
 
-    private static final String ERROR_UTILITY_CLASS_INSTANTIATION = "Utility class cannot be instantiated.";
+    private static final String ERROR_UTILITY_CLASS_INSTANTIATION = "Error, Utility class cannot be instantiated.";
     private static final int ARGUMENT_NUMBER = 0;
     private static final String ERROR_GAME_DOES_NOT_EXPECT_ANY_ARGUMENTS = "Error, Game does not expect any arguments";
 
@@ -29,12 +29,6 @@ public final class Application {
      * @param args input arguments
      */
     public static void main(String[] args) {
-
-        // TODO: 10.03.22 Add check for 0 arguments
-        // TODO: 10.03.22 check what kinds of input/output is allowed.
-        // TODO: 10.03.22 make sure there is no final \n when exiting?
-
-        // TODO: 15.03.22 figure out if this is too much?
         if (args.length != ARGUMENT_NUMBER) {
             throw new IllegalArgumentException(ERROR_GAME_DOES_NOT_EXPECT_ANY_ARGUMENTS);
         }

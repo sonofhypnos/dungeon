@@ -173,14 +173,12 @@ public class Runa {
 
     private void playerTurn() {
         player.reset();
-        var abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY, player.getHand());
+        var abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY, player.getHand(), true);
         var ability = abilityPrompt.parseItem();
 
         if (!SelectPrompt.isRunning()) {
             return;
         }
-        // TODO: 25.03.22 explain conflict between object-orientation, separating ui and model and not using the exit
-        //  command
         // TODO: 25.03.22 add that this was previously just put into the functions themselves (polymorphism), but
         //  this had the issue of needing to communicate put sideeffects through chain, which was awkward
         Monster target = null;

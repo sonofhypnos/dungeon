@@ -217,8 +217,6 @@ public class SelectPrompt<T> implements Prompt<T> {
     protected List<Integer> getIntegers(final String separator, final int maxOrdinal, final int minOptionNumber,
                                         final int maxOptionNumber) {
         this.prompt();
-        // TODO: 23.03.22 hübsscher (mach weninger wenn nicht laufend)
-        // TODO: 26.03.22 make all of this pretty (make einheitlich mit getInt (or refactor everything anyway?)
         List<Integer> args = null;
         // TODO: 26.03.22 if there is a newline inputted, then this is also null! maybe make more pretty?
         Scanner scanner = ScannerSingleton.getInstance();
@@ -251,7 +249,6 @@ public class SelectPrompt<T> implements Prompt<T> {
     }
 
     private void quit(final String input) {
-        // TODO: 26.03.22 there is all kinds of stuff that still gets printed on quit!
         if (QUIT.equals(input)) {
             SelectPrompt.stopRunning();
         }

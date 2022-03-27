@@ -13,7 +13,6 @@ import static java.lang.Integer.MAX_VALUE;
  */
 public class SelectNumbers extends SelectPrompt<Integer> {
 
-    private static final String PROMPT_DELIMITER = "%n";
     private final String separator;
     private final int optionNumber;
 
