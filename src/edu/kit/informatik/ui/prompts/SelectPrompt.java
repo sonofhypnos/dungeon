@@ -84,6 +84,7 @@ public class SelectPrompt<T> implements Prompt<T> {
         this.separator = ",";
         if (minOptionNumber == maxOptionNumber && minOptionNumber == 1) {
             this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
+            // TODO: 27.03.22 there is still something confusing about abilitycards!
         } else {
             this.entryPrompt = String.format(ENTER_NUMBERS_D_D_SEPARATED_BY_COMMA, FIRST_ORDINAL, options.size());
         }

@@ -8,8 +8,8 @@ Welcome to Runa's Strive
 Enter number [1--3]:
 
 To shuffle ability cards and monsters, enter two seeds
-Enter seeds [1--2147483647] separated by comma:
-32,23
+3Enter seeds [1--2147483647] separated by comma:
+2,23
 Runa enters Stage 1 of Level 1
 ----------------------------------------
 Runa (50/50 HP, 1/4 FP)
@@ -480,28 +480,16 @@ Enter number [1--2]:
 Runa uses Thrust(2)
 Enter dice roll [1--6]:
 6
-Mushroomlon takes 2 phy. damage
-Mushroomlon uses Scratch(2)
-Runa takes 10 phy. damage
-----------------------------------------
-Runa (39/50 HP, 1/6 FP)
-vs.
-Mushroomlon (2 HP, 0 FP): attempts Block(2) next
-----------------------------------------
-Select card to play
-1) Thrust(2)
-2) Parry(2)
+Mushroomlon takes 26 phy. damage
+Mushroomlon dies
+Choose Runa's reward
+1) new ability cards
+2) next player dice
 Enter number [1--2]:
 2
-Runa uses Parry(2)
-Mushroomlon uses Block(2)
-----------------------------------------
-Runa (39/50 HP, 1/6 FP)
-vs.
-Mushroomlon (2 HP, 0 FP): attempts Deflect(2) next
-----------------------------------------
-Select card to play
+Runa upgrades her die to a d8
+Runa (49/50 HP) can discard ability cards for healing (or none)
 1) Thrust(2)
 2) Parry(2)
-Enter number [1--2]:
+Enter numbers [1--2] separated by comma:
 quit

@@ -19,7 +19,7 @@ public class Deflect extends MonsterAbility {
 
     @Override
     public void applyEffect(final Monster aggressor, final Player target) {
-        aggressor.setProtection(new Damage(DamageType.PHYSICAL, 11 * level + 2));
+        aggressor.setProtection(new Damage(DamageType.MAGIC, 11 * level + 2));
     }
 
 }
