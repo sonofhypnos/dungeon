@@ -88,6 +88,7 @@ public class Runa {
 
         var archetyp = archetypePrompt.parseItem();
         // TODO: 25.03.22 add stuff about code repetition
+        // TODO: 27.03.22 remove var types!
         if (!SelectPrompt.isRunning()) {
             return;
         }

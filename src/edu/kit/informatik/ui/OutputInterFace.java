@@ -10,6 +10,7 @@ import edu.kit.informatik.ui.prompts.Prompt;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Output Interface is responsible for printing Messages to the User that are not prompts for input. We did not make
@@ -211,7 +212,8 @@ public class OutputInterFace {
      * @param string the string
      */
     public void println(String string) {
-        if (SelectPrompt.isRunning()) {
+        // TODO: 27.03.22 does this make sense with check?
+        if (SelectPrompt.isRunning() && !Objects.equals(string, "")) {
             System.out.println(string);
         }
     }

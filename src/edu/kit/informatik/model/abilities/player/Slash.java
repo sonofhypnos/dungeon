@@ -18,12 +18,12 @@ public class Slash extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Slash.
-     *
-     * @param slash the slash
+     *  @param slash the slash
      * @param level the level
+     * @param playerAbilities
      */
-    public Slash(final String slash, final int level) {
-        super(slash, level, AbilityType.OFFENSIVE);
+    public Slash(final String slash, final int level, final PlayerAbilities playerAbilities) {
+        super(slash, level, AbilityType.OFFENSIVE, playerAbilities);
         this.setDiceNeed(true);
     }
 

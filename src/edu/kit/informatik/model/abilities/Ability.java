@@ -46,6 +46,21 @@ public abstract class Ability<A, T> extends Effect<A, T> {
         this.type = type;
     }
 
+    /**
+     * Instantiates a new Ability.
+     *
+     * @param name  the name
+     * @param level the level
+     * @param type  the type
+     */
+    protected Ability(String name, int level, AbilityType type, AbilityKind kind) {
+        super();
+        this.name = name;
+        this.level = level;
+        this.type = type;
+        this.identifier = kind;
+    }
+
     // TODO: 27.03.22
     //- implement can be used
     //    todos:
@@ -130,6 +145,7 @@ public abstract class Ability<A, T> extends Effect<A, T> {
         if (this == o) return true;
         if (!(o instanceof Ability)) return false;
         Ability<?, ?> ability = (Ability<?, ?>) o;
+        if (identifier == null) return false;
         return identifier.equals(ability.identifier);
     }
 
