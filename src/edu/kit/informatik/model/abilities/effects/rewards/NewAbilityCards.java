@@ -3,10 +3,8 @@ package edu.kit.informatik.model.abilities.effects.rewards;
 import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.Cards.PlayerDeck;
-import edu.kit.informatik.model.Runa;
 import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
-import java.util.Map;
 
 /**
  * The type New ability cards.
@@ -21,12 +19,11 @@ public class NewAbilityCards extends Effect<Player, Monster> {
     private final int cardPoolSize;
 
     /**
-     * Instantiates a new New ability cards.
+     * Instantiates new Ability Card Effect.
      *
      * @param cards        the cards
      * @param cardNumber   the card number
      * @param cardPoolSize the card pool size
-     * @param runa         the runa
      */
     public NewAbilityCards(PlayerDeck cards, int cardNumber, int cardPoolSize) {
         this.cards = cards;
