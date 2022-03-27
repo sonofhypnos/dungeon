@@ -77,8 +77,8 @@ public class OutputInterFace {
 
         // TODO: 26.03.22 none does not work. Needs prompt?
         Prompt<Ability<Player, Monster>> healingPrompt = new SelectPrompt<>(
-                String.format(DISCARD_CARDS, player.toString(), player.getHealthStatus()), player.getCards(), MIN_CARDS,
-                player.getCards().size() - 1); //
+                String.format(DISCARD_CARDS, player.toString(), player.getHealthStatus()), player.getHand(), MIN_CARDS,
+                player.getHand().size() - 1); //
         var cards = healingPrompt.parseList();
         // TODO: 26.03.22 do the healingThing correctly
         if (cards == null) {
