@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author upkim
  * @version 1.0.0 2022-03-15
  */
-public class ScannerSingleton {
+public final class ScannerSingleton {
     private static Scanner scanner = null;
 
     private ScannerSingleton() {
