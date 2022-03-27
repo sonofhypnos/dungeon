@@ -5,9 +5,10 @@ import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.DamageMonsterWithDice;
-import java.util.List;
 
 /**
+ * The type Slash.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
@@ -15,8 +16,14 @@ public class Slash extends Ability<Player, Monster> {
 
     private static final int DAMAGE_FACTOR = 4;
 
+    /**
+     * Instantiates a new Slash.
+     *
+     * @param slash the slash
+     * @param level the level
+     */
     public Slash(final String slash, final int level) {
-        super(slash, level, AbilityType.OFFENSIV);
+        super(slash, level, AbilityType.OFFENSIVE);
         this.setDiceNeed(true);
     }
 

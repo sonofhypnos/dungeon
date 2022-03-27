@@ -3,12 +3,13 @@ package edu.kit.informatik.model.Cards;
 import edu.kit.informatik.model.Agent;
 import edu.kit.informatik.model.Damage;
 import edu.kit.informatik.model.abilities.Ability;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
+ * The type Monster.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
@@ -20,6 +21,15 @@ public class Monster extends Agent<Monster, Player> {
     private final List<MonsterType> monsterTypes;
     private final int level;
 
+    /**
+     * Instantiates a new Monster.
+     *
+     * @param name          the name
+     * @param initialHealth the initial health
+     * @param monsterTypes  the monster types
+     * @param abilities     the abilities
+     * @param level         the level
+     */
     public Monster(String name, int initialHealth, List<MonsterType> monsterTypes,
                    List<Ability<Monster, Player>> abilities, final int level) {
         super(MIN_FOCUS);
@@ -31,22 +41,43 @@ public class Monster extends Agent<Monster, Player> {
         this.level = level;
     }
 
+    /**
+     * Gets next ability.
+     *
+     * @return the next ability
+     */
     public Ability<Monster, Player> getNextAbility() {
         // TODO: 26.03.22 skip if not usable
         return abilities.get(DRAW_INDEX); // TODO: 11.03.22 never 0? // TODO: 26.03.22
     }
 
+    /**
+     * Activate next ability ability.
+     *
+     * @return the ability
+     */
     public Ability<Monster, Player> activateNextAbility() {
         playedAbility = getNextAbility();
         Collections.rotate(abilities, -1); //leftShift
         return playedAbility;
     }
 
+    /**
+     * Is type boolean.
+     *
+     * @param type the type
+     * @return the boolean
+     */
     public boolean isType(MonsterType type) {
         return this.monsterTypes.contains(type);
     }
 
 
+    /**
+     * Gets level.
+     *
+     * @return the level
+     */
     public int getLevel() {
         return level;
     }
@@ -58,18 +89,24 @@ public class Monster extends Agent<Monster, Player> {
     }
 
 
+    @Override
     public String getHealthStatus() {
         return String.format("%d HP", healthPoints);
     }
 
+    /**
+     * Damage.
+     *
+     * @param damage the damage
+     */
     public void damage(final Damage damage) {
         checkDamage(damage);
     }
 
+    @Override
     public String toString() {
         return this.name;
     }
-
 
 
 }

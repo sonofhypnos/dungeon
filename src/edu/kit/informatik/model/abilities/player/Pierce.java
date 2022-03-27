@@ -7,6 +7,8 @@ import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.DamageWithThreshhold;
 
 /**
+ * The type Pierce.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
@@ -16,11 +18,18 @@ public class Pierce extends Ability<Player, Monster> {
     private static final int DAMAGE_FACTOR = 7;
     private static final int BONUS_FACTOR = 5;
 
+    /**
+     * Instantiates a new Pierce.
+     *
+     * @param name  the name
+     * @param level the level
+     */
     public Pierce(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIV);
+        super(name, level, AbilityType.OFFENSIVE);
         this.setDiceNeed(true);
     }
 
+    @Override
     public void applyEffect(final Player aggressor, final Monster target) {
         var effect = new DamageWithThreshhold(BONUS_THRESHHOLD, DAMAGE_FACTOR, BONUS_FACTOR, this.level,
                 this.getRoll());

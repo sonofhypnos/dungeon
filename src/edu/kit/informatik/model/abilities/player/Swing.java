@@ -5,9 +5,10 @@ import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.DamageMonsterWithDice;
-import java.util.List;
 
 /**
+ * The type Swing.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
@@ -15,8 +16,14 @@ public class Swing extends Ability<Player, Monster> {
 
     private static final int DAMAGE_FACTOR = 5;
 
+    /**
+     * Instantiates a new Swing.
+     *
+     * @param name  the name
+     * @param level the level
+     */
     public Swing(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIV);
+        super(name, level, AbilityType.OFFENSIVE);
         this.setDiceNeed(true);
     }
 

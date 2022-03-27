@@ -6,15 +6,22 @@ import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.ElementPlayerEffect;
-import java.util.List;
 
 /**
+ * WaterAbility by the player.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
 public class Water extends Ability<Player, Monster> {
+    /**
+     * Instantiates new WaterAbility
+     *
+     * @param name  the name
+     * @param level the level
+     */
     public Water(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIV);
+        super(name, level, AbilityType.OFFENSIVE);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package edu.kit.informatik.ui.prompts;
 
-import edu.kit.informatik.model.exception.ParseException;
-
 import java.util.List;
 
 /**
@@ -11,10 +9,10 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-10
  */
-public interface Prompt <T> {
+public interface Prompt<T> {
 
     /**
-     * The constant FIRST_ORDINAL.
+     * FIRST_ORDINAL of a prompt
      */
     int FIRST_ORDINAL = 1;
 
@@ -31,16 +29,17 @@ public interface Prompt <T> {
     /**
      * Parse list.
      *
-     * @param input the input
-     * @return the list
-     * @throws ParseException the parseList exception
+     * @return input arguments
      */
     List<T> parseList();
     // TODO: 15.03.22 add that maxOrdinal is inclusive
 
+    /**
+     * Parse item t.
+     *
+     * @return the t
+     */
     T parseItem();
-
-
 
 
 }

@@ -1,20 +1,22 @@
 package edu.kit.informatik.model.abilities;
 
 /**
+ * The enum Ability type.
+ *
  * @author upkim
  * @version 1.0.0 11.03.22
  */
 public enum AbilityType {
     /**
-     * Offensiv ability kind.
+     * Offensiv ability type
      */
-    OFFENSIV,
+    OFFENSIVE,
     /**
-     * Defensiv ability kind.
+     * Defensive ability type
      */
-    DEFENSIV,
+    DEFENSIVE,
     /**
-     * Focus ability kind.
+     * Focus ability type
      */
     FOCUS,
 

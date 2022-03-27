@@ -5,18 +5,24 @@ import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.DamageWithThreshhold;
-import edu.kit.informatik.ui.prompts.Prompt;
-import java.util.List;
 
 /**
+ * The type Thrust.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
 public class Thrust extends Ability<Player, Monster> {
 
+    /**
+     * Instantiates a new Thrust.
+     *
+     * @param thrust the thrust
+     * @param level  the level
+     */
     public Thrust(final String thrust, final int level) {
-        super(thrust, level, AbilityType.OFFENSIV);
-        this.type = AbilityType.OFFENSIV;
+        super(thrust, level, AbilityType.OFFENSIVE);
+        this.type = AbilityType.OFFENSIVE;
         this.setDiceNeed(true);
     }
 

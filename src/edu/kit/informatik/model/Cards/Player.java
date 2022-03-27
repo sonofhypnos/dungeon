@@ -17,7 +17,10 @@ import java.util.stream.Collectors;
  */
 public class Player extends Agent<Player, List<Monster>> {
 
-    private static final int INITIAL_HEALTH = 50;
+    /**
+     * INITIAL_HEALTH of the player
+     */
+    public static final int INITIAL_HEALTH = 50;
     private static final Dice INITIAL_DICE = Dice.D4;
     private static final int REFLECT_DAMAGE = 10;
     private static final int MIN_FOCUS = 1;
@@ -25,6 +28,7 @@ public class Player extends Agent<Player, List<Monster>> {
     private List<PlayerAbilities> startingCards;
     private Dice dice;
     private boolean reflect;
+
     /**
      * Instantiates a new Player.
      *
@@ -42,6 +46,11 @@ public class Player extends Agent<Player, List<Monster>> {
 
     // TODO: 13.03.22 implement stuff for Fähigkeiten
 
+    /**
+     * Gets starting cards.
+     *
+     * @return the starting cards
+     */
     public List<PlayerAbilities> getStartingCards() {
         return new ArrayList<>(startingCards);
     }
@@ -87,12 +96,13 @@ public class Player extends Agent<Player, List<Monster>> {
     }
 
 
+    @Override
     public String getHealthStatus() {
         return String.format("%d/%d HP", healthPoints, INITIAL_HEALTH);
     }
 
     /**
-     * Damage.
+     * Damage computes the damage done to the player.
      *
      * @param damage    the damage
      * @param aggressor the aggressor
@@ -167,7 +177,7 @@ public class Player extends Agent<Player, List<Monster>> {
     }
 
     /**
-     * Sets reflect.
+     * Sets reflect boolean (which reflects whether the player has used Reflect).
      *
      * @param reflect the reflect
      */
@@ -182,9 +192,9 @@ public class Player extends Agent<Player, List<Monster>> {
     }
 
     /**
-     * Heal.
+     * Heals player by heal points up to his max health.
      *
-     * @param heal the heal
+     * @param heal points by which the player is healed.
      */
     public void heal(final int heal) {
         this.healthPoints += heal;
@@ -197,6 +207,7 @@ public class Player extends Agent<Player, List<Monster>> {
     /**
      * Upgrades the players starting-cards to level and adds removed starting cards back to the players hand.
      *
+     * @param level the level
      */
     public void upgradeCards(final int level) {
         // TODO: 27.03.22 make pretty
