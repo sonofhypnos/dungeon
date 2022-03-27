@@ -5,7 +5,7 @@
 package edu.kit.informatik.model;
 
 import edu.kit.informatik.model.abilities.Ability;
-import edu.kit.informatik.ui.OutputInterFace;
+import edu.kit.informatik.ui.Messaging;
 import java.util.List;
 
 /**
@@ -133,7 +133,7 @@ public abstract class Agent<A, T> {
         }
 
         // TODO: 26.03.22 only add damage, if damage not 0.
-        new OutputInterFace().printDamage(damage, this);
+        new Messaging().printDamage(damage, this);
         // TODO: 17.03.22 how much damage if dies?
     }
 

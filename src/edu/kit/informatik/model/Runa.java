@@ -10,8 +10,8 @@ import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.model.abilities.effects.rewards.NewAbilityCards;
-import edu.kit.informatik.model.abilities.effects.rewards.NewDice;
-import edu.kit.informatik.ui.OutputInterFace;
+import edu.kit.informatik.model.abilities.effects.rewards.NewDie;
+import edu.kit.informatik.ui.Messaging;
 import edu.kit.informatik.ui.prompts.DiceRoll;
 import edu.kit.informatik.ui.prompts.Prompt;
 import edu.kit.informatik.ui.prompts.SeedPrompt;
@@ -49,7 +49,7 @@ public class Runa {
     private static final int DEFAULT_MONSTER_NUMBER = 2;
     private final PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
-    private final OutputInterFace interFace;
+    private final Messaging output;
     private List<Monster> currentMonsters;
     private MonsterDeck monsterDeck;
     private int monsterNumber;
@@ -61,8 +61,8 @@ public class Runa {
     public Runa() {
         player = new Player(PLAYER_NAME);
         this.lost = false;
-        interFace = new OutputInterFace();
-        interFace.welcome();
+        output = new Messaging();
+        output.welcome();
     }
 
     /**
@@ -115,7 +115,7 @@ public class Runa {
             }
         }
         if (!this.lost) {
-            interFace.won(player);
+            output.won(player);
             // TODO: 26.03.22 initialisiere die Fähigkeitskarten des Spielers bei 1
         }
     }
@@ -126,7 +126,7 @@ public class Runa {
         for (int stage = INITIAL_STAGE; stage < BOSS_STAGE + INITIAL_STAGE; stage++) {
             startFight(stage, level);
             while (SelectPrompt.isRunning()) {
-                interFace.printStatus(player, currentMonsters);
+                output.printStatus(player, currentMonsters);
                 playerTurn();
                 if (currentMonsters.isEmpty()) {
                     break;
@@ -144,7 +144,7 @@ public class Runa {
                 final int newLevel = level + 1;
                 player.upgradeCards(newLevel);
                 for (var card : player.getStartingCards()) {
-                    interFace.getCard(player, card.getLevel(newLevel));
+                    output.getCard(player, card.getLevel(newLevel));
                 }
             } else {
                 collectRewards();
@@ -161,7 +161,7 @@ public class Runa {
             do {
                 monsterAbility = monster.activateNextAbility();
             } while (!monsterAbility.canBeUsed(monster));
-            interFace.printUsage(monster, monsterAbility);
+            output.printUsage(monster, monsterAbility);
             monsterAbility.applyEffect(monster, player);
             if (player.isDead()) {
                 return;
@@ -185,14 +185,14 @@ public class Runa {
         //  this had the issue of needing to communicate put sideeffects through chain, which was awkward
         Monster target = null;
         if (ability.isType(AbilityType.OFFENSIVE)) {
-            target = interFace.getTarget(player, currentMonsters);
+            target = output.getTarget(player, currentMonsters);
             if (!SelectPrompt.isRunning()) {
                 return;
             }
             // TODO: 26.03.22 find pretty solution for diceRoll
 
         }
-        interFace.printUsage(player, ability);
+        output.printUsage(player, ability);
         if (ability.needsDice()) {
             Prompt<Integer> dicePrompt = new DiceRoll(player.getDice());
             Integer roll = dicePrompt.parseItem();
@@ -216,11 +216,11 @@ public class Runa {
 
     private void evalFocus(final Agent<?, ?> agent) {
         int focusPoints = agent.evalFocus();
-        interFace.focus(agent, focusPoints);
+        output.focus(agent, focusPoints);
     }
 
     private void lost() {
-        interFace.dies(player);
+        output.dies(player);
     }
 
 
@@ -228,7 +228,7 @@ public class Runa {
         if (player.getHealthPoints() != player.getMaxHealth() && player.getHand().size() > MIN_CARDS) {
             // TODO: 18.03.22 remove if none?
             // TODO: 18.03.22 remove vars in code
-            var cardToRemove = interFace.heal(player, HEAL_PER_CARD);
+            var cardToRemove = output.heal(player, HEAL_PER_CARD);
             if (!SelectPrompt.isRunning()) {
                 return;
             }
@@ -236,7 +236,7 @@ public class Runa {
             final int healthPrev = player.getHealthPoints();
 
             player.heal(HEAL_PER_CARD * cardToRemove.size());
-            interFace.printHeal(player, player.getHealthPoints() - healthPrev);
+            output.printHeal(player, player.getHealthPoints() - healthPrev);
             for (var card : cardToRemove) {
                 player.removeCard(card);
             }
@@ -249,7 +249,7 @@ public class Runa {
             rewards.add(new NewAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber));
         }
         if (!this.player.getDice().isLast()) {
-            rewards.add(new NewDice());
+            rewards.add(new NewDie());
         }
         Prompt<Effect<Player, Monster>> rewardPrompt = new SelectPrompt<>(String.format("Choose %s's reward", player),
                 rewards);
@@ -274,7 +274,7 @@ public class Runa {
             currentMonsters = this.monsterDeck.draw(monsterNumber);
         }
         monsterNumber = currentMonsters.size();
-        interFace.printStage(player, stage, level);
+        output.printStage(player, stage, level);
         // TODO: 14.03.22 Update of abilities comes with prompt and only after boss level the second time around
     }
 

@@ -32,7 +32,7 @@ public class DamageMonsterWithDice extends Effect<Player, Monster> {
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        var effect = new DamageMonster(new Damage(DamageType.PHYSICAL, damageFactor * level + roll));
+        DamageMonster effect = new DamageMonster(new Damage(DamageType.PHYSICAL, damageFactor * level + roll));
         effect.applyEffect(aggressor, target);
         target.resetFocus();
     }

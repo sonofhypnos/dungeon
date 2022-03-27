@@ -5,6 +5,7 @@
 package edu.kit.informatik;
 
 import edu.kit.informatik.model.Runa;
+import edu.kit.informatik.ui.ScannerSingleton;
 
 /**
  * The Application. Creates the needed instances and runs the interactive command session.
@@ -39,5 +40,6 @@ public final class Application {
         }
         Runa game = new Runa();
         game.runGame();
+        ScannerSingleton.closeInstance();
     }
 }

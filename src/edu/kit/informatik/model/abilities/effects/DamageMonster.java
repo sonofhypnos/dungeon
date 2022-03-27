@@ -12,7 +12,7 @@ import edu.kit.informatik.model.Cards.Player;
  */
 public class DamageMonster extends Effect<Player, Monster> {
 
-    private Damage damage;
+    private final Damage damage;
 
     /**
      * Instantiates a new Damage monster.

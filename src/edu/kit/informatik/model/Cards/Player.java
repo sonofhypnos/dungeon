@@ -24,6 +24,8 @@ public class Player extends Agent<Player, List<Monster>> {
     private static final Dice INITIAL_DICE = Dice.D4;
     private static final int REFLECT_DAMAGE = 10;
     private static final int MIN_FOCUS = 1;
+    private static final String FOCUS_STATUS = "%d/%d FP";
+    private static final String HEALTH_STATUS = "%d/%d HP";
     private final List<Ability<Player, Monster>> hand = new ArrayList<>(); // TODO: 26.03.22 maybe make also card deck?
     private List<PlayerAbilities> startingCards;
     private Dice dice;
@@ -62,22 +64,7 @@ public class Player extends Agent<Player, List<Monster>> {
      */
     public void setClass(final Archetype gameArchetype) {
         // TODO: 13.03.22 make functions to set player abilities?
-
-
-        // TODO: 14.03.22 make enum for this?
-        switch (gameArchetype) {
-            case MAGE:
-                startingCards = new ArrayList<>(List.of(PlayerAbilities.FOCUS, PlayerAbilities.WATER));
-                break;
-            case WARRIOR:
-                startingCards = new ArrayList<>(List.of(PlayerAbilities.THRUST, PlayerAbilities.PARRY));
-                break;
-            case PALADIN:
-                startingCards = new ArrayList<>(List.of(PlayerAbilities.SLASH, PlayerAbilities.REFLECT));
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + gameArchetype); // TODO: 27.03.22 is this
-        }
+        this.startingCards = new ArrayList<>(gameArchetype.getAbilities());
         this.hand.addAll(startingCards.stream().map(PlayerAbilities::getAbility).collect(Collectors.toList()));
     }
 
@@ -92,13 +79,13 @@ public class Player extends Agent<Player, List<Monster>> {
 
     @Override
     public String getFocusPointStatus() {
-        return String.format("%d/%d FP", focusPoints, getMaxFocusPoints());
+        return String.format(FOCUS_STATUS, focusPoints, getMaxFocusPoints());
     }
 
 
     @Override
     public String getHealthStatus() {
-        return String.format("%d/%d HP", healthPoints, INITIAL_HEALTH);
+        return String.format(HEALTH_STATUS, healthPoints, INITIAL_HEALTH);
     }
 
     /**

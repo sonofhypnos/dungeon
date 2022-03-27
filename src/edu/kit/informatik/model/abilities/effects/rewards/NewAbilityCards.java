@@ -36,7 +36,7 @@ public class NewAbilityCards extends Effect<Player, Monster> {
     public void applyEffect(final Player player, final Monster target) {
         // TODO: 26.03.22 The number of cards is more than what is the stuff!
         var newCards = this.cards.draw(cardPoolSize);
-        int optionNumber = Math.min(newCards.size(), cardNumber);
+        int optionNumber = Math.min(newCards.size()-1, cardNumber);
         if (optionNumber != 0) {
             var abilityPrompt = new SelectPrompt<>(
                     String.format(String.format(PICK_S_CARD_S_AS_LOOT, cardNumber), newCards.size()), newCards,
