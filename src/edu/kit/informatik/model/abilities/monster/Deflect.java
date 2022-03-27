@@ -17,6 +17,8 @@ public class Deflect extends MonsterAbility {
      * The constant DEFLECT_REGEX.
      */
     public static final String DEFLECT_REGEX = "Deflect";
+    private static final int BONUS = 2;
+    private static final int FACTOR = 11;
 
     /**
      * Instantiates a new Deflect.
@@ -29,7 +31,7 @@ public class Deflect extends MonsterAbility {
 
     @Override
     public void applyEffect(final Monster aggressor, final Player target) {
-        aggressor.setProtection(new Damage(DamageType.MAGIC, 11 * level + 2));
+        aggressor.setProtection(new Damage(DamageType.MAGIC, FACTOR * level + BONUS));
     }
 
 }

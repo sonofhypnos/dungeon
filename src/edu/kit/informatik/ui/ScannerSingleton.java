@@ -11,6 +11,9 @@ import java.util.Scanner;
 public class ScannerSingleton {
     private static Scanner scanner = null;
 
+    private ScannerSingleton() {
+    }
+
     /**
      * Gets instance.
      *
