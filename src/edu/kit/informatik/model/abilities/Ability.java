@@ -52,6 +52,7 @@ public abstract class Ability<A, T> extends Effect<A, T> {
      * @param name  the name
      * @param level the level
      * @param type  the type
+     * @param kind  the kind
      */
     protected Ability(String name, int level, AbilityType type, AbilityKind kind) {
         super();

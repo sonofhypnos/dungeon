@@ -24,6 +24,12 @@ public class Focus<A extends Agent<?, ?>, T> extends Ability<A, T> {
         super(FOCUS_REGEX, level, AbilityType.FOCUS);
     }
 
+    /**
+     * Instantiates a new Focus.
+     *
+     * @param initialLevel    the initial level
+     * @param playerAbilities the player abilities
+     */
     public Focus(final int initialLevel, final PlayerAbilities playerAbilities) {
         super(FOCUS_REGEX, initialLevel, AbilityType.FOCUS, playerAbilities);
     }
