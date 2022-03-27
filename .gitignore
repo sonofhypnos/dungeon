@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+#testfiles
+testOutput
+testOutput2
+
 # Log file
 *.log
 
