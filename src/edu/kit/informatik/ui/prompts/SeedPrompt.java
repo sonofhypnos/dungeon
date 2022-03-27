@@ -20,6 +20,6 @@ public class SeedPrompt extends SelectNumbers {
      * @param seedNumber the seed number
      */
     public SeedPrompt(int seedNumber) {
-        super(SEEDS, ENTER_SEEDS, MAX_SEED, seedNumber, SEPARATOR_REGEX);
+        super(SEEDS, ENTER_SEEDS, MAX_SEED, seedNumber, SEPARATOR_REGEX, true);
     }
 }

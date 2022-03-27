@@ -38,6 +38,8 @@ public class SelectPrompt<T> implements Prompt<T> {
      * The Entry prompt.
      */
     protected final String entryPrompt;
+    private final int minOptionNumber;
+    private final int maxOptionNumber;
     /**
      * Interface for output
      */
@@ -50,10 +52,9 @@ public class SelectPrompt<T> implements Prompt<T> {
      * options for the User
      */
     List<T> options;
-    private final int minOptionNumber;
-    private final int maxOptionNumber;
     private String separator = DEFAULT_SEPARATOR;
     private boolean askSingle = false;
+    private boolean noDuplicates = true;
 
     /**
      * Instantiates a new Select prompt.
@@ -73,8 +74,9 @@ public class SelectPrompt<T> implements Prompt<T> {
     /**
      * Instantiates a new Select prompt.
      *
-     * @param text    the text
-     * @param options the options
+     * @param text      the text
+     * @param options   the options
+     * @param askSingle the ask single
      */
     public SelectPrompt(String text, List<T> options, boolean askSingle) {
         this.text = text;
@@ -89,11 +91,12 @@ public class SelectPrompt<T> implements Prompt<T> {
     /**
      * Instantiates a new Select prompt.
      *
-     * @param text        the text
-     * @param entryPrompt the entry prompt
-     * @param maxOrdinal  the max ordinal
+     * @param text         the text
+     * @param entryPrompt  the entry prompt
+     * @param maxOrdinal   the max ordinal
+     * @param noDuplicates the no duplicates
      */
-    public SelectPrompt(String text, String entryPrompt, int maxOrdinal) {
+    public SelectPrompt(String text, String entryPrompt, int maxOrdinal, final boolean noDuplicates) {
         // TODO: 15.03.22 make abstract class so this does not have to be overwritten?
         this.text = text;
         this.options = null;
@@ -101,6 +104,7 @@ public class SelectPrompt<T> implements Prompt<T> {
         this.entryPrompt = String.format(entryPrompt, FIRST_ORDINAL, maxOrdinal);
         this.minOptionNumber = DEFAULT_OPTION_NUMBER;
         this.maxOptionNumber = DEFAULT_OPTION_NUMBER;
+        this.noDuplicates = noDuplicates;
     }
 
 
@@ -239,6 +243,10 @@ public class SelectPrompt<T> implements Prompt<T> {
                 args = Arrays.stream(Objects.requireNonNull(input).split(separator, SPLIT_LIMIT))
                         .map(Integer::parseUnsignedInt).collect(Collectors.toList());
             } catch (NumberFormatException e) {
+                continue;
+            }
+            final boolean containsDuplicate = args.stream().distinct().count() != args.size();
+            if (containsDuplicate && noDuplicates) {
                 continue;
             }
             if (args.size() < minOptionNumber || args.size() > maxOptionNumber || args.stream()

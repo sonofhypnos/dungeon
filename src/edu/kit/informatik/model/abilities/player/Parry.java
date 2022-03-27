@@ -15,13 +15,12 @@ import edu.kit.informatik.model.abilities.AbilityType;
  */
 public class Parry extends Ability<Player, Monster> {
 
-    private static final int DAMAGE_FACTOR = 7;
+    private static final int DEFENSE_FACTOR = 7;
 
     /**
      * Instantiates a new Parry.
      *  @param name  the name
      * @param level the level
-     * @param playerAbilities
      */
     public Parry(final String name, final int level, final PlayerAbilities playerAbilities) {
         super(name, level, AbilityType.DEFENSIVE, playerAbilities);
@@ -30,7 +29,7 @@ public class Parry extends Ability<Player, Monster> {
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        aggressor.setProtection(new Damage(DamageType.PHYSICAL, DAMAGE_FACTOR * level));
+        aggressor.setProtection(new Damage(DamageType.PHYSICAL, DEFENSE_FACTOR * level));
     }
 
 
