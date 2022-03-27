@@ -8,16 +8,26 @@ import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 
 /**
+ * The type New ability cards.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-17
  */
-public class newAbilityCards extends Effect<Player, Monster> {
+public class NewAbilityCards extends Effect<Player, Monster> {
     private final PlayerDeck cards;
     private final int cardNumber;
-    private int cardPoolSize;
     private final Runa runa;
+    private final int cardPoolSize;
 
-    public newAbilityCards(PlayerDeck cards, int cardNumber, int cardPoolSize ,Runa runa){
+    /**
+     * Instantiates a new New ability cards.
+     *
+     * @param cards        the cards
+     * @param cardNumber   the card number
+     * @param cardPoolSize the card pool size
+     * @param runa         the runa
+     */
+    public NewAbilityCards(PlayerDeck cards, int cardNumber, int cardPoolSize, Runa runa) {
         this.cards = cards;
         this.cardNumber = cardNumber;
         this.cardPoolSize = cardPoolSize;
@@ -29,11 +39,12 @@ public class newAbilityCards extends Effect<Player, Monster> {
     public void applyEffect(final Player player, final Monster target) {
         // TODO: 26.03.22 The number of cards is more than what is the stuff!
         var newCards = this.cards.draw(cardPoolSize);
-        var abilityPrompt = new SelectPrompt<>(String.format(String.format("Pick %s card(s) as loot", cardNumber),
-                newCards.size()), newCards, cardNumber, cardNumber);
+        var abilityPrompt = new SelectPrompt<>(
+                String.format(String.format("Pick %s card(s) as loot", cardNumber), newCards.size()), newCards,
+                cardNumber, cardNumber);
 
         var loot = abilityPrompt.parseList();
-        if (runa.checkQuit(loot)) {
+        if (SelectPrompt.isRunning()) {
             return;
         }
         for (var card : loot) {

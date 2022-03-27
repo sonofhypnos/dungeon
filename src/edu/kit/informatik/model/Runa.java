@@ -1,13 +1,16 @@
 package edu.kit.informatik.model;
 
-import edu.kit.informatik.model.Cards.*;
+import edu.kit.informatik.model.Cards.Monster;
+import edu.kit.informatik.model.Cards.MonsterDeck;
+import edu.kit.informatik.model.Cards.MonsterType;
+import edu.kit.informatik.model.Cards.Monsters;
 import edu.kit.informatik.model.Cards.Player;
-
+import edu.kit.informatik.model.Cards.PlayerDeck;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.Effect;
-import edu.kit.informatik.model.abilities.effects.rewards.newAbilityCards;
-import edu.kit.informatik.model.abilities.effects.rewards.newDice;
+import edu.kit.informatik.model.abilities.effects.rewards.NewAbilityCards;
+import edu.kit.informatik.model.abilities.effects.rewards.NewDice;
 import edu.kit.informatik.model.abilities.player.PlayerAbilities;
 import edu.kit.informatik.ui.OutputInterFace;
 import edu.kit.informatik.ui.prompts.DiceRoll;
@@ -20,6 +23,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Runa class. Runs the logic of the Runa game. We decided to not use game states like the example solution of
+ * assignment 5, because without commands the game flow was very linear (At every decision-point of the user it is clear
+ * what the user is allowed to do (which is inputting Integers from 1 to n) as opposed to commands where it might be
+ * rather complicated to figure out whether the input was valid, so it would have made more sense to allow for a
+ * modular "gameflow" with explicit states.
+ *
  * @author upkim
  * @version 1.0
  */
@@ -35,21 +44,30 @@ public class Runa {
     private static final int INITIAL_STAGE = 1;
     private static final int HEAL_PER_CARD = 10;
     private static final int CARD_POOL_MULTIPLE = 2;
+    private static final String PLAYER_NAME = "Runa";
     private final PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
-    private List<Monster> currentMonsters;
     private final OutputInterFace interFace;
+    private List<Monster> currentMonsters;
     private MonsterDeck monsterDeck;
     private int monsterNumber;
     private boolean lost;
-    private boolean quit = false;
 
+    /**
+     * Instantiates a new Runa. game
+     */
     public Runa() {
-        player = new Player("Runa");
+        player = new Player(PLAYER_NAME);
         this.lost = false;
         interFace = new OutputInterFace();
+        interFace.welcome();
     }
 
+    /**
+     * Gets player.
+     *
+     * @return the player
+     */
     public Player getPlayer() {
         return player;
     }
@@ -57,11 +75,11 @@ public class Runa {
     // TODO: 25.03.22 alternative approach to try: Create gamestates again: each gamestate also takes in the session
     //  and sets the prompt for the session. The session in turn uses the parseInt and parseInteger functions from
     //  the Sheet to decide whether to parse Input.
+
     /**
-     * Process.
+     * Runs the main logic of the game.
      */
     public void runGame() {
-        //character
         Prompt<Archetype> archetypePrompt = new SelectPrompt<>(
                 String.format(SELECT_PLAYER_S_CHARACTER_CLASS, player.getName()), List.of(Archetype.values()));
         // TODO: 25.03.22 add justification for not using gameStates: while my approach has the downside of having to
@@ -70,7 +88,7 @@ public class Runa {
 
         var archetyp = archetypePrompt.parseItem();
         // TODO: 25.03.22 add stuff about code repetition
-        if (checkQuit(archetyp)) {
+        if (!SelectPrompt.isRunning()) {
             return;
         }
         this.player.setClass(archetyp); //done
@@ -80,7 +98,7 @@ public class Runa {
         for (int level = INITIAL_LEVEL; level < MAX_LEVEL + INITIAL_LEVEL; level++) {
             SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
             var seeds = prompt.parseList();
-            if (checkQuit(seeds)) {
+            if (!SelectPrompt.isRunning()) {
                 return;
             }
             // TODO: 26.03.22 add message about card update (maybe even include initial stage
@@ -95,13 +113,6 @@ public class Runa {
             interFace.won(player);
             // TODO: 26.03.22 initialisiere die Fähigkeitskarten des Spielers bei 1
         }
-    }
-
-    public <T> boolean checkQuit(final T input) { // TODO: 25.03.22 figure out how to defend this?
-        if (input == null) {
-            quit = true;
-        }
-        return quit;
     }
 
     // TODO: 18.03.22 implement message 0 damage
@@ -156,11 +167,10 @@ public class Runa {
 
     private void playerTurn() {
         player.reset();
-        var abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY,
-                player.getHand());
+        var abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY, player.getHand());
         var ability = abilityPrompt.parseItem();
 
-        if (checkQuit(ability)) {
+        if (!SelectPrompt.isRunning()) {
             return;
         }
         // TODO: 25.03.22 explain conflict between object-orientation, separating ui and model and not using the exit
@@ -168,9 +178,9 @@ public class Runa {
         // TODO: 25.03.22 add that this was previously just put into the functions themselves (polymorphism), but
         //  this had the issue of needing to communicate put sideeffects through chain, which was awkward
         Monster target = null;
-        if (ability.isType(AbilityType.OFFENSIV)) {
+        if (ability.isType(AbilityType.OFFENSIVE)) {
             target = interFace.getTarget(player, currentMonsters);
-            if (checkQuit(target)) {
+            if (!SelectPrompt.isRunning()) {
                 return;
             }
             // TODO: 26.03.22 find pretty solution for diceRoll
@@ -180,7 +190,7 @@ public class Runa {
         if (ability.needsDice()) {
             Prompt<Integer> dicePrompt = new DiceRoll(player.getDice());
             Integer roll = dicePrompt.parseItem();
-            if (checkQuit(roll)) {
+            if (!SelectPrompt.isRunning()) {
                 return;
             }
             ability.setRoll(roll);
@@ -208,13 +218,12 @@ public class Runa {
     }
 
 
-
     private void healing() {
         if (player.getHealthPoints() != player.getMaxHealth() && player.getHand().size() > MIN_CARDS) {
             // TODO: 18.03.22 remove if none?
             // TODO: 18.03.22 remove vars in code
             var cardToRemove = interFace.heal(player);
-            if (checkQuit(cardToRemove)) {
+            if (!SelectPrompt.isRunning()) {
                 return;
             }
 
@@ -229,18 +238,17 @@ public class Runa {
     }
 
     private void collectRewards() {
-        List<Effect<Player, Monster>> rewards = new ArrayList<>(
-                List.of());
+        List<Effect<Player, Monster>> rewards = new ArrayList<>(List.of());
         if (this.playerDeck.size() != 0) {
-            rewards.add(new newAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber, this));
+            rewards.add(new NewAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber, this));
         }
         if (!this.player.getDice().isLast()) {
-            rewards.add(new newDice());
+            rewards.add(new NewDice());
         }
         Prompt<Effect<Player, Monster>> rewardPrompt = new SelectPrompt<>(String.format("Choose %s's reward", player),
                 rewards);
         Effect<Player, Monster> reward = rewardPrompt.parseItem();
-        if (checkQuit(reward)) {
+        if (!SelectPrompt.isRunning()) {
             return;
         }
         reward.applyEffect(player, null);

@@ -8,6 +8,8 @@ import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.ElementPlayerEffect;
 
 /**
+ * The type Lightning.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
@@ -18,8 +20,14 @@ public class Lightning extends Ability<Player, Monster> {
     private static final int SECOND_DAMAGE_CONSTANT = 2;
     private static final int BONUS_DAMAGE_FACTOR = 2;
 
+    /**
+     * Instantiates a new Lightning.
+     *
+     * @param name  the name
+     * @param level the level
+     */
     public Lightning(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIV);
+        super(name, level, AbilityType.OFFENSIVE);
     }
 
     @Override

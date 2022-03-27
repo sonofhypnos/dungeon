@@ -26,5 +26,5 @@ public enum MonsterType {
     /**
      * Boss monster type.
      */
-    BOSS;
+    BOSS
 }

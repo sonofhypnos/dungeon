@@ -1,29 +1,39 @@
 package edu.kit.informatik.model.abilities.effects;
 
-import edu.kit.informatik.model.Damage;
 import edu.kit.informatik.model.Cards.DamageType;
 import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.MonsterType;
 import edu.kit.informatik.model.Cards.Player;
-import java.util.List;
+import edu.kit.informatik.model.Damage;
 
 /**
+ * The type Element player effect.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-17
  */
 public class ElementPlayerEffect extends Effect<Player, Monster> {
 
     private static final int FOCUS_POINT_COST = 1;
-    private MonsterType monsterType;
-    private int damageFactor;
-    private int damageConstant;
-    private int secondDamageConstant;
-    private int bonusDamageFactor;
-    private int level;
+    private final MonsterType monsterType;
+    private final int damageFactor;
+    private final int damageConstant;
+    private final int secondDamageConstant;
+    private final int bonusDamageFactor;
+    private final int level;
 
-    public ElementPlayerEffect(MonsterType monsterType, int damageFactor, int damageConstant,
-                               int secondDamageConstant,  int bonusDamageFactor,
-                               int level){
+    /**
+     * Instantiates a new Element player effect.
+     *
+     * @param monsterType          the monster type
+     * @param damageFactor         the damage factor
+     * @param damageConstant       the damage constant
+     * @param secondDamageConstant the second damage constant
+     * @param bonusDamageFactor    the bonus damage factor
+     * @param level                the level
+     */
+    public ElementPlayerEffect(MonsterType monsterType, int damageFactor, int damageConstant, int secondDamageConstant,
+                               int bonusDamageFactor, int level) {
         this.monsterType = monsterType;
         this.damageFactor = damageFactor;
         this.damageConstant = damageConstant;

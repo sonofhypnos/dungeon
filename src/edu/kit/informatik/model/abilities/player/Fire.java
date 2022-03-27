@@ -6,9 +6,10 @@ import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.abilities.Ability;
 import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.ElementPlayerEffect;
-import java.util.List;
 
 /**
+ * The type Fire.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
@@ -19,8 +20,14 @@ public class Fire extends Ability<Player, Monster> {
     private static final int SECOND_DAMAGE_CONSTANT = 0;
     private static final int BONUS_DAMAGE_FACTOR = 2;
 
+    /**
+     * Instantiates a new Fire.
+     *
+     * @param name  the name
+     * @param level the level
+     */
     public Fire(final String name, final int level) {
-        super(name, level, AbilityType.OFFENSIV);
+        super(name, level, AbilityType.OFFENSIVE);
     }
 
     @Override

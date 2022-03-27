@@ -48,13 +48,13 @@ public class CardDeck<T> {
     }
 
     /**
-     * Draw up to n cards from the deck. If the deck has less than n cards the remaining cards are returned and
-     * the deck is emptied.
+     * Draw up to n cards from the deck. If the deck has less than n cards the remaining cards are returned and the deck
+     * is emptied.
      *
      * @param n the n
      * @return the list
      */
-    public List<T> draw(int n){
+    public List<T> draw(int n) {
         List<T> values = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             if (this.cards.isEmpty()) {
@@ -65,10 +65,20 @@ public class CardDeck<T> {
         return values;
     }
 
+    /**
+     * Remove.
+     *
+     * @param card the card
+     */
     public void remove(T card) {
         this.cards.remove(card);
     }
 
+    /**
+     * Size int.
+     *
+     * @return the int
+     */
     public int size() {
         return this.cards.size();
     }
