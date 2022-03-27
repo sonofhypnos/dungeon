@@ -17,7 +17,6 @@ import edu.kit.informatik.ui.prompts.Prompt;
 import edu.kit.informatik.ui.prompts.SeedPrompt;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +46,7 @@ public class Runa {
     private static final int FIRST_STAGE = 1;
     private static final int FIRST_STAGE_MONSTER_NUMBER = 1;
     private static final int DEFAULT_MONSTER_NUMBER = 2;
+    private static final String CHOOSE_S_S_REWARD = "Choose %s's reward";
     private final PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
     private final Messaging output;
@@ -249,7 +249,7 @@ public class Runa {
         if (!this.player.getDice().isLast()) {
             rewards.add(new NewDie());
         }
-        Prompt<Effect<Player, Monster>> rewardPrompt = new SelectPrompt<>(String.format("Choose %s's reward", player),
+        Prompt<Effect<Player, Monster>> rewardPrompt = new SelectPrompt<>(String.format(CHOOSE_S_S_REWARD, player),
                 rewards);
         Effect<Player, Monster> reward = rewardPrompt.parseItem();
         if (!SelectPrompt.isRunning()) {
@@ -277,11 +277,15 @@ public class Runa {
     }
 
     private List<Monster> getBoss(final int level) {
-        return Arrays.stream(Monsters.values()).map(Monsters::getMonster) //Map enums to contained monsters
-                .filter((Monster m) -> m.isType(MonsterType.BOSS) && m.getLevel() == level)
-                .collect(Collectors.toList());
+        List<Monster> bossList = new ArrayList<>();
+        for (Monsters monsterEnum : Monsters.values()) {
+            Monster newMonster = monsterEnum.getMonster();
+            if (newMonster.isType(MonsterType.BOSS) && newMonster.getLevel() == level) {
+                bossList.add(newMonster);
+            }
+        }
+        return bossList;
     }
-
 
     private void shuffle(List<Integer> seeds, int level) {
         // TODO: 26.03.22 make sure the cards from runa's class are not included!
