@@ -10,7 +10,7 @@ import edu.kit.informatik.model.abilities.effects.Effect;
  * @author upkim
  * @version 1.0.0 2022-03-17
  */
-public class NewDice extends Effect<Player, Monster> {
+public class NewDie extends Effect<Player, Monster> {
 
     private static final String NEW_DICE = "next player dice";
 

@@ -1,7 +1,9 @@
 package edu.kit.informatik.model.abilities.effects;
 
-import edu.kit.informatik.ui.OutputInterFace;
+import edu.kit.informatik.ui.Messaging;
 
+// TODO: 27.03.22 explain why called effect (abilities)
+// TODO: 27.03.22 explain why effects
 /**
  * The type Effect.
  *
@@ -14,14 +16,14 @@ public abstract class Effect<A, B> {
     /**
      * The Inter face.
      */
-    protected OutputInterFace interFace;
+    protected Messaging interFace;
     private int roll;
 
     /**
      * Instantiates a new Effect.
      */
     public Effect() {
-        this.interFace = new OutputInterFace();
+        this.interFace = new Messaging();
     }
 
     /**

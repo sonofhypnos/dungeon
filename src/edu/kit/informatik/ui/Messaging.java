@@ -19,7 +19,7 @@ import java.util.Objects;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class OutputInterFace {
+public class Messaging {
 
     //Messages
     private static final String LINE_STRING = "----------------------------------------";
@@ -42,7 +42,7 @@ public class OutputInterFace {
     /**
      * Instantiates a new Output inter face.
      */
-    public OutputInterFace() {
+    public Messaging() {
     }
 
     /**
@@ -167,10 +167,9 @@ public class OutputInterFace {
      * @return the target
      */
     public Monster getTarget(final Player player, final List<Monster> currentMonsters) {
-        Prompt<Monster> monsterPrompt = new SelectPrompt<>(selectTarget(player), currentMonsters);
+        Prompt<Monster> monsterPrompt = new SelectPrompt<>(selectTarget(player), currentMonsters, false);
         return monsterPrompt.parseItem();
     }
-
     private String selectTarget(final Player player) {
         return String.format(SELECT_S_TARGET, player.getName());
     }

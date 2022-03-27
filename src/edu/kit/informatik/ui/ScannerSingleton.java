@@ -25,4 +25,8 @@ public final class ScannerSingleton {
         }
         return scanner;
     }
+
+    public static void closeInstance() {
+        scanner.close();
+    }
 }

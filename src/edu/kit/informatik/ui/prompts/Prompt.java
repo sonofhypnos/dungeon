@@ -16,6 +16,7 @@ public interface Prompt<T> {
      */
     int FIRST_ORDINAL = 1;
 
+
     /**
      * Prompt.
      */

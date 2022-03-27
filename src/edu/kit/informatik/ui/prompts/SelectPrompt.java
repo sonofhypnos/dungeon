@@ -1,6 +1,6 @@
 package edu.kit.informatik.ui.prompts;
 
-import edu.kit.informatik.ui.OutputInterFace;
+import edu.kit.informatik.ui.Messaging;
 import edu.kit.informatik.ui.ScannerSingleton;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +41,7 @@ public class SelectPrompt<T> implements Prompt<T> {
     /**
      * Interface for output
      */
-    protected OutputInterFace interFace = new OutputInterFace();
+    protected Messaging interFace = new Messaging();
     /**
      * Maximum Ordinal the User can input.
      */
@@ -53,6 +53,7 @@ public class SelectPrompt<T> implements Prompt<T> {
     private final int minOptionNumber;
     private final int maxOptionNumber;
     private String separator = DEFAULT_SEPARATOR;
+    private boolean askSingle = false;
 
     /**
      * Instantiates a new Select prompt.
@@ -67,6 +68,22 @@ public class SelectPrompt<T> implements Prompt<T> {
         this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
         this.minOptionNumber = DEFAULT_OPTION_NUMBER;
         this.maxOptionNumber = DEFAULT_OPTION_NUMBER;
+    }
+
+    /**
+     * Instantiates a new Select prompt.
+     *
+     * @param text    the text
+     * @param options the options
+     */
+    public SelectPrompt(String text, List<T> options, boolean askSingle) {
+        this.text = text;
+        this.options = options;
+        this.maxOrdinal = options.size(); // TODO: 18.03.22 why here not same as below?
+        this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
+        this.minOptionNumber = DEFAULT_OPTION_NUMBER;
+        this.maxOptionNumber = DEFAULT_OPTION_NUMBER;
+        this.askSingle = askSingle;
     }
 
     /**
@@ -164,7 +181,7 @@ public class SelectPrompt<T> implements Prompt<T> {
         if (!SelectPrompt.isRunning()) {
             return null;
         }
-        if (options.size() == 1) return options.get(0);
+        if (options.size() == 1 && !askSingle) return options.get(0);
         // TODO: 15.03.22 add while running
         Integer arg = getInt();
         if (arg == null) return null;
@@ -251,4 +268,5 @@ public class SelectPrompt<T> implements Prompt<T> {
         }
         return front + OPTION_DELIMITER + String.join(OPTION_DELIMITER, optionString);
     }
+
 }
