@@ -149,7 +149,6 @@ public class Player extends Agent<Player, List<Monster>> {
      * Gets next dice.
      */
     public void getNextDice() {
-        assert !dice.isLast(); // TODO: 25.03.22 Needs to be checked above?
         this.dice = Dice.values()[dice.ordinal() + 1];
     }
 

@@ -49,7 +49,7 @@ public enum Monsters {
     /**
      * The Goblin.
      */
-    GOBLIN("Goblin", 1, 12, List.of(), List.of(new Smash(1), new Bite(1))),
+    GOBLIN("Goblin", 1, 12, List.of(), List.of(new Smash(1), new Deflect(1))),
     /**
      * The Rat.
      */
