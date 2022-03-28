@@ -5,7 +5,7 @@ import edu.kit.informatik.model.abilities.effects.Effect;
 import java.util.Objects;
 
 /**
- * The type Ability.
+ * Ability class provides common functionality between abilities
  *
  * @param <A> the type parameter
  * @param <T> the type parameter
