@@ -17,7 +17,7 @@ public class CardDeck<T> {
     /**
      * The Cards.
      */
-    List<T> cards;
+    private final List<T> cards;
 
     /**
      * Instantiates a new Card deck.
