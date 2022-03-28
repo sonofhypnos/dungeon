@@ -77,7 +77,7 @@ public class Player extends Agent {
 
     @Override
     public String getHealthStatus() {
-        return String.format(HEALTH_STATUS, getFocusPoints(), INITIAL_HEALTH);
+        return String.format(HEALTH_STATUS, getHealthPoints(), getMaxHealth());
     }
 
     /**
