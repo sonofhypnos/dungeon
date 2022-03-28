@@ -1,6 +1,6 @@
 package edu.kit.informatik.ui.prompts;
 
-import edu.kit.informatik.ui.Messaging;
+import edu.kit.informatik.ui.Terminal;
 import java.util.List;
 
 import static java.lang.Integer.MAX_VALUE;
@@ -37,12 +37,12 @@ public class SelectNumbers extends SelectPrompt<Integer> {
 
     @Override
     public void prompt() {
-        Messaging.println(getText());
+        Terminal.println(getText());
     }
 
     @Override
     public void entryPrompt() {
-        Messaging.println(String.format(getEntryPrompt(), 1, MAX_VALUE));
+        Terminal.println(String.format(getEntryPrompt(), 1, MAX_VALUE));
     }
 
     @Override

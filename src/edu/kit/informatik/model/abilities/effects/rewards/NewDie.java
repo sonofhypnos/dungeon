@@ -3,7 +3,7 @@ package edu.kit.informatik.model.abilities.effects.rewards;
 import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.abilities.effects.Effect;
-import edu.kit.informatik.ui.Messaging;
+import edu.kit.informatik.ui.Terminal;
 
 /**
  * The type New dice.
@@ -18,7 +18,7 @@ public class NewDie extends Effect<Player, Monster> {
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
         aggressor.getNextDice();
-        Messaging.upgrade(aggressor, aggressor.getDice());
+        Terminal.upgrade(aggressor, aggressor.getDice());
     }
 
     @Override

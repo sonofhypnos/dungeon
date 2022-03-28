@@ -13,6 +13,7 @@ import java.util.Objects;
  * @version 1.0.0 11.03.22
  */
 public abstract class Ability<A, T> extends Effect<A, T> {
+    private static final String ABILITY_STRING = "%s(%d)";
     /**
      * The Type.
      */
@@ -109,7 +110,7 @@ public abstract class Ability<A, T> extends Effect<A, T> {
 
     @Override
     public String toString() {
-        return String.format("%s(%d)", getName(), level);
+        return String.format(ABILITY_STRING, getName(), level);
     }
 
     @Override
@@ -121,7 +122,7 @@ public abstract class Ability<A, T> extends Effect<A, T> {
      * @param agent the agent
      * @return the boolean
      */
-    public boolean canBeUsed(Agent<?, ?> agent) {
+    public boolean canBeUsed(Agent agent) {
         return true;
     }
 

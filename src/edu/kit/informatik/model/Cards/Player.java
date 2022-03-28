@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * @author upkim
  * @version 1.0.0 2022-03-10
  */
-public class Player extends Agent<Player, List<Monster>> {
+public class Player extends Agent {
 
     /**
      * INITIAL_HEALTH of the player
@@ -37,12 +37,8 @@ public class Player extends Agent<Player, List<Monster>> {
      * @param name the name
      */
     public Player(String name) {
-        super(MIN_FOCUS);
-        this.name = name;
-        maxHealth = INITIAL_HEALTH;
-        healthPoints = INITIAL_HEALTH;
+        super(name, MIN_FOCUS, MIN_FOCUS, INITIAL_HEALTH, INITIAL_HEALTH);
         dice = INITIAL_DICE;
-        focusPoints = MIN_FOCUS;
     }
 
     /**
@@ -75,13 +71,13 @@ public class Player extends Agent<Player, List<Monster>> {
 
     @Override
     public String getFocusPointStatus() {
-        return String.format(FOCUS_STATUS, focusPoints, getMaxFocusPoints());
+        return String.format(FOCUS_STATUS, getFocusPoints(), getMaxFocusPoints());
     }
 
 
     @Override
     public String getHealthStatus() {
-        return String.format(HEALTH_STATUS, healthPoints, INITIAL_HEALTH);
+        return String.format(HEALTH_STATUS, getFocusPoints(), INITIAL_HEALTH);
     }
 
     /**
@@ -179,15 +175,15 @@ public class Player extends Agent<Player, List<Monster>> {
      * @param heal points by which the player is healed.
      */
     public void heal(final int heal) {
-        this.healthPoints += heal;
-        if (this.healthPoints > this.getMaxHealth()) {
-            this.healthPoints = this.getMaxHealth();
+        setHealthPoints(getHealthPoints() + heal);
+        if (getHealthPoints() > this.getMaxHealth()) {
+            setHealthPoints(this.getMaxHealth());
         }
     }
 
     @Override
     public int evalFocus() {
-        newFocus = Math.min(newFocus, this.getMaxFocusPoints() - focusPoints);
+        setNewFocus(Math.min(getNewFocus(), this.getMaxFocusPoints() - getFocusPoints()));
         return super.evalFocus();
     }
 
