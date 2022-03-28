@@ -6,7 +6,7 @@ import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.ui.Terminal;
 
 /**
- * The type New dice.
+ * Updates Player Dice
  *
  * @author upkim
  * @version 1.0.0 2022-03-17

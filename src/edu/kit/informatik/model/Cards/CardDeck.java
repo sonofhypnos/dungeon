@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * The type Card deck.
+ * Card deck. Enables drawing shuffling and removing cards.
  *
  * @param <T> the type of the cards.
  * @author upkim

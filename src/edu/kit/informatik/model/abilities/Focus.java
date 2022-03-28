@@ -4,7 +4,7 @@ import edu.kit.informatik.model.Agent;
 import edu.kit.informatik.model.abilities.player.PlayerAbilities;
 
 /**
- * The type Focus.
+ * The Focus class. Implements focus functionality.
  *
  * @param <A> the type parameter
  * @param <T> the type parameter

@@ -1,7 +1,7 @@
 package edu.kit.informatik.model.abilities;
 
 /**
- * The output Ability kind.
+ * Interface for the kinds of abilities.
  *
  * @author upkim
  * @version 1.0.0 2022-03-11

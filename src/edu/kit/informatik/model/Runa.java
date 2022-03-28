@@ -47,7 +47,7 @@ public class Runa {
     private static final String SELECT_PLAYER_S_CHARACTER_CLASS = "Select %s's character class";
     private static final String SELECT_CARD_TO_PLAY = "Select card to play";
     private static final String CHOOSE_S_S_REWARD = "Choose %s's reward";
-    private final PlayerDeck playerDeck = new PlayerDeck();
+    private PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
     private List<Monster> currentMonsters;
     private MonsterDeck monsterDeck;
@@ -79,7 +79,7 @@ public class Runa {
         initGame();
         for (int level = INITIAL_LEVEL; level < MAX_LEVEL + INITIAL_LEVEL; level++) {
             SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
-            var seeds = prompt.parseList();
+            List<Integer> seeds = prompt.parseList();
             if (!SelectPrompt.isRunning()) {
                 return;
             }

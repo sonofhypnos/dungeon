@@ -22,9 +22,10 @@ public class Lightning extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Lightning.
-     *  @param name  the name
-     * @param level the level
-     * @param playerAbilities
+     *
+     * @param name            the name
+     * @param level           the level
+     * @param playerAbilities abilities
      */
     public Lightning(final String name, final int level, final PlayerAbilities playerAbilities) {
         super(name, level, AbilityType.OFFENSIVE, playerAbilities);
@@ -32,8 +33,8 @@ public class Lightning extends Ability<Player, Monster> {
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        var effect = new ElementPlayerEffect(MonsterType.FIRE, DAMAGE_FACTOR, DAMAGE_CONSTANT, SECOND_DAMAGE_CONSTANT,
-                BONUS_DAMAGE_FACTOR, level);
+        ElementPlayerEffect effect = new ElementPlayerEffect(MonsterType.FIRE, DAMAGE_FACTOR, DAMAGE_CONSTANT,
+                SECOND_DAMAGE_CONSTANT, BONUS_DAMAGE_FACTOR, level);
         effect.applyEffect(aggressor, target);
     }
 

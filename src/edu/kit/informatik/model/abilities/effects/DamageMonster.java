@@ -5,7 +5,7 @@ import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
 
 /**
- * The type Damage monster.
+ * damages target Monster.
  *
  * @author upkim
  * @version 1.0.0 2022-03-17
