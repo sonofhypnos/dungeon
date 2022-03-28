@@ -26,7 +26,6 @@ public class Claw extends MonsterAbility {
     @Override
     public void applyEffect(final Monster aggressor, final Player target) {
         target.resetFocus();
-        // TODO: 17.03.22 check for message when breaking focus?
         target.damage(new Damage(DamageType.PHYSICAL, 6 * level), aggressor);
     }
 

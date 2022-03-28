@@ -19,8 +19,10 @@ public class Parry extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Parry.
-     *  @param name  the name
-     * @param level the level
+     *
+     * @param name            the name
+     * @param level           the level
+     * @param playerAbilities the player abilities
      */
     public Parry(final String name, final int level, final PlayerAbilities playerAbilities) {
         super(name, level, AbilityType.DEFENSIVE, playerAbilities);

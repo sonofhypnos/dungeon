@@ -26,7 +26,7 @@ public class Player extends Agent<Player, List<Monster>> {
     private static final int MIN_FOCUS = 1;
     private static final String FOCUS_STATUS = "%d/%d FP";
     private static final String HEALTH_STATUS = "%d/%d HP";
-    private final List<Ability<Player, Monster>> hand = new ArrayList<>(); // TODO: 26.03.22 maybe make also card deck?
+    private final List<Ability<Player, Monster>> hand = new ArrayList<>();
     private List<PlayerAbilities> startingCards;
     private Dice dice;
     private boolean reflect;
@@ -37,7 +37,6 @@ public class Player extends Agent<Player, List<Monster>> {
      * @param name the name
      */
     public Player(String name) {
-        // TODO: 26.03.22 add other stuff in constructor
         super(MIN_FOCUS);
         this.name = name;
         maxHealth = INITIAL_HEALTH;
@@ -45,8 +44,6 @@ public class Player extends Agent<Player, List<Monster>> {
         dice = INITIAL_DICE;
         focusPoints = MIN_FOCUS;
     }
-
-    // TODO: 13.03.22 implement stuff for Fähigkeiten
 
     /**
      * Gets starting cards.
@@ -63,7 +60,6 @@ public class Player extends Agent<Player, List<Monster>> {
      * @param gameArchetype the game archetype
      */
     public void setClass(final Archetype gameArchetype) {
-        // TODO: 13.03.22 make functions to set player abilities?
         this.startingCards = new ArrayList<>(gameArchetype.getAbilities());
         this.hand.addAll(startingCards.stream().map(PlayerAbilities::getAbility).collect(Collectors.toList()));
     }
@@ -125,7 +121,6 @@ public class Player extends Agent<Player, List<Monster>> {
      */
     public void removeCard(Ability<Player, Monster> card) {
         this.hand.remove(card);
-        // TODO: 25.03.22 there were some weird exceptions with cards maybe ask Johannes because I did not get it.
     }
 
     /**
@@ -197,7 +192,6 @@ public class Player extends Agent<Player, List<Monster>> {
      * @param level the level
      */
     public void upgradeCards(final int level) {
-        // TODO: 27.03.22 make pretty
         for (var card : startingCards) {
             addCard(card.getLevel(level));
         }

@@ -20,9 +20,10 @@ public class Thrust extends Ability<Player, Monster> {
 
     /**
      * Instantiates a new Thrust.
-     *  @param thrust the thrust
-     * @param level  the level
-     * @param playerAbilities
+     *
+     * @param thrust          the thrust
+     * @param level           the level
+     * @param playerAbilities the player abilities
      */
     public Thrust(final String thrust, final int level, final PlayerAbilities playerAbilities) {
         super(thrust, level, AbilityType.OFFENSIVE, playerAbilities);
@@ -32,8 +33,8 @@ public class Thrust extends Ability<Player, Monster> {
 
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
-        var effect = new DamageWithThreshhold(BONUS_THRESHHOLD, DAMAGE_FACTOR, BONUS_FACTOR, this.level, this.getRoll());
+        var effect = new DamageWithThreshhold(BONUS_THRESHHOLD, DAMAGE_FACTOR, BONUS_FACTOR, this.level,
+                this.getRoll());
         effect.applyEffect(aggressor, target);
-        // TODO: 17.03.22 handle isDead in another place
     }
 }

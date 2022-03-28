@@ -4,6 +4,7 @@ import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.Cards.PlayerDeck;
 import edu.kit.informatik.model.abilities.effects.Effect;
+import edu.kit.informatik.ui.Messaging;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 
 /**
@@ -34,9 +35,8 @@ public class NewAbilityCards extends Effect<Player, Monster> {
 
     @Override
     public void applyEffect(final Player player, final Monster target) {
-        // TODO: 26.03.22 The number of cards is more than what is the stuff!
         var newCards = this.cards.draw(cardPoolSize);
-        int optionNumber = Math.min(newCards.size()-1, cardNumber);
+        int optionNumber = Math.min(newCards.size() - 1, cardNumber);
         if (optionNumber != 0) {
             var abilityPrompt = new SelectPrompt<>(
                     String.format(String.format(PICK_S_CARD_S_AS_LOOT, cardNumber), newCards.size()), newCards,
@@ -48,7 +48,7 @@ public class NewAbilityCards extends Effect<Player, Monster> {
             }
             for (var card : loot) {
                 player.addCard(card);
-                interFace.getCard(player, card);
+                Messaging.getCard(player, card);
             }
         }
     }

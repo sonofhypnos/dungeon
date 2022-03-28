@@ -1,11 +1,8 @@
 package edu.kit.informatik.model.abilities.effects;
 
-import edu.kit.informatik.ui.Messaging;
-
-// TODO: 27.03.22 explain why called effect (abilities)
-// TODO: 27.03.22 explain why effects
 /**
- * The type Effect.
+ * The effect class implements is for the effects of different abilities as well as for rewards that get chosen by the
+ * user through the Prompt-output.
  *
  * @param <A> the type parameter
  * @param <B> the type parameter
@@ -13,17 +10,12 @@ import edu.kit.informatik.ui.Messaging;
  * @version 1.0.0 11.03.22
  */
 public abstract class Effect<A, B> {
-    /**
-     * The Inter face.
-     */
-    protected Messaging interFace;
     private int roll;
 
     /**
      * Instantiates a new Effect.
      */
     public Effect() {
-        this.interFace = new Messaging();
     }
 
     /**

@@ -31,7 +31,6 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class Runa {
-    // TODO: 26.03.22 make sure there are no getter functions that can change somethign about an object
     private static final int MIN_CARDS = 1;
     private static final int INITIAL_LEVEL = 1;
     private static final int BOSS_STAGE = 4;
@@ -49,7 +48,6 @@ public class Runa {
     private static final String CHOOSE_S_S_REWARD = "Choose %s's reward";
     private final PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
-    private final Messaging output;
     private List<Monster> currentMonsters;
     private MonsterDeck monsterDeck;
     private int monsterNumber;
@@ -61,8 +59,7 @@ public class Runa {
     public Runa() {
         player = new Player(PLAYER_NAME);
         this.lost = false;
-        output = new Messaging();
-        output.welcome();
+        Messaging.welcome();
     }
 
     /**
@@ -74,10 +71,6 @@ public class Runa {
         return player;
     }
 
-    // TODO: 25.03.22 alternative approach to try: Create gamestates again: each gamestate also takes in the session
-    //  and sets the prompt for the session. The session in turn uses the parseInt and parseInteger functions from
-    //  the Sheet to decide whether to parse Input.
-
     /**
      * Runs the main logic of the game.
      */
@@ -86,17 +79,11 @@ public class Runa {
 
         Prompt<Archetype> archetypePrompt = new SelectPrompt<>(
                 String.format(SELECT_PLAYER_S_CHARACTER_CLASS, player.getName()), List.of(Archetype.values()));
-        // TODO: 25.03.22 add justification for not using gameStates: while my approach has the downside of having to
-        //  use return statements everywhere, the state-approach has the downside of basically being an awkward goto
-        //  (add justification)
-
-        var archetyp = archetypePrompt.parseItem();
-        // TODO: 25.03.22 add stuff about code repetition
-        // TODO: 27.03.22 remove var types!
+        Archetype archetype = archetypePrompt.parseItem();
         if (!SelectPrompt.isRunning()) {
             return;
         }
-        this.player.setClass(archetyp); //done
+        this.player.setClass(archetype); //done
         for (var card : player.getStartingCards()) {
             playerDeck.remove(card.getAbility());
         }
@@ -106,7 +93,6 @@ public class Runa {
             if (!SelectPrompt.isRunning()) {
                 return;
             }
-            // TODO: 26.03.22 add message about card update (maybe even include initial stage
             shuffle(seeds, level);
             fight(level);
             if (this.lost) {
@@ -115,18 +101,15 @@ public class Runa {
             }
         }
         if (!this.lost) {
-            output.won(player);
-            // TODO: 26.03.22 initialisiere die Fähigkeitskarten des Spielers bei 1
+            Messaging.won(player);
         }
     }
-
-    // TODO: 18.03.22 implement message 0 damage
 
     private void fight(int level) {
         for (int stage = INITIAL_STAGE; stage < BOSS_STAGE + INITIAL_STAGE; stage++) {
             startFight(stage, level);
             while (SelectPrompt.isRunning()) {
-                output.printStatus(player, currentMonsters);
+                Messaging.printStatus(player, currentMonsters);
                 playerTurn();
                 if (currentMonsters.isEmpty()) {
                     break;
@@ -144,7 +127,7 @@ public class Runa {
                 final int newLevel = level + 1;
                 player.upgradeCards(newLevel);
                 for (var card : player.getStartingCards()) {
-                    output.getCard(player, card.getLevel(newLevel));
+                    Messaging.getCard(player, card.getLevel(newLevel));
                 }
             } else {
                 collectRewards();
@@ -161,7 +144,7 @@ public class Runa {
             do {
                 monsterAbility = monster.activateNextAbility();
             } while (!monsterAbility.canBeUsed(monster));
-            output.printUsage(monster, monsterAbility);
+            Messaging.printUsage(monster, monsterAbility);
             monsterAbility.applyEffect(monster, player);
             if (player.isDead()) {
                 return;
@@ -179,18 +162,14 @@ public class Runa {
         if (!SelectPrompt.isRunning()) {
             return;
         }
-        // TODO: 25.03.22 add that this was previously just put into the functions themselves (polymorphism), but
-        //  this had the issue of needing to communicate put sideeffects through chain, which was awkward
         Monster target = null;
         if (ability.isType(AbilityType.OFFENSIVE)) {
-            target = output.getTarget(player, currentMonsters);
+            target = Messaging.getTarget(player, currentMonsters);
             if (!SelectPrompt.isRunning()) {
                 return;
             }
-            // TODO: 26.03.22 find pretty solution for diceRoll
-
         }
-        output.printUsage(player, ability);
+        Messaging.printUsage(player, ability);
         if (ability.needsDice()) {
             Prompt<Integer> dicePrompt = new DiceRoll(player.getDice());
             Integer roll = dicePrompt.parseItem();
@@ -198,14 +177,10 @@ public class Runa {
                 return;
             }
             ability.setRoll(roll);
-            // TODO: 26.03.22 target should come before the dice throw
-            // TODO: 25.03.22 can I write stuff like the above?
         }
         ability.applyEffect(player, target);
 
-        currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead())
-                .collect(Collectors.toList()); // TODO: 26.03.22 this might not need to be done here(is done in apply
-        // effect (which also might be unnecessary??
+        currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead()).collect(Collectors.toList());
 
         for (Monster monster : currentMonsters) {
             evalFocus(monster);
@@ -214,19 +189,17 @@ public class Runa {
 
     private void evalFocus(final Agent<?, ?> agent) {
         int focusPoints = agent.evalFocus();
-        output.focus(agent, focusPoints);
+        Messaging.focus(agent, focusPoints);
     }
 
     private void lost() {
-        output.dies(player);
+        Messaging.dies(player);
     }
 
 
     private void healing() {
         if (player.getHealthPoints() != player.getMaxHealth() && player.getHand().size() > MIN_CARDS) {
-            // TODO: 18.03.22 remove if none?
-            // TODO: 18.03.22 remove vars in code
-            var cardToRemove = output.heal(player, HEAL_PER_CARD);
+            var cardToRemove = Messaging.heal(player, HEAL_PER_CARD);
             if (!SelectPrompt.isRunning()) {
                 return;
             }
@@ -234,7 +207,7 @@ public class Runa {
             final int healthPrev = player.getHealthPoints();
 
             player.heal(HEAL_PER_CARD * cardToRemove.size());
-            output.printHeal(player, player.getHealthPoints() - healthPrev);
+            Messaging.printHeal(player, player.getHealthPoints() - healthPrev);
             for (var card : cardToRemove) {
                 player.removeCard(card);
             }
@@ -259,7 +232,6 @@ public class Runa {
     }
 
 
-    // TODO: 26.03.22 dont forget todos in emacs scratchpad!
     private void startFight(final int stage, final int level) {
         if (stage == BOSS_STAGE) {
             currentMonsters = getBoss(level);
@@ -272,8 +244,7 @@ public class Runa {
             currentMonsters = this.monsterDeck.draw(monsterNumber);
         }
         monsterNumber = currentMonsters.size();
-        output.printStage(player, stage, level);
-        // TODO: 14.03.22 Update of abilities comes with prompt and only after boss level the second time around
+        Messaging.printStage(player, stage, level);
     }
 
     private List<Monster> getBoss(final int level) {
@@ -288,7 +259,6 @@ public class Runa {
     }
 
     private void shuffle(List<Integer> seeds, int level) {
-        // TODO: 26.03.22 make sure the cards from runa's class are not included!
         monsterDeck = new MonsterDeck(level);
         playerDeck.shuffle(seeds.get(0));
         monsterDeck.shuffle(seeds.get(1));

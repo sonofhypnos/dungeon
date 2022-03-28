@@ -1,7 +1,5 @@
 package edu.kit.informatik.model.Cards;
 
-import java.util.Arrays;
-
 /**
  * The enum Dice.
  *
@@ -35,7 +33,8 @@ public enum Dice {
 
     /**
      * private Constructor for new Dice object.
-     * @param name name of dice
+     *
+     * @param name  name of dice
      * @param value value of dice.
      */
     Dice(final String name, final int value) {

@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
- * Main implementation of Prompt Interface.
+ * Main implementation of Prompt output.
  *
  * @param <T> the type parameter
  * @author upkim
@@ -33,25 +33,22 @@ public class SelectPrompt<T> implements Prompt<T> {
     /**
      * The Text.
      */
-    protected final String text;
+    private final String text;
     /**
      * The Entry prompt.
      */
-    protected final String entryPrompt;
+    private final String entryPrompt;
     private final int minOptionNumber;
     private final int maxOptionNumber;
-    /**
-     * Interface for output
-     */
-    protected Messaging interFace = new Messaging();
-    /**
-     * Maximum Ordinal the User can input.
-     */
-    protected int maxOrdinal;
+
     /**
      * options for the User
      */
-    List<T> options;
+    private final List<T> options;
+    /**
+     * Maximum Ordinal the User can input.
+     */
+    private final int maxOrdinal;
     private String separator = DEFAULT_SEPARATOR;
     private boolean askSingle = false;
     private boolean noDuplicates = true;
@@ -65,8 +62,8 @@ public class SelectPrompt<T> implements Prompt<T> {
     public SelectPrompt(String text, List<T> options) {
         this.text = text;
         this.options = options;
-        this.maxOrdinal = options.size(); // TODO: 18.03.22 why here not same as below?
-        this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
+        this.maxOrdinal = options.size();
+        this.entryPrompt = String.format(ENTER_PROMPT, 1, options.size());
         this.minOptionNumber = DEFAULT_OPTION_NUMBER;
         this.maxOptionNumber = DEFAULT_OPTION_NUMBER;
     }
@@ -81,8 +78,8 @@ public class SelectPrompt<T> implements Prompt<T> {
     public SelectPrompt(String text, List<T> options, boolean askSingle) {
         this.text = text;
         this.options = options;
-        this.maxOrdinal = options.size(); // TODO: 18.03.22 why here not same as below?
-        this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
+        this.maxOrdinal = options.size();
+        this.entryPrompt = String.format(ENTER_PROMPT, 1, options.size());
         this.minOptionNumber = DEFAULT_OPTION_NUMBER;
         this.maxOptionNumber = DEFAULT_OPTION_NUMBER;
         this.askSingle = askSingle;
@@ -97,16 +94,14 @@ public class SelectPrompt<T> implements Prompt<T> {
      * @param noDuplicates the no duplicates
      */
     public SelectPrompt(String text, String entryPrompt, int maxOrdinal, final boolean noDuplicates) {
-        // TODO: 15.03.22 make abstract class so this does not have to be overwritten?
         this.text = text;
         this.options = null;
         this.maxOrdinal = maxOrdinal;
-        this.entryPrompt = String.format(entryPrompt, FIRST_ORDINAL, maxOrdinal);
+        this.entryPrompt = String.format(entryPrompt, 1, maxOrdinal);
         this.minOptionNumber = DEFAULT_OPTION_NUMBER;
         this.maxOptionNumber = DEFAULT_OPTION_NUMBER;
         this.noDuplicates = noDuplicates;
     }
-
 
     /**
      * Instantiates a new Select prompt.
@@ -119,42 +114,68 @@ public class SelectPrompt<T> implements Prompt<T> {
     public SelectPrompt(String text, List<T> options, int minOptionNumber, int maxOptionNumber) {
         this.text = text;
         this.options = options;
-        this.maxOrdinal = options.size() + FIRST_ORDINAL - 1; // TODO: 18.03.22 this is confusing even me!
+        this.maxOrdinal = options.size() + 1;
         this.minOptionNumber = minOptionNumber;
         this.maxOptionNumber = maxOptionNumber;
-        this.separator = ",";
+        this.separator = DEFAULT_SEPARATOR;
         if (maxOptionNumber == 1) {
-            this.entryPrompt = String.format(ENTER_PROMPT, FIRST_ORDINAL, options.size());
-            // TODO: 27.03.22 there is still something confusing about abilitycards!
+            this.entryPrompt = String.format(ENTER_PROMPT, 1, options.size());
         } else {
-            this.entryPrompt = String.format(SEPARATED_BY_COMMA, FIRST_ORDINAL, options.size());
+            this.entryPrompt = String.format(SEPARATED_BY_COMMA, 1, options.size());
         }
     }
-
 
     private static void stopRunning() {
         SelectPrompt.running = false;
     }
 
-
     /**
      * This is done so quit can be called at any time. A check for running needs to be added after every call to
      * parseList or parseItem. We admit that having these if-checks is a bit ugly, but we felt that in this case this
      * was less convoluted (We can run the main game logic in one function and can use niceties like for loops) than
-     * adding a gamestate class for every time we want to ask for input from the user (which also wouldn't have greatly
-     * increased the separation). The only justfication for gamestates in this instance we found would have been that
-     * the quit command would have been nicer to implement, but we accepted this tradoff. We felt having to create a new
-     * state every time we want to ask for user-input would have been more annoying.
+     * adding a game state class for every time we want to ask for input from the user (which also wouldn't have greatly
+     * increased the separation).
+     * <p>
+     * The only justification for game states in this instance we found would have been that the quit command would have
+     * been nicer to implement, but we accepted this tradeoff. We felt having to create a new state every time we want
+     * to ask for user-input would have been more annoying.
      *
      * @return running boolean
      */
-    public static boolean isRunning() { // TODO: 25.03.22 figure out how to defend this?
+    public static boolean isRunning() {
         return SelectPrompt.running;
+    }
+
+    /**
+     * Gets text.
+     *
+     * @return the text
+     */
+    protected String getText() {
+        return text;
+    }
+
+    /**
+     * Gets entry prompt.
+     *
+     * @return the entry prompt
+     */
+    protected String getEntryPrompt() {
+        return entryPrompt;
+    }
+
+    /**
+     * Gets max ordinal.
+     *
+     * @return the max ordinal
+     */
+    protected int getMaxOrdinal() {
+        return maxOrdinal;
     }
 
     @Override
     public void prompt() {
-        interFace.println(listOptions(text, this.options));
+        Messaging.println(listOptions(text, this.options));
     }
 
     @Override
@@ -162,7 +183,7 @@ public class SelectPrompt<T> implements Prompt<T> {
         if (!SelectPrompt.isRunning()) {
             return;
         }
-        interFace.println(entryPrompt);
+        Messaging.println(entryPrompt);
     }
 
     @Override
@@ -179,20 +200,13 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     @Override
     public T parseItem() {
-        // TODO: 15.03.22 document we don't let user choose if 1 option
-        // TODO: 18.03.22 use getIntegers here against code duplication
-
         if (!SelectPrompt.isRunning()) {
             return null;
         }
         if (options.size() == 1 && !askSingle) return options.get(0);
-        // TODO: 15.03.22 add while running
         Integer arg = getInt();
         if (arg == null) return null;
-        // TODO: 25.03.22 we get index out of bounds if 1 above correct value
-        return options.get(arg - FIRST_ORDINAL);
-        // TODO: 17.03.22 figure out what happens if you first enter wrong and then correct values
-
+        return options.get(arg - 1);
     }
 
     /**
@@ -206,7 +220,6 @@ public class SelectPrompt<T> implements Prompt<T> {
             return null;
         }
         return args.get(0); //guaranteed to exist
-        // TODO: 27.03.22 make sure this is only called when lenght supposed to be 0?
     }
 
     /**
@@ -222,7 +235,6 @@ public class SelectPrompt<T> implements Prompt<T> {
                                         final int maxOptionNumber) {
         this.prompt();
         List<Integer> args = null;
-        // TODO: 26.03.22 if there is a newline inputted, then this is also null! maybe make more pretty?
         Scanner scanner = ScannerSingleton.getInstance();
         while (isRunning()) {
             entryPrompt();
@@ -263,15 +275,14 @@ public class SelectPrompt<T> implements Prompt<T> {
     }
 
     private boolean outSideInterval(final Integer i, final int maxOrdinal) {
-        return i < FIRST_ORDINAL || i > maxOrdinal;
+        return i < 1 || i > maxOrdinal;
     }
 
     private String listOptions(final String front, final List<T> options) {
         List<String> optionString = new ArrayList<>();
         for (int i = 0; i < options.size(); i++) {
-            optionString.add(String.format(OPTION_ITEM, i + FIRST_ORDINAL, options.get(i)));
+            optionString.add(String.format(OPTION_ITEM, i + 1, options.get(i)));
         }
         return front + OPTION_DELIMITER + String.join(OPTION_DELIMITER, optionString);
     }
-
 }

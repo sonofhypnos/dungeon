@@ -110,12 +110,6 @@ public abstract class Agent<A, T> {
      */
     public abstract String getHealthStatus();
 
-    //    @Override
-    //    public String toString() {
-    //        return String.format("%s (%d/%d HP, %s FP)", getName(), getHealthPoints(), getMaxHealth(),
-    //                getFocusPointStatus());
-    //    }
-
     /**
      * Check damage.
      *
@@ -132,9 +126,7 @@ public abstract class Agent<A, T> {
             isDead = true;
         }
 
-        // TODO: 26.03.22 only add damage, if damage not 0.
-        new Messaging().printDamage(damage, this);
-        // TODO: 17.03.22 how much damage if dies?
+        Messaging.printDamage(damage, this);
     }
 
     /**
@@ -156,15 +148,13 @@ public abstract class Agent<A, T> {
     }
 
     /**
-     * Eval focus int.
+     * Adds focusPoints to agent if focus was not broken and resets newFocus.
      *
      * @return the int
      */
-    // TODO: 26.03.22 document sideeffect
     public int evalFocus() {
         final int output = newFocus;
         if (isFocusing()) {
-            // TODO: 26.03.22 maybe do the io stuff somewhere else?
             focusPoints += newFocus;
             resetFocus();
         }

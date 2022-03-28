@@ -19,7 +19,7 @@ public class DiceRoll extends SelectPrompt<Integer> {
      * @param dice the dice
      */
     public DiceRoll(final Dice dice) {
-        super(DICE_PROMPT, DICE_ENTRY_PROMPT, dice.getValue());
+        super(DICE_PROMPT, DICE_ENTRY_PROMPT, dice.getValue(), false);
     }
 
 
@@ -29,9 +29,6 @@ public class DiceRoll extends SelectPrompt<Integer> {
 
     @Override
     public Integer parseItem() {
-        // TODO: 15.03.22 add while running
         return getInt();
     }
-    // TODO: 14.03.22 make sure throws exception if prompt() is used?
-    // TODO: 14.03.22 maybe separate prompt and other stuff?
 }
