@@ -1,7 +1,7 @@
 package edu.kit.informatik.model.abilities;
 
 /**
- * The enum Ability type.
+ * Type of abilities.
  *
  * @author upkim
  * @version 1.0.0 11.03.22
