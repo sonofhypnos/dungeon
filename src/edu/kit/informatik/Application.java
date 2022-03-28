@@ -8,8 +8,8 @@ import edu.kit.informatik.model.Runa;
 import edu.kit.informatik.ui.ScannerSingleton;
 
 /**
- * The Application. Creates the needed instances and runs the interactive command session.
- * 
+ * The Application. Creates instance of the game and runs it.
+ *
  * @author upkim
  * @version 1.0 17-03-2022
  */

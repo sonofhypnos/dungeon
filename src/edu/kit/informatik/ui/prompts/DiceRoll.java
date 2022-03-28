@@ -19,7 +19,7 @@ public class DiceRoll extends SelectPrompt<Integer> {
      * @param dice the dice
      */
     public DiceRoll(final Dice dice) {
-        super(DICE_PROMPT, DICE_ENTRY_PROMPT, dice.getValue(), false);
+        super(DICE_PROMPT, DICE_ENTRY_PROMPT, dice.getValue(), true);
     }
 
 
