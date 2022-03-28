@@ -1,12 +1,11 @@
 package edu.kit.informatik.model;
 
 import edu.kit.informatik.model.abilities.player.PlayerAbilities;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The enum Archetype. We did not name it class, because of the name clash with the java keyword Class which would have
- * been confusing.
+ * The enum Archetype. We did not name it class, because of the name clash with the java keyword for class which would
+ * have been confusing.
  *
  * @author upkim
  * @version 1.0.0 10.03.22
@@ -27,12 +26,17 @@ public enum Archetype {
     PALADIN("Paladin", List.of(PlayerAbilities.SLASH, PlayerAbilities.REFLECT));
 
     private final String name;
-    private List<PlayerAbilities> abilities;
+    private final List<PlayerAbilities> abilities;
 
 
-    Archetype(final String name, final List<PlayerAbilities> playerAbilities) {
+    /**
+     * Instantiates archetype
+     * @param name name of the Archetype
+     * @param startingCards Starting Cards of archetype
+     */
+    Archetype(final String name, final List<PlayerAbilities> startingCards) {
         this.name = name;
-        abilities = playerAbilities;
+        abilities = startingCards;
     }
 
     @Override
@@ -41,6 +45,11 @@ public enum Archetype {
     }
 
 
+    /**
+     * Gets abilities.
+     *
+     * @return the abilities
+     */
     public List<PlayerAbilities> getAbilities() {
         return abilities;
     }

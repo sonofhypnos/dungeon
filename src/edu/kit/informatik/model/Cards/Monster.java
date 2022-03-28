@@ -17,7 +17,6 @@ public class Monster extends Agent<Monster, Player> {
     private static final int DRAW_INDEX = 0;
     private static final int INITIAL_FOCUS = 0;
     private static final int MIN_FOCUS = 0;
-    // TODO: 17.03.22 check everywhere for illegal giving of list without copy
     private final List<MonsterType> monsterTypes;
     private final int level;
 
@@ -47,8 +46,7 @@ public class Monster extends Agent<Monster, Player> {
      * @return the next ability
      */
     public Ability<Monster, Player> getNextAbility() {
-        // TODO: 26.03.22 skip if not usable
-        return abilities.get(DRAW_INDEX); // TODO: 11.03.22 never 0? // TODO: 26.03.22
+        return abilities.get(DRAW_INDEX);
     }
 
     /**

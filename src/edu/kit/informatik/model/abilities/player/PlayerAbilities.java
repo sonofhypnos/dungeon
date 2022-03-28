@@ -109,7 +109,6 @@ public enum PlayerAbilities implements AbilityKind {
             return new Lightning("Lightning", 1, this);
         }
     };
-    // TODO: 26.03.22 there are the wrong cards to be seen on the screen
 
     /**
      * Gets ability.

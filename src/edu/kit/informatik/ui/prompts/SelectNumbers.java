@@ -1,11 +1,12 @@
 package edu.kit.informatik.ui.prompts;
 
+import edu.kit.informatik.ui.Messaging;
 import java.util.List;
 
 import static java.lang.Integer.MAX_VALUE;
 
 /**
- * Select Numbers Prompt. Difference to Selectprompt is that it does not list any options, since we actually want a
+ * Select Numbers Prompt. Difference to Select prompt is that it does not list any options, since we actually want a
  * number from the user.
  *
  * @author upkim
@@ -25,26 +26,27 @@ public class SelectNumbers extends SelectPrompt<Integer> {
      * @param maxOrdinal     the max ordinal
      * @param optionNumber   the option number
      * @param separatorRegex the separator regex
+     * @param noDuplicates   the no duplicates
      */
     public SelectNumbers(final String text, final String entryPrompt, final int maxOrdinal, int optionNumber,
-                         final String separatorRegex, boolean allowDuplicates) {
-        super(text, entryPrompt, maxOrdinal, allowDuplicates);
+                         final String separatorRegex, boolean noDuplicates) {
+        super(text, entryPrompt, maxOrdinal, noDuplicates);
         this.separator = separatorRegex;
         this.optionNumber = optionNumber;
     }
 
     @Override
     public void prompt() {
-        interFace.println(text);
+        Messaging.println(getText());
     }
 
     @Override
     public void entryPrompt() {
-        interFace.println(String.format((this.entryPrompt), FIRST_ORDINAL, MAX_VALUE));
+        Messaging.println(String.format(getEntryPrompt(), 1, MAX_VALUE));
     }
 
     @Override
     public List<Integer> parseList() {
-        return getIntegers(separator, maxOrdinal, optionNumber, optionNumber);
+        return getIntegers(separator, super.getMaxOrdinal(), optionNumber, optionNumber);
     }
 }
