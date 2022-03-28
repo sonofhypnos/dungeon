@@ -16,7 +16,7 @@ import edu.kit.informatik.model.abilities.monster.Water;
 import java.util.List;
 
 /**
- * The enum Monsters.
+ * Monster Enums. Initializes the Monsters with their abilities.
  */
 public enum Monsters {
     /* Arguments for every Monster constructor here:

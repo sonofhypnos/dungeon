@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The type Monster.
+ * Monster implements common functionality of all the monsters.
  *
  * @author upkim
  * @version 1.0.0 2022-03-11
