@@ -194,7 +194,7 @@ public class Player extends Agent {
      * @param level the level
      */
     public void upgradeCards(final int level) {
-        for (var card : startingCards) {
+        for (PlayerAbilities card : startingCards) {
             addCard(card.getLevel(level));
         }
     }
