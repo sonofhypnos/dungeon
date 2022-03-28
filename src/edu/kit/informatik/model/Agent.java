@@ -7,7 +7,7 @@ package edu.kit.informatik.model;
 import edu.kit.informatik.ui.Terminal;
 
 /**
- *
+ * Agent is the class with common functionality between monsters and player.
  *
  * @author upkim
  * @version 1.0.0 2022-03-27

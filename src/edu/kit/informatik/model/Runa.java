@@ -133,7 +133,7 @@ public class Runa {
                     Terminal.getCard(player, card.getLevel(newLevel));
                 }
             } else {
-                collectRewards();
+                collectRewards(level);
             }
             healing();
         }
@@ -233,10 +233,10 @@ public class Runa {
         }
     }
 
-    private void collectRewards() {
+    private void collectRewards(int level) {
         List<Effect<Player, Monster>> rewards = new ArrayList<>(List.of());
         if (this.playerDeck.size() != 0) {
-            rewards.add(new NewAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber));
+            rewards.add(new NewAbilityCards(playerDeck, monsterNumber, CARD_POOL_MULTIPLE * monsterNumber, level));
         }
         if (!this.player.getDice().isLast()) {
             rewards.add(new NewDie());
