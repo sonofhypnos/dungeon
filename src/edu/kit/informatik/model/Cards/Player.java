@@ -102,7 +102,7 @@ public class Player extends Agent<Player, List<Monster>> {
             }
             return;
         }
-        checkDamage(damage); // this is to be applied after other effects
+        checkDamage(damage);
     }
 
     /**
@@ -183,6 +183,12 @@ public class Player extends Agent<Player, List<Monster>> {
         if (this.healthPoints > this.getMaxHealth()) {
             this.healthPoints = this.getMaxHealth();
         }
+    }
+
+    @Override
+    public int evalFocus() {
+        newFocus = Math.min(newFocus, this.getMaxFocusPoints() - focusPoints);
+        return super.evalFocus();
     }
 
 

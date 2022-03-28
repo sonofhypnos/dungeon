@@ -27,8 +27,5 @@ public class DamageMonster extends Effect<Player, Monster> {
     @Override
     public void applyEffect(final Player aggressor, final Monster target) {
         target.damage(damage);
-        if (target.isDead()) {
-            Messaging.dies(target);
-        }
     }
 }

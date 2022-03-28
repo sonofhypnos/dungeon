@@ -57,7 +57,7 @@ public enum Dice {
      * @return the boolean
      */
     public boolean isLast() {
-        return Dice.values().length == this.ordinal() - 1;
+        return this.equals(Dice.D12);
     }
 
     @Override
