@@ -19,7 +19,7 @@ public class Monster extends Agent {
     private static final int MIN_FOCUS = 0;
     private final List<MonsterType> monsterTypes;
     private final int level;
-    private List<Ability<Monster, Player>> abilities;
+    private final List<Ability<Monster, Player>> abilities;
 
     /**
      * Instantiates a new Monster.
@@ -35,7 +35,7 @@ public class Monster extends Agent {
         super(name, MIN_FOCUS, INITIAL_FOCUS, initialHealth, initialHealth);
         this.monsterTypes = new ArrayList<>(monsterTypes);
         this.level = level;
-        this.abilities = abilities;
+        this.abilities = new ArrayList<>(abilities);
     }
 
     /**

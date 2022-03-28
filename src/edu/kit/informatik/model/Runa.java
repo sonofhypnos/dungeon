@@ -113,7 +113,7 @@ public class Runa {
             startFight(stage, level);
             while (SelectPrompt.isRunning()) {
                 Terminal.printStatus(player, currentMonsters);
-                playerTurn();
+                playerTurn(level, stage);
                 if (currentMonsters.isEmpty()) {
                     break;
                 }
@@ -165,7 +165,7 @@ public class Runa {
         return currentMonsters.stream().filter((Monster m) -> !m.isDead()).collect(Collectors.toList());
     }
 
-    private void playerTurn() {
+    private void playerTurn(int level, final int stage) {
         player.reset();
         var abilityPrompt = new SelectPrompt<>(SELECT_CARD_TO_PLAY, player.getHand(), true);
         var ability = abilityPrompt.parseItem();
@@ -193,6 +193,11 @@ public class Runa {
         if (target != null && target.isDead()) {
             Terminal.dies(target);
             currentMonsters.remove(target);
+        }
+
+        if (currentMonsters.isEmpty() && level == MAX_LEVEL && stage == BOSS_STAGE) {
+            Terminal.won(player);
+            SelectPrompt.stopRunning();
         }
 
 
