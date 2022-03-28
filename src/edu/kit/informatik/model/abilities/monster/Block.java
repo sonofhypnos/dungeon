@@ -15,6 +15,7 @@ import edu.kit.informatik.model.abilities.AbilityType;
 public class Block extends MonsterAbility {
 
     private static final String BLOCK = "Block";
+    private static final int FACTOR = 7;
 
     /**
      * Instantiates a new Block.
@@ -27,6 +28,6 @@ public class Block extends MonsterAbility {
 
     @Override
     public void applyEffect(final Monster aggressor, final Player target) {
-        aggressor.setProtection(new Damage(DamageType.PHYSICAL, 7 * level));
+        aggressor.setProtection(new Damage(DamageType.PHYSICAL, FACTOR * level));
     }
 }

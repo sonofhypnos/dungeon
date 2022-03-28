@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
+ * Player-deck is used for drawing abilities for the user.
+ *
  * @author upkim
  * @version 1.0.0 2022-03-10
  */
