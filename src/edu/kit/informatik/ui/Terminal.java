@@ -135,7 +135,7 @@ public final class Terminal {
     }
 
     /**
-     * Heal list.
+     * Heal returns cards sacrificed for healing. Also does some commandlien output related to healing
      *
      * @param player      the player
      * @param healPerCard the heal per card
