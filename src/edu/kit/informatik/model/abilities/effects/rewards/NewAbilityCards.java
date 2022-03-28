@@ -28,6 +28,7 @@ public class NewAbilityCards extends Effect<Player, Monster> {
      * @param cards        the cards
      * @param cardNumber   the card number
      * @param cardPoolSize the card pool size
+     * @param level        the level
      */
     public NewAbilityCards(PlayerDeck cards, int cardNumber, int cardPoolSize, int level) {
         this.cards = cards;
