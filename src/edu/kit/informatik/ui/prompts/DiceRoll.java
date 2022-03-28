@@ -10,7 +10,7 @@ import edu.kit.informatik.model.Cards.Dice;
  */
 public class DiceRoll extends SelectPrompt<Integer> {
 
-    private static final String DICE_PROMPT = ""; // make sure DiceRoll throws
+    private static final String DICE_PROMPT = "";
     private static final String DICE_ENTRY_PROMPT = "Enter dice roll [%d--%d]:";
 
     /**

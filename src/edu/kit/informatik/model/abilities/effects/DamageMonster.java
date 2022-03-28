@@ -3,7 +3,6 @@ package edu.kit.informatik.model.abilities.effects;
 import edu.kit.informatik.model.Damage;
 import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
-import edu.kit.informatik.ui.Messaging;
 
 /**
  * The type Damage monster.

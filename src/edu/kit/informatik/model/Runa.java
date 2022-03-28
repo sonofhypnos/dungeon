@@ -11,19 +11,20 @@ import edu.kit.informatik.model.abilities.AbilityType;
 import edu.kit.informatik.model.abilities.effects.Effect;
 import edu.kit.informatik.model.abilities.effects.rewards.NewAbilityCards;
 import edu.kit.informatik.model.abilities.effects.rewards.NewDie;
-import edu.kit.informatik.ui.Messaging;
+import edu.kit.informatik.ui.Terminal;
 import edu.kit.informatik.ui.prompts.DiceRoll;
 import edu.kit.informatik.ui.prompts.Prompt;
 import edu.kit.informatik.ui.prompts.SeedPrompt;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
  * Runa class. Runs the logic of the Runa game. We decided to not use game states like the example solution of
  * assignment 5, because without commands the game flow was very linear (At every decision-point of the user it is clear
- * what the user is allowed to do (which is inputting Integers from 1 to n) as opposed to commands where it might be
+ * what the user is allowed to do (which is input Integers from 1 to n) as opposed to commands where it might be
  * rather complicated to figure out whether the input was valid, so it would have made more sense to allow for a
  * modular "gameflow" with explicit states.
  *
@@ -36,15 +37,15 @@ public class Runa {
     private static final int BOSS_STAGE = 4;
     private static final int SEED_NUMBER = 2;
     private static final int MAX_LEVEL = 2;
-    private static final String SELECT_PLAYER_S_CHARACTER_CLASS = "Select %s's character class";
-    private static final String SELECT_CARD_TO_PLAY = "Select card to play";
     private static final int INITIAL_STAGE = 1;
+    private static final int INITIAL_STAGE_MONSTER_NUMBER = 1;
     private static final int HEAL_PER_CARD = 10;
     private static final int CARD_POOL_MULTIPLE = 2;
-    private static final String PLAYER_NAME = "Runa";
-    private static final int FIRST_STAGE = 1;
-    private static final int FIRST_STAGE_MONSTER_NUMBER = 1;
     private static final int DEFAULT_MONSTER_NUMBER = 2;
+
+    private static final String PLAYER_NAME = "Runa";
+    private static final String SELECT_PLAYER_S_CHARACTER_CLASS = "Select %s's character class";
+    private static final String SELECT_CARD_TO_PLAY = "Select card to play";
     private static final String CHOOSE_S_S_REWARD = "Choose %s's reward";
     private final PlayerDeck playerDeck = new PlayerDeck();
     private final Player player;
@@ -59,7 +60,7 @@ public class Runa {
     public Runa() {
         player = new Player(PLAYER_NAME);
         this.lost = false;
-        Messaging.welcome();
+        Terminal.welcome();
     }
 
     /**
@@ -71,9 +72,8 @@ public class Runa {
         return player;
     }
 
-    // TODO: 28.03.22 important method to document!
     /**
-     * Starts the Runa game
+     * Starts the Runa game.
      */
     public void runGame() {
         initGame();
@@ -91,7 +91,7 @@ public class Runa {
             }
         }
         if (!this.lost) {
-            Messaging.won(player);
+            Terminal.won(player);
         }
     }
 
@@ -112,7 +112,7 @@ public class Runa {
         for (int stage = INITIAL_STAGE; stage < BOSS_STAGE + INITIAL_STAGE; stage++) {
             startFight(stage, level);
             while (SelectPrompt.isRunning()) {
-                Messaging.printStatus(player, currentMonsters);
+                Terminal.printStatus(player, currentMonsters);
                 playerTurn();
                 if (currentMonsters.isEmpty()) {
                     break;
@@ -130,7 +130,7 @@ public class Runa {
                 final int newLevel = level + 1;
                 player.upgradeCards(newLevel);
                 for (var card : player.getStartingCards()) {
-                    Messaging.getCard(player, card.getLevel(newLevel));
+                    Terminal.getCard(player, card.getLevel(newLevel));
                 }
             } else {
                 collectRewards();
@@ -146,10 +146,10 @@ public class Runa {
             do {
                 monsterAbility = monster.activateNextAbility();
             } while (!monsterAbility.canBeUsed(monster));
-            Messaging.printUsage(monster, monsterAbility);
+            Terminal.printUsage(monster, monsterAbility);
             monsterAbility.applyEffect(monster, player);
             if (monster.isDead()) {
-                Messaging.dies(monster);
+                Terminal.dies(monster);
             }
             if (player.isDead()) {
                 return;
@@ -175,12 +175,12 @@ public class Runa {
         }
         Monster target = null;
         if (ability.isType(AbilityType.OFFENSIVE)) {
-            target = Messaging.getTarget(player, currentMonsters);
+            target = Terminal.getTarget(player, currentMonsters);
             if (!SelectPrompt.isRunning()) {
                 return;
             }
         }
-        Messaging.printUsage(player, ability);
+        Terminal.printUsage(player, ability);
         if (ability.needsDice()) {
             Prompt<Integer> dicePrompt = new DiceRoll(player.getDice());
             Integer roll = dicePrompt.parseItem();
@@ -191,7 +191,7 @@ public class Runa {
         }
         ability.applyEffect(player, target);
         if (target != null && target.isDead()) {
-            Messaging.dies(target);
+            Terminal.dies(target);
             currentMonsters.remove(target);
         }
 
@@ -201,27 +201,27 @@ public class Runa {
         }
     }
 
-    private <A extends Agent<?, ?>> void evalFocus(final A agent) {
+    private <A extends Agent> void evalFocus(final A agent) {
         int focusPoints = agent.evalFocus();
-        Messaging.focus(agent, focusPoints);
+        Terminal.focus(agent, focusPoints);
     }
 
     private void lost() {
-        Messaging.dies(player);
+        Terminal.dies(player);
     }
 
 
     private void healing() {
         if (player.getHealthPoints() != player.getMaxHealth() && player.getHand().size() > MIN_CARDS) {
-            var cardToRemove = Messaging.heal(player, HEAL_PER_CARD);
+            var cardToRemove = Terminal.heal(player, HEAL_PER_CARD);
             if (!SelectPrompt.isRunning()) {
                 return;
             }
 
             final int healthPrev = player.getHealthPoints();
 
-            player.heal(HEAL_PER_CARD * cardToRemove.size());
-            Messaging.printHeal(player, player.getHealthPoints() - healthPrev);
+            player.heal(HEAL_PER_CARD * Objects.requireNonNull(cardToRemove).size());
+            Terminal.printHeal(player, player.getHealthPoints() - healthPrev);
             for (var card : cardToRemove) {
                 player.removeCard(card);
             }
@@ -250,15 +250,15 @@ public class Runa {
         if (stage == BOSS_STAGE) {
             currentMonsters = getBoss(level);
         } else {
-            if (stage == FIRST_STAGE) {
-                monsterNumber = FIRST_STAGE_MONSTER_NUMBER;
+            if (stage == INITIAL_STAGE) {
+                monsterNumber = INITIAL_STAGE_MONSTER_NUMBER;
             } else {
                 monsterNumber = DEFAULT_MONSTER_NUMBER;
             }
             currentMonsters = this.monsterDeck.draw(monsterNumber);
         }
         monsterNumber = currentMonsters.size();
-        Messaging.printStage(player, stage, level);
+        Terminal.printStage(player, stage, level);
     }
 
     private List<Monster> getBoss(final int level) {

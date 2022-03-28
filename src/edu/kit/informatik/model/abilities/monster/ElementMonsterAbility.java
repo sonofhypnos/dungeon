@@ -33,7 +33,7 @@ public class ElementMonsterAbility extends MonsterAbility {
     }
 
     @Override
-    public boolean canBeUsed(final Agent<?, ?> agent) {
+    public boolean canBeUsed(final Agent agent) {
         return agent.getFocusPoints() >= this.level;
     }
 

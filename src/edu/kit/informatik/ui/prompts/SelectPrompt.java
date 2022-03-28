@@ -1,6 +1,6 @@
 package edu.kit.informatik.ui.prompts;
 
-import edu.kit.informatik.ui.Messaging;
+import edu.kit.informatik.ui.Terminal;
 import edu.kit.informatik.ui.ScannerSingleton;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -174,7 +174,7 @@ public class SelectPrompt<T> implements Prompt<T> {
 
     @Override
     public void prompt() {
-        Messaging.println(listOptions(text, this.options));
+        Terminal.println(listOptions(text, this.options));
     }
 
     @Override
@@ -182,7 +182,7 @@ public class SelectPrompt<T> implements Prompt<T> {
         if (!SelectPrompt.isRunning()) {
             return;
         }
-        Messaging.println(entryPrompt);
+        Terminal.println(entryPrompt);
     }
 
     @Override

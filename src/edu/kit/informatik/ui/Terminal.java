@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Output output is responsible for printing Messages to the User that are not prompts for input. We did not make this
+ * The Terminal class is responsible for printing messages to the User that are not prompts for input.
  *
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public final class Messaging {
+public final class Terminal {
 
     //Messages
     private static final String LINE_STRING = "----------------------------------------";
@@ -35,12 +35,14 @@ public final class Messaging {
     private static final String SELECT_S_TARGET = "Select %s's target.";
     private static final String GAINS_HEALTH = "%s gains %d health";
     private static final String WELCOME_TO_RUNA_S_STRIVE = "Welcome to Runa's Strive";
+    private static final String DIE_UPGRADE = "%s upgrades her die to a %s";
+    private static final String GAINS_D_FOCUS = "%s gains %d focus";
 
 
     /**
      * Private constructor for utility class
      */
-    private Messaging() {
+    private Terminal() {
     }
 
     /**
@@ -74,7 +76,7 @@ public final class Messaging {
         println(LINE_STRING);
     }
 
-    private static String agentToStatus(Agent<?, ?> agent) {
+    private static String agentToStatus(Agent agent) {
         return String.format(STATUS_MESSAGE, agent.getName(), agent.getHealthStatus(), agent.getFocusPointStatus());
     }
 
@@ -88,7 +90,7 @@ public final class Messaging {
      * @param agent   the agent
      * @param ability the ability
      */
-    public static void printUsage(Agent<?, ?> agent, final Ability<?, ?> ability) {
+    public static void printUsage(Agent agent, final Ability<?, ?> ability) {
         println(String.format(USE, agent.getName(), ability.toString()));
     }
 
@@ -98,7 +100,7 @@ public final class Messaging {
      * @param damage the damage
      * @param agent  the agent
      */
-    public static void printDamage(final Damage damage, final Agent<?, ?> agent) {
+    public static void printDamage(final Damage damage, final Agent agent) {
         printIfNotZero(String.format(DAMAGE_MESSAGE, agent.toString(), damage.getAmount(), damage.getType()),
                 damage.getAmount());
     }
@@ -119,7 +121,7 @@ public final class Messaging {
      *
      * @param agent the agent
      */
-    public static void dies(final Agent<?, ?> agent) {
+    public static void dies(final Agent agent) {
         println(String.format(DIE_MESSAGE, agent));
     }
 
@@ -188,7 +190,7 @@ public final class Messaging {
      * @param agent  the agent
      * @param points the points
      */
-    public static void focus(final Agent<?, ?> agent, final int points) {
+    public static void focus(final Agent agent, final int points) {
         printIfNotZero(gainFocus(agent, points), points);
     }
 
@@ -198,8 +200,8 @@ public final class Messaging {
         }
     }
 
-    private static String gainFocus(final Agent<?, ?> agent, final int points) {
-        return String.format("%s gains %d focus", agent, points);
+    private static String gainFocus(final Agent agent, final int points) {
+        return String.format(GAINS_D_FOCUS, agent, points);
     }
 
     /**
@@ -227,6 +229,6 @@ public final class Messaging {
      * @param dice      the dice
      */
     public static void upgrade(final Player aggressor, final Dice dice) {
-        println(String.format("%s upgrades her die to a %s", aggressor, dice));
+        println(String.format(DIE_UPGRADE, aggressor, dice));
     }
 }

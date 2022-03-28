@@ -11,7 +11,7 @@ import edu.kit.informatik.model.abilities.player.PlayerAbilities;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class Focus<A extends Agent<?, ?>, T> extends Ability<A, T> {
+public class Focus<A extends Agent, T> extends Ability<A, T> {
     private static final String FOCUS_REGEX = "Focus";
 
 

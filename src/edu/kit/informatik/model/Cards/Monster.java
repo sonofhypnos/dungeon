@@ -13,12 +13,13 @@ import java.util.List;
  * @author upkim
  * @version 1.0.0 2022-03-11
  */
-public class Monster extends Agent<Monster, Player> {
+public class Monster extends Agent {
     private static final int DRAW_INDEX = 0;
     private static final int INITIAL_FOCUS = 0;
     private static final int MIN_FOCUS = 0;
     private final List<MonsterType> monsterTypes;
     private final int level;
+    private List<Ability<Monster, Player>> abilities;
 
     /**
      * Instantiates a new Monster.
@@ -31,13 +32,10 @@ public class Monster extends Agent<Monster, Player> {
      */
     public Monster(String name, int initialHealth, List<MonsterType> monsterTypes,
                    List<Ability<Monster, Player>> abilities, final int level) {
-        super(MIN_FOCUS);
-        focusPoints = INITIAL_FOCUS;
-        this.name = name;
-        this.healthPoints = initialHealth;
-        this.abilities = new ArrayList<>(abilities);
+        super(name, MIN_FOCUS, INITIAL_FOCUS, initialHealth, initialHealth);
         this.monsterTypes = new ArrayList<>(monsterTypes);
         this.level = level;
+        this.abilities = abilities;
     }
 
     /**
@@ -55,7 +53,7 @@ public class Monster extends Agent<Monster, Player> {
      * @return the ability
      */
     public Ability<Monster, Player> activateNextAbility() {
-        playedAbility = getNextAbility();
+        Ability<Monster, Player> playedAbility = getNextAbility();
         Collections.rotate(abilities, -1); //leftShift
         return playedAbility;
     }
@@ -82,14 +80,14 @@ public class Monster extends Agent<Monster, Player> {
 
     @Override
     public String getFocusPointStatus() {
-        return String.format("%d FP", focusPoints);
+        return String.format("%d FP", getFocusPoints());
 
     }
 
 
     @Override
     public String getHealthStatus() {
-        return String.format("%d HP", healthPoints);
+        return String.format("%d HP", getHealthPoints());
     }
 
     /**
@@ -103,7 +101,7 @@ public class Monster extends Agent<Monster, Player> {
 
     @Override
     public String toString() {
-        return this.name;
+        return getName();
     }
 
 

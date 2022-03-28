@@ -4,60 +4,60 @@
 
 package edu.kit.informatik.model;
 
-import edu.kit.informatik.model.abilities.Ability;
-import edu.kit.informatik.ui.Messaging;
-import java.util.List;
+import edu.kit.informatik.ui.Terminal;
 
 /**
- * The type Agent.
  *
- * @param <A> the type parameter
- * @param <T> the type parameter
+ *
  * @author upkim
  * @version 1.0.0 2022-03-27
  */
-public abstract class Agent<A, T> {
+public abstract class Agent {
     private static final int DEFAULT_PROTECTION = 0;
     private static final int MIN_HEALTH = 0;
-    /**
-     * The Abilities.
-     */
-    protected List<Ability<A, T>> abilities;
-    /**
-     * The Played ability.
-     */
-    protected Ability<A, T> playedAbility;
-    /**
-     * The Name.
-     */
-    protected String name;
-    /**
-     * The Max health.
-     */
-    protected int maxHealth;
-    /**
-     * The Health points.
-     */
-    protected int healthPoints;
-    /**
-     * The Focus points.
-     */
-    protected int focusPoints;
-    /**
-     * The New focus.
-     */
-    protected int newFocus;
     private final int minFocus;
+    private final String name;
+    private final int maxHealth;
+    private int healthPoints;
+    private int focusPoints;
+    private int newFocus;
     private boolean isDead = false;
     private Damage protection = new Damage();
 
     /**
      * Instantiates a new Agent.
      *
-     * @param minFocus the min focus
+     * @param name          the name
+     * @param minFocus      the min focus
+     * @param initialFocus  the initial focus
+     * @param initialHealth the initial health
+     * @param maxHealth     the max health
      */
-    protected Agent(int minFocus) {
+    protected Agent(final String name, int minFocus, final int initialFocus, final int initialHealth,
+                    final int maxHealth) {
+        this.name = name;
         this.minFocus = minFocus;
+        this.maxHealth = maxHealth;
+        this.focusPoints = initialFocus;
+        this.healthPoints = initialHealth;
+    }
+
+    /**
+     * Gets new focus.
+     *
+     * @return the new focus
+     */
+    protected int getNewFocus() {
+        return newFocus;
+    }
+
+    /**
+     * Sets new focus.
+     *
+     * @param newFocus the new focus
+     */
+    protected void setNewFocus(final int newFocus) {
+        this.newFocus = newFocus;
     }
 
     /**
@@ -85,6 +85,15 @@ public abstract class Agent<A, T> {
      */
     public int getHealthPoints() {
         return healthPoints;
+    }
+
+    /**
+     * Sets health points.
+     *
+     * @param healthPoints the health points
+     */
+    protected void setHealthPoints(final int healthPoints) {
+        this.healthPoints = healthPoints;
     }
 
     /**
@@ -126,7 +135,7 @@ public abstract class Agent<A, T> {
             isDead = true;
         }
 
-        Messaging.printDamage(damage, this);
+        Terminal.printDamage(damage, this);
     }
 
     /**

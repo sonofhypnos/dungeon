@@ -4,7 +4,7 @@ import edu.kit.informatik.model.Cards.Monster;
 import edu.kit.informatik.model.Cards.Player;
 import edu.kit.informatik.model.Cards.PlayerDeck;
 import edu.kit.informatik.model.abilities.effects.Effect;
-import edu.kit.informatik.ui.Messaging;
+import edu.kit.informatik.ui.Terminal;
 import edu.kit.informatik.ui.prompts.SelectPrompt;
 
 /**
@@ -15,6 +15,7 @@ import edu.kit.informatik.ui.prompts.SelectPrompt;
  */
 public class NewAbilityCards extends Effect<Player, Monster> {
     private static final String PICK_S_CARD_S_AS_LOOT = "Pick %s card(s) as loot";
+    private static final String NEW_ABILITY_CARDS = "new ability cards";
     private final PlayerDeck cards;
     private final int cardNumber;
     private final int cardPoolSize;
@@ -48,13 +49,13 @@ public class NewAbilityCards extends Effect<Player, Monster> {
             }
             for (var card : loot) {
                 player.addCard(card);
-                Messaging.getCard(player, card);
+                Terminal.getCard(player, card);
             }
         }
     }
 
     @Override
     public String toString() {
-        return "new ability cards";
+        return NEW_ABILITY_CARDS;
     }
 }
