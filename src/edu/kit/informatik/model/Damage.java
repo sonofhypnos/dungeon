@@ -3,7 +3,7 @@ package edu.kit.informatik.model;
 import edu.kit.informatik.model.Cards.DamageType;
 
 /**
- * The type Damage.
+ * Damage class stores magnitude as well as type of damage.
  *
  * @author upkim
  * @version 1.0.0 2022-03-11
@@ -13,7 +13,7 @@ public class Damage {
     private int amount;
 
     /**
-     * Instantiates a new Damage.
+     * Instantiates new Damage.
      */
     public Damage() {
         this.amount = 0;
@@ -21,7 +21,7 @@ public class Damage {
     }
 
     /**
-     * Instantiates a new Damage.
+     * Instantiates new Damage.
      *
      * @param type   the type
      * @param amount the amount

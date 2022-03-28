@@ -3,7 +3,7 @@ package edu.kit.informatik.ui.prompts;
 import java.util.List;
 
 /**
- * The output Prompt.
+ * Prompt Interface. Responsible for user input, parsing string Integers and returning selection.
  *
  * @param <T> the type parameter
  * @author upkim
