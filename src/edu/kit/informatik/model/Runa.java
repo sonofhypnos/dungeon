@@ -71,22 +71,12 @@ public class Runa {
         return player;
     }
 
+    // TODO: 28.03.22 important method to document!
     /**
-     * Runs the main logic of the game.
+     * Starts the Runa game
      */
     public void runGame() {
-
-
-        Prompt<Archetype> archetypePrompt = new SelectPrompt<>(
-                String.format(SELECT_PLAYER_S_CHARACTER_CLASS, player.getName()), List.of(Archetype.values()));
-        Archetype archetype = archetypePrompt.parseItem();
-        if (!SelectPrompt.isRunning()) {
-            return;
-        }
-        this.player.setClass(archetype); //done
-        for (var card : player.getStartingCards()) {
-            playerDeck.remove(card.getAbility());
-        }
+        initGame();
         for (int level = INITIAL_LEVEL; level < MAX_LEVEL + INITIAL_LEVEL; level++) {
             SeedPrompt prompt = new SeedPrompt(SEED_NUMBER);
             var seeds = prompt.parseList();
@@ -102,6 +92,19 @@ public class Runa {
         }
         if (!this.lost) {
             Messaging.won(player);
+        }
+    }
+
+    private void initGame() {
+        Prompt<Archetype> archetypePrompt = new SelectPrompt<>(
+                String.format(SELECT_PLAYER_S_CHARACTER_CLASS, player.getName()), List.of(Archetype.values()));
+        Archetype archetype = archetypePrompt.parseItem();
+        if (!SelectPrompt.isRunning()) {
+            return;
+        }
+        this.player.setClass(archetype);
+        for (var card : player.getStartingCards()) {
+            playerDeck.remove(card.getAbility());
         }
     }
 
@@ -140,18 +143,26 @@ public class Runa {
         for (Monster monster : currentMonsters) {
             monster.reset();
             Ability<Monster, Player> monsterAbility;
-            //It is assumed that there is alway
             do {
                 monsterAbility = monster.activateNextAbility();
             } while (!monsterAbility.canBeUsed(monster));
             Messaging.printUsage(monster, monsterAbility);
             monsterAbility.applyEffect(monster, player);
+            if (monster.isDead()) {
+                Messaging.dies(monster);
+            }
             if (player.isDead()) {
                 return;
             }
         }
 
+        currentMonsters = removeDeadMonsters();
+
         evalFocus(player);
+    }
+
+    private List<Monster> removeDeadMonsters() {
+        return currentMonsters.stream().filter((Monster m) -> !m.isDead()).collect(Collectors.toList());
     }
 
     private void playerTurn() {
@@ -179,15 +190,18 @@ public class Runa {
             ability.setRoll(roll);
         }
         ability.applyEffect(player, target);
+        if (target != null && target.isDead()) {
+            Messaging.dies(target);
+            currentMonsters.remove(target);
+        }
 
-        currentMonsters = currentMonsters.stream().filter((Monster m) -> !m.isDead()).collect(Collectors.toList());
 
         for (Monster monster : currentMonsters) {
             evalFocus(monster);
         }
     }
 
-    private void evalFocus(final Agent<?, ?> agent) {
+    private <A extends Agent<?, ?>> void evalFocus(final A agent) {
         int focusPoints = agent.evalFocus();
         Messaging.focus(agent, focusPoints);
     }
