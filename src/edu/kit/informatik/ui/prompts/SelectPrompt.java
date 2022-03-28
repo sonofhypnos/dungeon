@@ -125,6 +125,9 @@ public class SelectPrompt<T> implements Prompt<T> {
         }
     }
 
+    /**
+     * Stops the Prompt from Running
+     */
     public static void stopRunning() {
         SelectPrompt.running = false;
     }
