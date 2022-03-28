@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
- * Main implementation of Prompt output.
+ * Main implementation of Prompt interface and thus responsible for parsing user-input.
  *
  * @param <T> the type parameter
  * @author upkim
@@ -86,14 +86,14 @@ public class SelectPrompt<T> implements Prompt<T> {
     }
 
     /**
-     * Instantiates a new Select prompt.
+     * SelectPrompt constructor for Prompt<Integer>
      *
      * @param text         the text
      * @param entryPrompt  the entry prompt
      * @param maxOrdinal   the max ordinal
-     * @param noDuplicates the no duplicates
+     * @param noDuplicates whether to allow duplicates in the parsed integers
      */
-    public SelectPrompt(String text, String entryPrompt, int maxOrdinal, final boolean noDuplicates) {
+    protected SelectPrompt(String text, String entryPrompt, int maxOrdinal, final boolean noDuplicates) {
         this.text = text;
         this.options = null;
         this.maxOrdinal = maxOrdinal;
@@ -114,7 +114,7 @@ public class SelectPrompt<T> implements Prompt<T> {
     public SelectPrompt(String text, List<T> options, int minOptionNumber, int maxOptionNumber) {
         this.text = text;
         this.options = options;
-        this.maxOrdinal = options.size() + 1;
+        this.maxOrdinal = options.size();
         this.minOptionNumber = minOptionNumber;
         this.maxOptionNumber = maxOptionNumber;
         this.separator = DEFAULT_SEPARATOR;
@@ -130,15 +130,14 @@ public class SelectPrompt<T> implements Prompt<T> {
     }
 
     /**
-     * This is done so quit can be called at any time. A check for running needs to be added after every call to
-     * parseList or parseItem. We admit that having these if-checks is a bit ugly, but we felt that in this case this
-     * was less convoluted (We can run the main game logic in one function and can use niceties like for loops) than
-     * adding a game state class for every time we want to ask for input from the user (which also wouldn't have greatly
-     * increased the separation).
+     * The isRunning function and the running field is used, so quit can be called at any time. A check for running
+     * needs to be added after every call to parseList or parseItem. We admit that having these if-checks is a bit ugly,
+     * but we felt that in this case this was less convoluted (We can run the main game logic in one function and can
+     * use niceties like for loops) than adding a game state class for every time we want to ask for input from the
+     * user.
      * <p>
      * The only justification for game states in this instance we found would have been that the quit command would have
-     * been nicer to implement, but we accepted this tradeoff. We felt having to create a new state every time we want
-     * to ask for user-input would have been more annoying.
+     * been easier to implement, but we accepted this tradeoff.
      *
      * @return running boolean
      */
@@ -258,14 +257,17 @@ public class SelectPrompt<T> implements Prompt<T> {
                 continue;
             }
             final boolean containsDuplicate = args.stream().distinct().count() != args.size();
-            if (containsDuplicate && noDuplicates) {
+            if (containsDuplicate && noDuplicates)
                 continue;
-            }
-            if (args.size() < minOptionNumber || args.size() > maxOptionNumber || args.stream()
-                    .anyMatch(arg -> outSideInterval(arg, maxOrdinal))) continue;
+            if (args.size() < minOptionNumber || args.size() > maxOptionNumber || anyOutsideInterval(maxOrdinal, args))
+                continue;
             break;
         }
         return args;
+    }
+
+    private boolean anyOutsideInterval(final int maxOrdinal, final List<Integer> args) {
+        return args.stream().anyMatch(arg -> outSideInterval(arg, maxOrdinal));
     }
 
     private void quit(final String input) {
