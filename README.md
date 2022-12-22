@@ -1,6 +1,6 @@
 # dungeon
 
-Welcome to Runa's Strive, an exciting dungeon crawler that I implemented for my programming class at the [KIT](https://www.kit.edu/english/index.php).
+Welcome to Runa's Strive, an exciting dungeon crawler that I implemented for my programming class at [KIT](https://www.kit.edu/english/index.php).
 
 ## How to install
 
