@@ -13,6 +13,6 @@ git clone https://github.com/sonofhypnos/dungeon.git
 
 run 
 ```
-cd out/production/dungeon; java edu.kit.informatik.Application
+chmod +x dungeon.jar; ./dungeon.jar
 ```
 in the project root. Java versions 11 and above should work.
