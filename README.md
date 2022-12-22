@@ -15,4 +15,4 @@ run
 ```
 chmod +x dungeon.jar; ./dungeon.jar
 ```
-in the project root. Java versions 11 and above should work.
+in the project root. Java versions 11 and above should work. The game is pretty self-explanatory. Just follow the instructions in the terminal.
